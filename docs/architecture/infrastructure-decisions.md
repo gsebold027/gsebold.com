@@ -33,8 +33,6 @@ This document captures the architectural decisions made for the landing page pro
 
 **Decision**: Use shadcn/ui with Tailwind CSS
 
-**Status**: ✅ Accepted
-
 **Context**:
 - Need accessible, modern UI components
 - Want to maintain design consistency
