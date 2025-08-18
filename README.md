@@ -1,4 +1,5 @@
 # 🚀 Landing Page
+
 > A personal landing page project built from scratch to learn and apply modern web development practices including CI/CD, infrastructure as code, theming, and internationalization.
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -19,16 +20,15 @@
 - Ensure the site supports dark/light themes and multiple languages (EN/PT)
 - Host the app on Kubernetes via DigitalOcean with GitOps deployment
 
-
 ## 🛠 Tech Stack
 
-| Area       | Tool / Library                        |
-|------------|---------------------------------------|
-| Frontend   | React + Vite                          |
-| UI         | shadcn/ui (Tailwind + Radix UI)       |
-| i18n       | react-i18next                         |
-| Theming    | Tailwind + `class` toggling           |
-| CI/CD      | GitHub Actions                        |
-| Infra      | Docker, Kubernetes, Argo CD           |
-| Hosting    | DigitalOcean Kubernetes               |
-| CDN + SSL  | Cloudflare                            |
+| Area      | Tool / Library                  |
+| --------- | ------------------------------- |
+| Frontend  | React + Vite                    |
+| UI        | shadcn/ui (Tailwind + Radix UI) |
+| i18n      | react-i18next                   |
+| Theming   | Tailwind + `class` toggling     |
+| CI/CD     | GitHub Actions                  |
+| Infra     | Docker, Kubernetes, Argo CD     |
+| Hosting   | DigitalOcean Kubernetes         |
+| CDN + SSL | Cloudflare                      |
