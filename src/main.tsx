@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router'
 
 import { ThemeProvider } from './components/ThemeProvider'
 import './globals.css'
+import './lib/i18n'
 import { routes } from './routes'
 
 const router = createBrowserRouter(routes, {})
