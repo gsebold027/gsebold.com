@@ -9,11 +9,13 @@ This document captures the architectural decisions made for the landing page pro
 **Decision**: Use React + Vite
 
 **Context**:
+
 - Building a simple personal landing page (static content)
 - Primary goal is learning CI/CD and infrastructure tools
 - Need support for theming and internationalization
 
 **Decision Rationale**:
+
 - **Simplicity**: Vite has minimal configuration overhead
 - **Learning Focus**: Allows more time on infrastructure rather than framework complexity
 - **Static Output**: Perfect for containerization and CDN caching
@@ -21,6 +23,7 @@ This document captures the architectural decisions made for the landing page pro
 - **Ecosystem**: Full React ecosystem available for UI components
 
 **Trade-offs**:
+
 - ✅ Faster builds and dev server
 - ✅ Simpler deployment (static files)
 - ✅ Better learning focus on infrastructure
@@ -34,17 +37,20 @@ This document captures the architectural decisions made for the landing page pro
 **Decision**: Use shadcn/ui with Tailwind CSS
 
 **Context**:
+
 - Need accessible, modern UI components
 - Want to maintain design consistency
 - Support for dark/light themes required
 
 **Decision Rationale**:
+
 - **Accessibility**: Built on Radix UI primitives (ARIA compliant)
 - **Customization**: Full control over component code
 - **Modern Design**: Contemporary aesthetic out of the box
 - **Theme Support**: Excellent dark/light mode implementation
 
 **Trade-offs**:
+
 - ✅ Full component customization control
 - ✅ Excellent accessibility support
 - ✅ Modern design patterns
@@ -59,17 +65,20 @@ This document captures the architectural decisions made for the landing page pro
 **Decision**: Use Kubernetes on DigitalOcean
 
 **Context**:
+
 - Learning objective: understand enterprise deployment patterns
 - Need scalable, production-like infrastructure
 - Budget considerations for hosting costs
 
 **Decision Rationale**:
+
 - **Learning Value**: Kubernetes is industry standard for container orchestration
 - **Cost Effective**: DigitalOcean pricing is predictable and reasonable
 - **Managed Service**: Reduces operational overhead while learning
 - **GitOps Ready**: Works well with Argo CD deployment patterns
 
 **Trade-offs**:
+
 - ✅ Industry-standard technology
 - ✅ Excellent learning opportunity
 - ✅ Scalable for future projects
@@ -85,11 +94,13 @@ This document captures the architectural decisions made for the landing page pro
 **Decision**: Use Argo CD for continuous deployment
 
 **Context**:
+
 - Want to implement GitOps deployment pattern
 - Need automated synchronization between Git and Kubernetes
 - Learning objective: understand modern deployment practices
 
 **Decision Rationale**:
+
 - **Git as Source of Truth**: Declarative approach to deployments
 - **Visual Interface**: Excellent UI for monitoring deployments
 - **Kubernetes Native**: Designed specifically for K8s environments
@@ -97,6 +108,7 @@ This document captures the architectural decisions made for the landing page pro
 - **Industry Adoption**: Widely used in enterprise environments
 
 **Trade-offs**:
+
 - ✅ True GitOps implementation
 - ✅ Excellent observability and UI
 - ✅ Automatic drift correction
@@ -112,11 +124,13 @@ This document captures the architectural decisions made for the landing page pro
 **Decision**: Use Cloudflare for CDN, SSL, and DNS
 
 **Context**:
+
 - Need global content delivery for performance
 - Require SSL/TLS termination
 - Want DDoS protection and security features
 
 **Decision Rationale**:
+
 - **Free Tier**: Excellent free plan for personal projects
 - **Performance**: Global edge network with excellent performance
 - **Security**: Built-in DDoS protection and Web Application Firewall
@@ -124,6 +138,7 @@ This document captures the architectural decisions made for the landing page pro
 - **Additional Features**: Analytics, caching rules, Workers capability
 
 **Trade-offs**:
+
 - ✅ Excellent performance and reliability
 - ✅ Comprehensive security features
 - ✅ Free tier covers project needs
@@ -138,11 +153,13 @@ This document captures the architectural decisions made for the landing page pro
 **Decision**: Use GitHub Actions for CI/CD with containerized deployments
 
 **Context**:
+
 - Code hosted on GitHub
 - Need automated testing and deployment
 - Want integration with existing GitHub workflow
 
 **Decision Rationale**:
+
 - **Integration**: Seamless integration with GitHub repository
 - **Free Tier**: Generous free minutes for open source projects
 - **Ecosystem**: Rich marketplace of actions and workflows
@@ -150,6 +167,7 @@ This document captures the architectural decisions made for the landing page pro
 - **YAML Configuration**: Infrastructure as code approach
 
 **Trade-offs**:
+
 - ✅ Tight GitHub integration
 - ✅ Large ecosystem and community
 - ✅ Free for public repositories
@@ -164,11 +182,13 @@ This document captures the architectural decisions made for the landing page pro
 **Decision**: Use react-i18next with namespace organization
 
 **Context**:
+
 - Support for English and Portuguese languages
 - Need runtime language switching
 - Want maintainable translation management
 
 **Decision Rationale**:
+
 - **Feature Complete**: Pluralization, interpolation, namespaces
 - **Runtime Switching**: Change language without reload
 - **Community**: Large community and ecosystem
@@ -176,6 +196,7 @@ This document captures the architectural decisions made for the landing page pro
 - **Developer Experience**: Good tooling and debugging
 
 **Trade-offs**:
+
 - ✅ Comprehensive i18n features
 - ✅ Runtime language switching
 - ✅ Good performance characteristics
@@ -188,6 +209,7 @@ This document captures the architectural decisions made for the landing page pro
 ## Technology Stack Summary
 
 ### Frontend Layer
+
 ```
 ┌─────────────────┐
 │   React + Vite  │ ← Fast development, static build output
@@ -201,6 +223,7 @@ This document captures the architectural decisions made for the landing page pro
 ```
 
 ### Infrastructure Layer
+
 ```
 ┌─────────────────┐
 │   Cloudflare    │ ← CDN, SSL, DNS, Security
@@ -214,6 +237,7 @@ This document captures the architectural decisions made for the landing page pro
 ```
 
 ### Automation Layer
+
 ```
 ┌─────────────────┐
 │ GitHub Actions  │ ← CI/CD pipeline
@@ -228,13 +252,13 @@ This document captures the architectural decisions made for the landing page pro
 
 **When someone asks "Why did you choose X over Y?"**
 
-| Technology | Key Reason | Learning Value |
-|------------|------------|----------------|
-| Vite | Simplicity + static output | Focus on infrastructure |
-| Kubernetes | Industry standard | Enterprise deployment patterns |
-| Argo CD | GitOps best practices | Modern deployment methodology |
-| DigitalOcean | Cost-effective learning | Managed services balance |
-| Cloudflare | Performance + security | Edge computing concepts |
-| shadcn/ui | Modern + accessible | Component architecture |
+| Technology   | Key Reason                 | Learning Value                 |
+| ------------ | -------------------------- | ------------------------------ |
+| Vite         | Simplicity + static output | Focus on infrastructure        |
+| Kubernetes   | Industry standard          | Enterprise deployment patterns |
+| Argo CD      | GitOps best practices      | Modern deployment methodology  |
+| DigitalOcean | Cost-effective learning    | Managed services balance       |
+| Cloudflare   | Performance + security     | Edge computing concepts        |
+| shadcn/ui    | Modern + accessible        | Component architecture         |
 
 This architecture balances learning objectives with practical implementation, providing enterprise-relevant experience while maintaining reasonable complexity and cost.

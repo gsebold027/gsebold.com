@@ -1,0 +1,7 @@
+# .husky/pre-commit
+FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
+if [ -n "$FILES" ]; then
+  pnpm run lint:staged $FILES
+  pnpm run format:staged $FILES
+  git update-index --again
+fi
