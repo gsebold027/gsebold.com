@@ -24,8 +24,8 @@ import {
   TailwindIcon,
   TypescriptIcon,
   ViteIcon
-} from './icons'
-import { TypographyH2, TypographyH3, TypographyH4 } from './ui/typography'
+} from '../icons'
+import { TypographyH2, TypographyH3, TypographyH4 } from '../ui/typography'
 
 const CareerSection = () => {
   const { t } = usePageTranslation('landing-page')

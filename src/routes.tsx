@@ -1,5 +1,8 @@
+import { lazy } from 'react'
+
 import Layout from './components/Layout'
-import LandingPage from './pages/landing-page/LandingPage'
+
+const LandingPage = lazy(() => import('@/pages/landing-page/LandingPage'))
 
 export const routes = [
   {

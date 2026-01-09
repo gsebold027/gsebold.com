@@ -13,7 +13,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from './ui'
+} from '../ui'
 
 export type Language = {
   value: string
@@ -80,4 +80,4 @@ const LanguageSwitcher = () => {
   )
 }
 
-export default LanguageSwitcher
+export { LanguageSwitcher }

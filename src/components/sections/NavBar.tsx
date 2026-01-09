@@ -4,9 +4,8 @@ import { Menu } from 'lucide-react'
 
 import { usePageTranslation } from '@/lib/hooks'
 
-import LanguageSwitcher from './LanguageSwitcher'
-import { ThemeToggle } from './ThemeToggle'
-import { Logo } from './icons'
+import { Logo } from '../icons'
+import { LanguageSwitcher, ThemeToggle } from '../theme'
 import {
   Button,
   NavigationMenu,
@@ -17,7 +16,7 @@ import {
   SheetContent,
   SheetHeader,
   SheetTrigger
-} from './ui'
+} from '../ui'
 
 type NavBarLink = {
   href: string

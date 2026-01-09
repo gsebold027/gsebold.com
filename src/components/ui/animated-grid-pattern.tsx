@@ -16,7 +16,7 @@ export type AnimatedGridPatternProps = {
   repeatDelay?: number
 } & ComponentPropsWithoutRef<'svg'>
 
-export const AnimatedGridPattern = ({
+const AnimatedGridPattern = ({
   width = 40,
   height = 40,
   x = -1,
@@ -134,3 +134,5 @@ export const AnimatedGridPattern = ({
     </svg>
   )
 }
+
+export { AnimatedGridPattern }

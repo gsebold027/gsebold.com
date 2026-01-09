@@ -5,8 +5,8 @@ import { Link } from 'react-router'
 
 import { usePageTranslation } from '@/lib/hooks'
 
-import { Button } from './ui'
-import { TypographyH1, TypographyH2, TypographyP } from './ui/typography'
+import { Button } from '../ui'
+import { TypographyH1, TypographyH2, TypographyP } from '../ui/typography'
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null)

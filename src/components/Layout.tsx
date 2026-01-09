@@ -2,7 +2,7 @@ import { Outlet } from 'react-router'
 
 import { cn } from '@/lib/utils'
 
-import NavBar from './NavBar'
+import NavBar from './sections/NavBar'
 import { AnimatedGridPattern } from './ui'
 
 const Layout = () => (

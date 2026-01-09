@@ -6,7 +6,7 @@ import { flushSync } from 'react-dom'
 import { useTheme } from '@/contexts/ThemeProvider'
 import { usePageTranslation } from '@/lib/hooks'
 
-import { Button } from './ui'
+import { Button } from '../ui'
 
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme()
