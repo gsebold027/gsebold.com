@@ -1,1 +1,18 @@
-{}
+{
+  "hero": {
+    "greeting": "Olá, eu sou o",
+    "name": "Gustavo Sebold",
+    "tagline": "Construindo a web do futuro, hoje.",
+    "description": "Onde criatividade encontra tecnologia. Como desenvolvedor full-stack, eu crio experiências digitais fluidas que priorizam tanto performance quanto acessibilidade.",
+    "cta": "Entre em contato",
+    "scroll_next_question": "Avançar para a próxima seção"
+  },
+  "experience": {
+    "title": "Minha Jornada",
+    "skills_title": "Habilidades",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "database": "Banco de dados",
+    "tools": "Ferramentas"
+  }
+}

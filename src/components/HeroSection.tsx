@@ -1,0 +1,59 @@
+import { useRef } from 'react'
+
+import { ChevronsDown, Mouse } from 'lucide-react'
+import { Link } from 'react-router'
+
+import { usePageTranslation } from '@/lib/hooks'
+
+import { Button } from './ui'
+import { TypographyH1, TypographyH2, TypographyP } from './ui/typography'
+
+const HeroSection = () => {
+  const heroRef = useRef<HTMLDivElement>(null)
+
+  const { t } = usePageTranslation('landing-page')
+
+  const scrollPastCurrent = () => {
+    const el = heroRef.current
+    if (!el) return
+
+    const heroBottom = el.getBoundingClientRect().bottom + window.scrollY
+
+    const FIXED_HEADER_OFFSET = 80
+
+    window.scrollTo({
+      top: heroBottom - FIXED_HEADER_OFFSET,
+      behavior: 'smooth'
+    })
+  }
+
+  return (
+    <div
+      ref={heroRef}
+      className="min-h-dvh py-[clamp(1rem,_2.5vw_+_0rem,_2rem)] flex items-center relative">
+      <div className="max-w-4xl xl:px-0">
+        <TypographyP className="text-base font-mono text-primary mb-2">
+          {t('hero.greeting')}
+        </TypographyP>
+        <TypographyH1 className="mb-4">{t('hero.name')}</TypographyH1>
+        <TypographyH2 className="mb-[clamp(1rem,_2.5vw_+_0rem,_2rem)] text-muted-foreground">
+          {t('hero.tagline')}
+        </TypographyH2>
+        <TypographyP className="max-w-xl mb-8">{t('hero.description')}</TypographyP>
+        <Button variant="outline" size="lg" asChild>
+          <Link to="#contact">{t('hero.cta')}</Link>
+        </Button>
+      </div>
+
+      <Button
+        className="text-muted-foreground absolute left-1/2 bottom-5 translate-x-[-50%] flex-col h-auto hover:bg-transparent px-2"
+        variant="ghost"
+        onClick={scrollPastCurrent}
+        aria-label={t('hero.scroll_next_question')}>
+        <Mouse size={24} />
+        <ChevronsDown size={24} />
+      </Button>
+    </div>
+  )
+}
+export default HeroSection

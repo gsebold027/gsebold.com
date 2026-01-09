@@ -1,1 +1,14 @@
-{}
+{
+  "header": {
+    "open_menu": "Open menu",
+    "toggle_theme": "Toggle theme",
+    "select_language": "Select Language",
+    "nav": {
+      "home": "Home",
+      "career": "Career",
+      "technologies": "Technologies",
+      "projects": "Projects",
+      "contact": "Contact"
+    }
+  }
+}

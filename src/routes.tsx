@@ -1,5 +1,5 @@
-import App from './App'
 import Layout from './components/Layout'
+import LandingPage from './pages/landing-page/LandingPage'
 
 export const routes = [
   {
@@ -8,7 +8,7 @@ export const routes = [
     children: [
       {
         index: true,
-        element: <App />
+        element: <LandingPage />
       }
     ]
   }

@@ -5,7 +5,7 @@ import { StrictMode, useMemo } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider, createBrowserRouter } from 'react-router'
 
-import { ThemeProvider } from './components/ThemeProvider'
+import { ThemeProvider } from './contexts/ThemeProvider'
 import './globals.css'
 import axios, { AxiosContext } from './lib/facades/axios.facade'
 import './lib/i18n'

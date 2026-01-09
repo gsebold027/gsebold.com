@@ -1,1 +1,14 @@
-{}
+{
+  "header": {
+    "open_menu": "Abrir menu",
+    "toggle_theme": "Alternar tema",
+    "select_language": "Selecionar idioma",
+    "nav": {
+      "home": "Início",
+      "career": "Carreira",
+      "technologies": "Tecnologias",
+      "projects": "Projetos",
+      "contact": "Contato"
+    }
+  }
+}
