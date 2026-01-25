@@ -1,6 +1,6 @@
 export const socialLinks = {
-  linkedin: 'https://linkedin.com/in/gustavosebold',
-  github: 'https://github.com/gustavosebold',
+  linkedin: 'https://www.linkedin.com/in/gustavo-sebold',
+  github: 'https://github.com/gsebold027',
   email: 'gustavosebold027@gmail.com'
 } as const
 

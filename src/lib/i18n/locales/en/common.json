@@ -1,4 +1,7 @@
 {
+  "layout": {
+    "skip_to_content": "Skip to main content"
+  },
   "header": {
     "open_menu": "Open menu",
     "toggle_theme": "Toggle theme",
