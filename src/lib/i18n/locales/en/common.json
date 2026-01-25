@@ -1,1 +1,36 @@
-{}
+{
+  "header": {
+    "open_menu": "Open menu",
+    "toggle_theme": "Toggle theme",
+    "select_language": "Select Language",
+    "primary_navigation": "Primary navigation",
+    "mobile_menu": "Mobile menu",
+    "mobile_menu_description": "Navigate through the website sections",
+    "nav": {
+      "home": "Home",
+      "career": "Career",
+      "technologies": "Technologies",
+      "projects": "Projects",
+      "contact": "Contact"
+    }
+  },
+  "footer": {
+    "footer_heading": "Footer",
+    "brand_section": "Brand and social media",
+    "social_links": "Social media links",
+    "linkedin_profile": "Visit LinkedIn profile",
+    "github_profile": "Visit GitHub profile",
+    "tagline": "Building tomorrow's web, today.",
+    "navigation": "Navigation",
+    "footer_navigation": "Footer navigation",
+    "contact_card": {
+      "title": "Get in Touch",
+      "description": "Let's discuss how we can bring your ideas to life through innovative solutions.",
+      "copy_email": "Copy email to clipboard",
+      "email_copied": "Email copied to clipboard"
+    },
+    "back_to_top": "Back to top",
+    "made_with": "Made with",
+    "location": "in Curitiba, Brazil"
+  }
+}

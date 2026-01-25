@@ -1,5 +1,8 @@
-import App from './App'
+import { lazy } from 'react'
+
 import Layout from './components/Layout'
+
+const LandingPage = lazy(() => import('@/pages/landing-page/LandingPage'))
 
 export const routes = [
   {
@@ -8,7 +11,7 @@ export const routes = [
     children: [
       {
         index: true,
-        element: <App />
+        element: <LandingPage />
       }
     ]
   }

@@ -1,1 +1,27 @@
-{}
+{
+  "header": {
+    "open_menu": "Abrir menu",
+    "toggle_theme": "Alternar tema",
+    "select_language": "Selecionar idioma",
+    "nav": {
+      "home": "Início",
+      "career": "Carreira",
+      "technologies": "Tecnologias",
+      "projects": "Projetos",
+      "contact": "Contato"
+    }
+  },
+  "footer": {
+    "tagline": "Construindo a web do futuro, hoje.",
+    "navigation": "Navegação",
+    "contact_card": {
+      "title": "Entre em Contato",
+      "description": "Vamos discutir como podemos transformar suas ideias em soluções inovadoras.",
+      "copy_email": "Copiar email para área de transferência",
+      "email_copied": "Email copiado para área de transferência"
+    },
+    "back_to_top": "Voltar ao topo",
+    "made_with": "Feito com",
+    "location": "em Curitiba, Brasil"
+  }
+}
