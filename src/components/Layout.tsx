@@ -2,6 +2,7 @@ import { Outlet } from 'react-router'
 
 import { cn } from '@/lib/utils'
 
+import Footer from './sections/Footer'
 import NavBar from './sections/NavBar'
 import { AnimatedGridPattern } from './ui'
 
@@ -20,11 +21,10 @@ const Layout = () => (
       />
     </div>
     <NavBar />
-    <div className="mx-auto max-w-[calc(84rem)] px-[clamp(1rem,_2.5vw_+_0rem,_2rem)] z-10 relative">
+    <main className="mx-auto max-w-[calc(84rem)] px-[clamp(1rem,_2.5vw_+_0rem,_2rem)] z-10 relative">
       <Outlet />
-    </div>
-    <div className="h-dvh"></div>
-    <div className="h-dvh"></div>
+    </main>
+    <Footer />
   </>
 )
 

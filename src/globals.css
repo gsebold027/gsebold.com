@@ -43,7 +43,7 @@
   --font-mono: JetBrains Mono, monospace;
   --font-size-heading1: clamp(2.25rem, 5.625vw + 0rem, 4.5rem);
   --font-size-heading2: clamp(1.5rem, 3.75vw + 0rem, 3rem);
-  --font-size-heading3:clamp(1.25rem, 1.563vw + 0.625rem, 1.875rem);
+  --font-size-heading3: clamp(1.25rem, 1.563vw + 0.625rem, 1.875rem);
   --font-size-heading4: clamp(1.125rem, 0.313vw + 1rem, 1.25rem);
   --font-size-paragraph: clamp(1rem, 0.313vw + 0.875rem, 1.125rem);
   --font-serif: Georgia, serif;
@@ -71,6 +71,19 @@
   --shadow-opacity: var(--shadow-opacity);
   --color-shadow-color: var(--shadow-color);
   --color-destructive-foreground: var(--destructive-foreground);
+  --animate-shine: shine var(--duration) infinite linear;
+
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    to {
+      background-position: 0% 0%;
+    }
+  }
 }
 
 @utility text-heading1 {
@@ -129,7 +142,7 @@
   --destructive-foreground: oklch(1 0 0);
   --font-size-heading1: clamp(2.25rem, 5.625vw + 0rem, 4.5rem);
   --font-size-heading2: clamp(1.5rem, 3.75vw + 0rem, 3rem);
-  --font-size-heading3:clamp(1.25rem, 1.563vw + 0.625rem, 1.875rem);
+  --font-size-heading3: clamp(1.25rem, 1.563vw + 0.625rem, 1.875rem);
   --font-size-paragraph: clamp(1rem, 0.313vw + 0.875rem, 1.125rem);
   --font-sans: Inter, sans-serif;
   --font-serif: Georgia, serif;

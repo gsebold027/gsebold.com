@@ -1,15 +1,16 @@
 {
   "hero": {
     "greeting": "Hi, my name is",
-    "name": "Gustavo Sebold",
     "tagline": "Building tomorrow's web, today.",
     "description": "Where creativity meets technology. As a full-stack developer, I craft seamless digital experiences that prioritize both performance and accessibility.",
     "cta": "Get in touch",
-    "scroll_next_question": "Scroll to next section"
+    "cta_aria_label": "Navigate to contact section",
+    "scroll_next_section": "Scroll to next section"
   },
   "experience": {
     "title": "My journey",
     "skills_title": "Developed skills",
+    "skills_list_aria": "Tecnologias de {{category}}",
     "frontend": "Frontend",
     "backend": "Backend",
     "database": "Database",
