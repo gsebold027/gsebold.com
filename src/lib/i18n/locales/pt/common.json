@@ -1,4 +1,7 @@
 {
+  "layout": {
+    "skip_to_content": "Pular para o conteúdo principal"
+  },
   "header": {
     "open_menu": "Abrir menu",
     "toggle_theme": "Alternar tema",
