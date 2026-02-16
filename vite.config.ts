@@ -14,5 +14,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src')
     }
   },
-  base: '/'
+  base: '/',
+  preview: {
+    allowedHosts: process.env.VITE_ALLOWED_HOSTS
+      ? process.env.VITE_ALLOWED_HOSTS.split(',').map((host) => host.trim())
+      : ['localhost']
+  }
 })
