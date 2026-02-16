@@ -23,6 +23,7 @@
     "social_links": "Social media links",
     "linkedin_profile": "Visit LinkedIn profile",
     "github_profile": "Visit GitHub profile",
+    "contact_section": "Contact information",
     "tagline": "Building tomorrow's web, today.",
     "navigation": "Navigation",
     "footer_navigation": "Footer navigation",
@@ -34,6 +35,7 @@
     },
     "back_to_top": "Back to top",
     "made_with": "Made with",
+    "love": "love",
     "location": "in Curitiba, Brazil"
   }
 }

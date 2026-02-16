@@ -14,5 +14,15 @@
     "backend": "Backend",
     "database": "Banco de dados",
     "tools": "Ferramentas"
+  },
+  "contact": {
+    "section_label": "Entre em contato",
+    "title": "Vamos conversar",
+    "description": "Estou sempre aberto para colaborar e dar vida às suas ideias. Se você tem um projeto em mente, entre em contato!",
+    "contact_info_aria": "Informações para contato",
+    "email_label": "Email",
+    "email_value": "gustavosebold027@gmail.com",
+    "location_label": "Localização",
+    "location_value": "Curitiba, Brasil"
   }
 }

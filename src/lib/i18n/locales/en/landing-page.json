@@ -15,5 +15,15 @@
     "backend": "Backend",
     "database": "Database",
     "tools": "Tools"
+  },
+  "contact": {
+    "section_label": "Get in touch",
+    "title": "Let's get started",
+    "description": "I'm always open to collaborate and bring your ideas to life. If you have a project in mind, please get in touch!",
+    "contact_info_aria": "Contact information",
+    "email_label": "Email",
+    "email_value": "gustavosebold027@gmail.com",
+    "location_label": "Location",
+    "location_value": "Curitiba, Brazil"
   }
 }

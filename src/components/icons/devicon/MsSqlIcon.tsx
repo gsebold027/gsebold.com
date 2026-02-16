@@ -15,8 +15,8 @@ const MSSQLIcon: React.FC<IconProps> = ({ size = 24, className, ...props }) => (
         y2="1420.3311"
         gradientTransform="matrix(.01102 0 0 -.01102 56.808 125.521)"
         gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#909ca9"></stop>
-        <stop offset="1" stop-color="currentColor"></stop>
+        <stop offset="0" stopColor="#909ca9"></stop>
+        <stop offset="1" stopColor="currentColor"></stop>
       </linearGradient>
       <linearGradient
         id="b"
@@ -26,8 +26,8 @@ const MSSQLIcon: React.FC<IconProps> = ({ size = 24, className, ...props }) => (
         y2="10288.81"
         gradientTransform="matrix(.01102 0 0 -.01102 56.808 125.521)"
         gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#939fab"></stop>
-        <stop offset="1" stop-color="currentColor"></stop>
+        <stop offset="0" stopColor="#939fab"></stop>
+        <stop offset="1" stopColor="currentColor"></stop>
       </linearGradient>
       <radialGradient
         id="c"
@@ -36,8 +36,8 @@ const MSSQLIcon: React.FC<IconProps> = ({ size = 24, className, ...props }) => (
         r="898.12"
         gradientTransform="matrix(-.01059 -.0016 -.00321 .02118 -64.462 -130.43)"
         gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="currentColor"></stop>
-        <stop offset="1" stop-color="#a91d22"></stop>
+        <stop offset="0" stopColor="currentColor"></stop>
+        <stop offset="1" stopColor="#a91d22"></stop>
       </radialGradient>
     </defs>
     <path

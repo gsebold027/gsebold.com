@@ -1,0 +1,66 @@
+{
+  "contact": {
+    "title": "Start a Conversation",
+    "description": "Fill out the form below and I'll get back to you ASAP",
+    "form_fields_aria": "Contact form fields",
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "Michael Davis",
+        "help_text": "Enter your full name (2-50 characters, letters only)",
+        "validation": {
+          "min": "Full name must be at least 2 characters",
+          "max": "Full name must be at most 50 characters",
+          "format": "Full name can only contain letters and spaces"
+        }
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "michael.davis@example.com",
+        "help_text": "Enter a valid email address",
+        "validation": {
+          "invalid": "Please enter a valid email address",
+          "min": "Email must be at least 5 characters",
+          "max": "Email must be at most 100 characters"
+        }
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Website development project",
+        "help_text": "Brief subject line (5-100 characters)",
+        "validation": {
+          "min": "Subject must be at least 5 characters",
+          "max": "Subject must be at most 100 characters"
+        }
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Hi Gustavo, I'm interested in developing a new React application for my business. Could we schedule a call to discuss the requirements?",
+        "character_count": "{{count}}/600 characters",
+        "character_count_aria": "{{count}} of {{max}} characters used",
+        "help_text": "Your message (20-600 characters)",
+        "validation": {
+          "min": "Message must be at least 20 characters",
+          "max": "Message must be at most 600 characters"
+        }
+      }
+    },
+    "submit_button": "Send",
+    "submitting_button": "Sending",
+    "submit_button_help": "Submit the contact form to send your message",
+    "notifications": {
+      "success": {
+        "title": "Message sent successfully!",
+        "description": "Thank you for contacting me. I'll get back to you as soon as possible."
+      },
+      "warning": {
+        "title": "Failed to send message",
+        "description": "There was a problem sending your message. Please try again later or contact me directly."
+      },
+      "error": {
+        "title": "Unexpected error",
+        "description": "An unexpected error occurred. Please try again later or contact me directly."
+      }
+    }
+  }
+}

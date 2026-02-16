@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 
 import Footer from './sections/Footer'
 import NavBar from './sections/NavBar'
-import { AnimatedGridPattern } from './ui'
+import { AnimatedGridPattern, Toaster } from './ui'
 
 const Layout = () => {
   const { t } = usePageTranslation()
@@ -40,6 +40,7 @@ const Layout = () => {
       </main>
 
       <Footer />
+      <Toaster />
     </div>
   )
 }
