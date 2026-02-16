@@ -3,6 +3,7 @@ import { lazy } from 'react'
 import Layout from './components/Layout'
 
 const LandingPage = lazy(() => import('@/pages/landing-page/LandingPage'))
+const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 export const routes = [
   {
@@ -14,5 +15,9 @@ export const routes = [
         element: <LandingPage />
       }
     ]
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />
   }
 ]
