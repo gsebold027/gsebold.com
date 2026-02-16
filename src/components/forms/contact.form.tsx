@@ -135,7 +135,7 @@ const ContactForm = () => {
                         autoComplete="name"
                         required
                       />
-                      <div id={helpId} className="sr-only">
+                      <div id={helpId} className="sr-only max-w-full">
                         {t('contact.fields.name.help_text')}
                       </div>
                       {isInvalid && (
@@ -171,7 +171,7 @@ const ContactForm = () => {
                         autoComplete="email"
                         required
                       />
-                      <div id={helpId} className="sr-only">
+                      <div id={helpId} className="sr-only max-w-full">
                         {t('contact.fields.email.help_text')}
                       </div>
                       {isInvalid && (
@@ -207,7 +207,7 @@ const ContactForm = () => {
                       autoComplete="off"
                       required
                     />
-                    <div id={helpId} className="sr-only">
+                    <div id={helpId} className="sr-only max-w-full">
                       {t('contact.fields.subject.help_text')}
                     </div>
                     {isInvalid && (
@@ -265,7 +265,7 @@ const ContactForm = () => {
                         </InputGroupText>
                       </InputGroupAddon>
                     </InputGroup>
-                    <div id={helpId} className="sr-only">
+                    <div id={helpId} className="sr-only max-w-full">
                       {t('contact.fields.message.help_text')}
                     </div>
                     {isInvalid && (
@@ -298,7 +298,7 @@ const ContactForm = () => {
           )}
         </Button>
 
-        <div id="submit-button-help" className="sr-only">
+        <div id="submit-button-help" className="sr-only max-w-full">
           {t('contact.submit_button_help')}
         </div>
       </CardFooter>
