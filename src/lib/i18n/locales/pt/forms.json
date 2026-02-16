@@ -1,0 +1,66 @@
+{
+  "contact": {
+    "title": "Entre em Contato",
+    "description": "Preencha o formulário abaixo e eu responderei o mais breve possível",
+    "form_fields_aria": "Campos do formulário de contato",
+    "fields": {
+      "name": {
+        "label": "Nome Completo",
+        "placeholder": "João Silva",
+        "help_text": "Digite seu nome completo (2-50 caracteres, apenas letras)",
+        "validation": {
+          "min": "Nome completo deve ter pelo menos 2 caracteres",
+          "max": "Nome completo deve ter no máximo 50 caracteres",
+          "format": "Nome completo pode conter apenas letras e espaços"
+        }
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "joao.silva@exemplo.com",
+        "help_text": "Digite um endereço de email válido",
+        "validation": {
+          "invalid": "Por favor, insira um endereço de email válido",
+          "min": "Email deve ter pelo menos 5 caracteres",
+          "max": "Email deve ter no máximo 100 caracteres"
+        }
+      },
+      "subject": {
+        "label": "Assunto",
+        "placeholder": "Projeto de desenvolvimento web",
+        "help_text": "Digite o assunto brevemente (5-100 caracteres)",
+        "validation": {
+          "min": "Assunto deve ter pelo menos 5 caracteres",
+          "max": "Assunto deve ter no máximo 100 caracteres"
+        }
+      },
+      "message": {
+        "label": "Mensagem",
+        "placeholder": "Olá Gustavo, tenho interesse em desenvolver uma nova aplicação React para minha empresa. Podemos agendar uma conversa para discutir os requisitos?",
+        "character_count": "{{count}}/600 caracteres",
+        "character_count_aria": "{{count}} de {{max}} caracteres utilizados",
+        "help_text": "Digite sua mensagem (20-600 caracteres)",
+        "validation": {
+          "min": "Mensagem deve ter pelo menos 20 caracteres",
+          "max": "Mensagem deve ter no máximo 600 caracteres"
+        }
+      }
+    },
+    "submit_button": "Enviar",
+    "submitting_button": "Enviando",
+    "submit_button_help": "Enviar o formulário de contato para mandar sua mensagem",
+    "notifications": {
+      "success": {
+        "title": "Mensagem enviada com sucesso!",
+        "description": "Obrigado por entrar em contato. Retornarei o mais breve possível."
+      },
+      "warning": {
+        "title": "Falha ao enviar mensagem",
+        "description": "Houve um problema ao enviar sua mensagem. Tente novamente mais tarde ou entre em contato diretamente."
+      },
+      "error": {
+        "title": "Erro inesperado",
+        "description": "Ocorreu um erro inesperado. Tente novamente mais tarde ou entre em contato diretamente."
+      }
+    }
+  }
+}

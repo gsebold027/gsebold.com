@@ -3,6 +3,7 @@ import { Mail, MapPin } from 'lucide-react'
 import { socialLinks } from '@/config'
 import { usePageTranslation } from '@/lib/hooks'
 
+import { ContactForm } from '../forms'
 import { ContactInfo } from '../shared'
 import { TypographyH2, TypographyP } from '../ui/typography'
 
@@ -42,7 +43,7 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-      <div className="w-full"></div>
+      <ContactForm />
     </section>
   )
 }

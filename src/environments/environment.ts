@@ -4,6 +4,7 @@ export const environment = {
     theme: 'theme'
   },
   urls: {
-    baseUrl: ''
-  }
+    baseUrl: import.meta.env.VITE_API_BASE_URL
+  },
+  email: import.meta.env.VITE_EMAIL
 }

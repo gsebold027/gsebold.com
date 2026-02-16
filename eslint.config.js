@@ -10,7 +10,7 @@ import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', '**/*.{cjs,mjs}', '.react-router', 'old/**']
+    ignores: ['dist', 'node_modules', '**/*.{cjs,mjs}', '.react-router']
   },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],

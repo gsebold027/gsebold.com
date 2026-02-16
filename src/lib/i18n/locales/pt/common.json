@@ -6,6 +6,9 @@
     "open_menu": "Abrir menu",
     "toggle_theme": "Alternar tema",
     "select_language": "Selecionar idioma",
+    "primary_navigation": "Navegação principal",
+    "mobile_menu": "Menu para dispositivos móveis",
+    "mobile_menu_description": "Navegar pelas seções do site",
     "nav": {
       "home": "Início",
       "career": "Carreira",
@@ -15,8 +18,15 @@
     }
   },
   "footer": {
+    "footer_heading": "Rodapé",
+    "brand_section": "Marca e redes sociais",
+    "social_links": "Links de redes sociais",
+    "linkedin_profile": "Visitar perfil no LinkedIn",
+    "github_profile": "Visitar perfil no GitHub",
     "tagline": "Construindo a web do futuro, hoje.",
+    "contact_section": "Informações de contato",
     "navigation": "Navegação",
+    "footer_navigation": "Navegação do rodapé",
     "contact_card": {
       "title": "Entre em Contato",
       "description": "Vamos discutir como podemos transformar suas ideias em soluções inovadoras.",
@@ -25,6 +35,7 @@
     },
     "back_to_top": "Voltar ao topo",
     "made_with": "Feito com",
+    "love": "amor",
     "location": "em Curitiba, Brasil"
   }
 }

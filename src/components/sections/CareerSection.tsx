@@ -95,6 +95,7 @@ const CareerSection = () => {
       <div className="flex flex-col gap-8 sm:gap-16">
         {skills.map((section, sectionIndex) => (
           <div
+            key={`${section}-${sectionIndex}`}
             className="flex md:flex-row flex-col gap-6 sm:gap-8 items-start"
             role="region"
             aria-labelledby={`skill-category-${sectionIndex}`}>
@@ -107,7 +108,7 @@ const CareerSection = () => {
               className="w-full md:w-4/5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6 list-none p-0"
               aria-label={t('experience.skills_list_aria', { category: section.title })}>
               {section.items.map((tool) => (
-                <li className="flex items-center gap-2">
+                <li key={tool.label.replace(' ', '-')} className="flex items-center gap-2">
                   <tool.icon aria-hidden="true" />
                   <span className="text-lg">{tool.label}</span>
                 </li>
