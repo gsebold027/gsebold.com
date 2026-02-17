@@ -9,6 +9,7 @@
   },
   "experience": {
     "title": "My journey",
+    "how_i_grew_as_fullstack_developer": "How I grew as a full-stack developer and problem solver",
     "skills_title": "Developed skills",
     "skills_list_aria": "Tecnologias de {{category}}",
     "frontend": "Frontend",

@@ -86,7 +86,7 @@ const CareerSection = () => {
         {t('experience.title')}
       </TypographyH2>
       <TypographyH3 className="text-muted-foreground mb-4">
-        How I grew as a full-stack developer and problem solver
+        {t('experience.how_i_grew_as_fullstack_developer')}
       </TypographyH3>
       <WorkExperience />
 
