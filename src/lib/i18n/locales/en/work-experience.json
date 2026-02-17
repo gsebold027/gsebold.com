@@ -1,0 +1,33 @@
+{
+  "show_previous": "Show previous experiences",
+  "current_position": "Current",
+  "positions": {
+    "internship": "Intern",
+    "fullstack_developer": "Full Stack Developer",
+    "senior_fullstack_developer": "Senior Full Stack Developer"
+  },
+  "companies": {
+    "ssw_sistemas": "SSW Sistemas"
+  },
+  "responsibilities": {
+    "backend_development_pascal": "Design and maintenance of back-end systems using Object Pascal, focusing on business logic",
+    "api_maintenance": "Design, development, and maintenance of RESTful APIs and web services",
+    "edi_development": "Development of EDI solutions to automate system-to-system data exchange, ensuring data reliability and integrity",
+    "database_analysis": "Data modeling, query optimization, and performance tuning using PostgreSQL",
+
+    "development_using_ruby_on_rails": "Back-end development with Ruby on Rails applying MVC patterns and microservices architecture",
+    "frontend_using_html_css_javascript": "Development of responsive user interfaces using HTML, CSS, and JavaScript",
+    "using_git_plus_heroku": "Source control with Git and CI/CD implementation with continuous deployment via Heroku",
+    "management_app": "Development of web applications with administrative dashboards using Vue.js",
+    "maintain_legacy_code": "Refactoring, maintenance, and modernization of legacy systems",
+
+    "react_rest_development": "Development of React applications integrated with RESTful APIs",
+    "fullstack_react_nest": "Full-stack development using React on the front-end and NestJS on the back-end, following scalable architecture principles",
+    "graphql_api_development": "Implementation of GraphQL APIs including schema design, resolver development, and service integration",
+    "mongodb_integration": "Data modeling and performance optimization using MongoDB, including collection design and query tuning",
+
+    "frontend_architecture_best_practices": "Definition and implementation of scalable front-end architecture emphasizing reusable components and performance optimization",
+    "backend_endpoint_development": "Design and implementation of RESTful endpoints using NestJS and .NET, applying Clean Architecture and software engineering best practices",
+    "cms_directus_integration": "Front-end development integrated with a headless CMS (Directus), including content modeling, collection design, relationship definition, and API integration"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "show_previous": "Ver experiências anteriores",
+  "current_position": "Atual",
+  "positions": {
+    "internship": "Estagiário",
+    "fullstack_developer": "Desenvolvedor Full Stack",
+    "senior_fullstack_developer": "Desenvolvedor Full Stack Sênior"
+  },
+  "responsibilities": {
+    "backend_development_pascal": "Desenvolvimento e manutenção de sistemas back-end utilizando Object Pascal, com foco em regras de negócio",
+    "api_maintenance": "Design, desenvolvimento e manutenção de APIs RESTful e web services",
+    "edi_development": "Desenvolvimento de soluções EDI para automação de troca de dados entre sistemas, garantindo confiabilidade e integridade das informações",
+    "database_analysis": "Modelagem, análise e otimização de consultas SQL utilizando PostgreSQL, com foco em performance e integridade de dados",
+
+    "development_using_ruby_on_rails": "Desenvolvimento back-end com Ruby on Rails aplicando arquitetura MVC e microsserviços",
+    "frontend_using_html_css_javascript": "Desenvolvimento de interfaces responsivas utilizando HTML, CSS e JavaScript",
+    "using_git_plus_heroku": "Versionamento de código com Git e implementação de CI/CD com deploy contínuo via Heroku",
+    "management_app": "Desenvolvimento de aplicação web com painel administrativo para gestão de dados, utilizando Vue.js",
+    "maintain_legacy_code": "Refatoração, manutenção e modernização de sistemas legados",
+
+    "react_rest_development": "Desenvolvimento de aplicações React integradas a APIs RESTful",
+    "fullstack_react_nest": "Desenvolvimento full-stack utilizando React no front-end e NestJS no back-end, seguindo princípios de arquitetura escalável",
+    "graphql_api_development": "Implementação de APIs GraphQL incluindo definição de schema, resolvers e integração com serviços",
+    "mongodb_integration": "Modelagem e otimização de dados em MongoDB, incluindo estruturação de coleções e melhoria de performance de consultas",
+
+    "frontend_architecture_best_practices": "Definição e implementação de arquitetura front-end escalável com foco em componentização, reutilização de código e otimização de performance",
+    "backend_endpoint_development": "Design e implementação de endpoints utilizando NestJS e .NET, aplicando princípios REST, Clean Architecture e boas práticas de desenvolvimento",
+    "cms_directus_integration": "Desenvolvimento de front-end integrado a CMS headless (Directus), incluindo modelagem de coleções, definição de relacionamentos, estruturação de conteúdo e integração via API"
+  }
+}

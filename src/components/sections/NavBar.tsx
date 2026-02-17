@@ -38,7 +38,7 @@ const NavBar = () => {
     { href: '#home', label: t('header.nav.home') },
     { href: '#career', label: t('header.nav.career') },
     { href: '#technologies', label: t('header.nav.technologies') },
-    { href: '#projects', label: t('header.nav.projects') },
+    // { href: '#projects', label: t('header.nav.projects') },
     { href: '#contact', label: t('header.nav.contact') }
   ]
 
