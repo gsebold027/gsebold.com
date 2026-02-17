@@ -1,6 +1,5 @@
 import { Mail, MapPin } from 'lucide-react'
 
-import { socialLinks } from '@/config'
 import { usePageTranslation } from '@/lib/hooks'
 
 import { ContactForm } from '../forms'
@@ -31,7 +30,7 @@ const ContactSection = () => {
             <ContactInfo
               icon={<Mail />}
               title={t('contact.email_label')}
-              value={socialLinks.email}
+              value={t('contact.email_value')}
             />
           </div>
           <div role="listitem">

@@ -30,10 +30,11 @@ const Footer = () => {
   const scrollToSection = useSmoothScroll()
 
   const currentYear = new Date().getFullYear()
+  const email = t('footer.email_value')
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(socialLinks.email)
+      await navigator.clipboard.writeText(email)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     } catch (err) {
@@ -146,7 +147,7 @@ const Footer = () => {
                       ? t('footer.contact_card.email_copied')
                       : t('footer.contact_card.copy_email')
                   }>
-                  <span>{socialLinks.email}</span>
+                  <span>{email}</span>
                   {copied ? (
                     <Check className="size-4 text-green-500" aria-hidden="true" />
                   ) : (
