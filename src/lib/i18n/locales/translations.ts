@@ -20,7 +20,7 @@ export const translations = {
   pt: {
     common: ptCommon,
     forms: ptForms,
-    'landing-page': ptLandingPage.contact,
+    'landing-page': ptLandingPage,
     'not-found-page': ptNotFoundPage,
     'work-experience': ptWorkExperience
   }
