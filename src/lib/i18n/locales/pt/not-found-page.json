@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "Gustavo Sebold · Desenvolvedor Full-Stack",
+    "description": "Ops! Esta página não existe. Volte ao portfólio de Gustavo Sebold.",
+    "og_description": "Olá, sou Gustavo Sebold — desenvolvedor full-stack que cria aplicações web acessíveis e de alta performance. Explore minha trajetória e entre em contato."
+  },
   "pageNotFound": "Página Não Encontrada",
   "pageNotFoundDescription": "Desculpe, a página que você está procurando não existe ou foi movida.",
   "goHome": "Ir para Início"

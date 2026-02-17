@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "404 · Page Not Found | Gustavo Sebold",
+    "description": "Oops! This page doesn't exist. Head back to Gustavo Sebold's portfolio.",
+    "og_description": "Hi, I'm Gustavo Sebold — a full-stack developer who builds seamless, accessible, and performant web applications. Explore my journey, skills, and get in touch."
+  },
   "pageNotFound": "Page Not Found",
   "pageNotFoundDescription": "Sorry, the page you are looking for doesn't exist or has been moved.",
   "goHome": "Go Home"

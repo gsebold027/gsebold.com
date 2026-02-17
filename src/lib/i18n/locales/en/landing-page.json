@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "Gustavo Sebold · Full-Stack Developer",
+    "description": "Full-stack developer from Curitiba, Brazil. Crafting modern web experiences with React, Node.js, TypeScript, and more. Let's build something great.",
+    "og_description": "Hi, I'm Gustavo Sebold — a full-stack developer who builds seamless, accessible, and performant web applications. Explore my journey, skills, and get in touch."
+  },
   "hero": {
     "greeting": "Hi, my name is",
     "tagline": "Building tomorrow's web, today.",

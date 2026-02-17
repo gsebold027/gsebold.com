@@ -1,4 +1,9 @@
 {
+  "meta": {
+    "title": "Gustavo Sebold · Desenvolvedor Full-Stack",
+    "description": "Desenvolvedor full-stack de Curitiba, Brasil. Criando experiências web modernas com React, Node.js, TypeScript e muito mais.",
+    "og_description": "Olá, sou Gustavo Sebold — desenvolvedor full-stack que cria aplicações web acessíveis e de alta performance. Explore minha trajetória e entre em contato."
+  },
   "hero": {
     "greeting": "Olá, eu sou o",
     "tagline": "Construindo a web do futuro, hoje.",
