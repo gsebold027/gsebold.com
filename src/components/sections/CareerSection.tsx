@@ -25,6 +25,7 @@ import {
   TypescriptIcon,
   ViteIcon
 } from '../icons'
+import { WorkExperience } from '../shared/WorkExperience/WorkExperience'
 import { TypographyH2, TypographyH3, TypographyH4 } from '../ui/typography'
 
 const CareerSection = () => {
@@ -84,11 +85,12 @@ const CareerSection = () => {
       <TypographyH2 id="career-heading" className="mb-[clamp(1rem,_2.5vw_+_0rem,_2rem)]">
         {t('experience.title')}
       </TypographyH2>
-      {/* <TypographyH3 className="text-muted-foreground">
-      How I grew as a full-stack developer and problem solver
-    </TypographyH3> */}
+      <TypographyH3 className="text-muted-foreground mb-4">
+        How I grew as a full-stack developer and problem solver
+      </TypographyH3>
+      <WorkExperience />
 
-      <TypographyH3 id="technologies" className="text-muted-foreground mb-6 sm:mb-12">
+      <TypographyH3 id="technologies" className="text-muted-foreground mb-6">
         {t('experience.skills_title')}
       </TypographyH3>
 

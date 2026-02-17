@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-type i18nNamespaces = 'common' | 'forms' | 'landing-page' | 'not-found-page'
+type i18nNamespaces = 'common' | 'forms' | 'landing-page' | 'not-found-page' | 'work-experience'
 
 export function usePageTranslation(namespace?: i18nNamespaces | i18nNamespaces[]) {
   const namespaces = namespace
