@@ -11,7 +11,6 @@ const SeoHead = () => {
 
   return (
     <Helmet>
-      {/* === CORE === */}
       <html lang={lang} />
       <title>{t('meta.title')}</title>
       <meta name="description" content={t('meta.description')} />

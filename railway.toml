@@ -1,7 +1,7 @@
 [build]
 builder = "RAILPACK"
 buildCommand = "pnpm build"
-watchPatterns = ["public/**", "src/**", "package.json"]
+watchPatterns = ["public/**", "src/**", "index.html", "package.json", "railway.toml"]
 
 [deploy]
 startCommand = "pnpm preview --host"
