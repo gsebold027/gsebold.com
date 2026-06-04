@@ -20,4 +20,4 @@ jobs:
         with:
           github_token: ${{ secrets.GH_PAT }}
           tag_prefix: v
-          default_bump: patch
+          default_bump: false
