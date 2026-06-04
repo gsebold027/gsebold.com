@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://gsebold.com/</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://gsebold.com/pt</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gsebold.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gsebold.com/en"/>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://gsebold.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://gsebold.com/pt"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://gsebold.com/en"/>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
