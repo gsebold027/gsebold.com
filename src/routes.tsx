@@ -1,4 +1,5 @@
 import { lazy, useEffect } from 'react'
+
 import { Navigate, useParams } from 'react-router'
 
 import Layout from './components/Layout'
