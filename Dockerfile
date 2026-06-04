@@ -23,15 +23,11 @@ RUN pnpm build
 FROM nginx:alpine AS runner
 
 COPY --from=builder /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf.template
-
-# Default for local / docker compose; Railway overrides this at runtime
-ENV PORT=80
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-    CMD wget -qO- http://localhost:${PORT}/ || exit 1
+    CMD wget -qO- http://localhost:80/ || exit 1
 
-# Substitute $PORT into the nginx config, then start nginx
-CMD ["/bin/sh", "-c", "envsubst '${PORT}' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"]
+CMD ["nginx", "-g", "daemon off;"]
