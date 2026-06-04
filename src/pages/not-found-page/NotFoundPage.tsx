@@ -8,7 +8,8 @@ import { usePageTranslation } from '@/lib/hooks'
 import SeoHead from './SeoHead'
 
 const NotFoundPage = () => {
-  const { t } = usePageTranslation('not-found-page')
+  const { t, i18n } = usePageTranslation('not-found-page')
+  const lang = i18n.resolvedLanguage === 'pt' ? 'pt' : 'en'
 
   return (
     <>
@@ -36,7 +37,7 @@ const NotFoundPage = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild>
-              <Link to="/"> {t('goHome')}</Link>
+              <Link to={`/${lang}`}>{t('goHome')}</Link>
             </Button>
           </div>
         </div>

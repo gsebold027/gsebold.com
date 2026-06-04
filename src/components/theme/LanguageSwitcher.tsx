@@ -1,5 +1,6 @@
 import { ChevronDownIcon, Dot, GlobeIcon } from 'lucide-react'
 import Flag from 'react-flagkit'
+import { useNavigate } from 'react-router'
 
 import { usePageTranslation } from '@/lib/hooks'
 import { cn } from '@/lib/utils'
@@ -15,8 +16,11 @@ import {
   DropdownMenuTrigger
 } from '../ui'
 
+export const SUPPORTED_LANGS = ['en', 'pt'] as const
+export type SupportedLang = (typeof SUPPORTED_LANGS)[number]
+
 export type Language = {
-  value: string
+  value: SupportedLang
   label: string
   flagReference: string
 }
@@ -28,11 +32,12 @@ const languages: Language[] = [
 
 const LanguageSwitcher = () => {
   const { i18n, t } = usePageTranslation()
+  const navigate = useNavigate()
 
   const currentLanguage = i18n.resolvedLanguage || i18n.language
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng)
+  const changeLanguage = (lng: SupportedLang) => {
+    navigate(`/${lng}`, { replace: true })
   }
 
   return (
