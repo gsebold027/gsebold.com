@@ -7,13 +7,10 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "noImplicitAny": false,
-
     /* react-router config */
-    "types": ["node", "vite/client"],
-    "baseUrl": ".",
+    "types": ["node", "vite/client", "@testing-library/jest-dom"],
     "rootDirs": [".", "./.react-router/types"],
-    "paths": { "@/*": ["src/*"] },
+    "paths": { "@/*": ["./src/*"] },
     "resolveJsonModule": true,
 
     /* Bundler mode */

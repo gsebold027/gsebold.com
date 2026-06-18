@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-
 import { ChevronsDown, Mouse } from 'lucide-react'
 
 import { usePageTranslation, useSmoothScroll } from '@/lib/hooks'
@@ -8,28 +6,11 @@ import { Button } from '../ui'
 import { TypographyH1, TypographyH2, TypographyP } from '../ui/typography'
 
 const HeroSection = () => {
-  const heroRef = useRef<HTMLDivElement>(null)
-
   const { t } = usePageTranslation('landing-page')
   const scrollToSection = useSmoothScroll()
 
-  const scrollPastCurrent = () => {
-    const el = heroRef.current
-    if (!el) return
-
-    const heroBottom = el.getBoundingClientRect().bottom + window.scrollY
-
-    const FIXED_HEADER_OFFSET = 80
-
-    window.scrollTo({
-      top: heroBottom - FIXED_HEADER_OFFSET,
-      behavior: 'smooth'
-    })
-  }
-
   return (
     <section
-      ref={heroRef}
       id="home"
       className="min-h-dvh py-[clamp(1rem,_2.5vw_+_0rem,_2rem)] flex items-center relative"
       aria-labelledby="hero-heading">
@@ -56,7 +37,7 @@ const HeroSection = () => {
       <Button
         className="text-muted-foreground absolute left-1/2 bottom-5 translate-x-[-50%] flex-col h-auto hover:bg-transparent px-2"
         variant="ghost"
-        onClick={scrollPastCurrent}
+        onClick={() => scrollToSection('#career')}
         aria-label={t('hero.scroll_next_section')}>
         <Mouse size={24} aria-hidden="true" />
         <ChevronsDown size={24} aria-hidden="true" />

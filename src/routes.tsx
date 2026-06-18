@@ -3,6 +3,7 @@ import { lazy, useEffect } from 'react'
 import { Navigate, useParams } from 'react-router'
 
 import Layout from './components/Layout'
+import { RouteErrorBoundary } from './components/shared/RouteErrorBoundary'
 import { SUPPORTED_LANGS, SupportedLang } from './components/theme/LanguageSwitcher'
 import i18n from './lib/i18n'
 
@@ -40,6 +41,7 @@ export const routes = [
   {
     path: '/:lang',
     element: <LangLayout />,
+    errorElement: <RouteErrorBoundary />,
     children: [
       {
         index: true,

@@ -47,7 +47,7 @@ export default tseslint.config(
         }
       ],
       'react-refresh/only-export-components': ['off', { allowConstantExport: true }],
-      '@typescript-eslint/no-explicit-any': ['off'],
+      '@typescript-eslint/no-explicit-any': ['error'],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type']
     }
   },
