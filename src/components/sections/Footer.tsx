@@ -178,7 +178,11 @@ const Footer = () => {
           </TypographyP>
           <div className="flex items-center gap-2 text-muted-foreground text-sm">
             <span>{t('footer.made_with')}</span>
-            <Heart role="img" className="size-4 fill-red-500 text-red-500" aria-label={t('footer.love')} />
+            <Heart
+              role="img"
+              className="size-4 fill-red-500 text-red-500"
+              aria-label={t('footer.love')}
+            />
             <span>{t('footer.location')}</span>
           </div>
         </div>

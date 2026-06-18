@@ -77,7 +77,10 @@ const LanguageSwitcher = () => {
                     {language.label}
                   </span>
                 </div>
-                <Dot className={cn('hidden', currentLanguage === language.value && 'block')} aria-hidden={true} />
+                <Dot
+                  className={cn('hidden', currentLanguage === language.value && 'block')}
+                  aria-hidden={true}
+                />
               </div>
             </DropdownMenuItem>
           ))}

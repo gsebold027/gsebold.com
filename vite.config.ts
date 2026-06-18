@@ -25,9 +25,17 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (!id.includes('node_modules')) return
-          if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/react-router/') || id.includes('/scheduler/')) return 'vendor-react'
-          if (id.includes('@radix-ui') || id.includes('/motion/') || id.includes('/sonner/')) return 'vendor-ui'
-          if (id.includes('@tanstack') || id.includes('/axios/') || id.includes('/zod/')) return 'vendor-query'
+          if (
+            id.includes('/react/') ||
+            id.includes('/react-dom/') ||
+            id.includes('/react-router/') ||
+            id.includes('/scheduler/')
+          )
+            return 'vendor-react'
+          if (id.includes('@radix-ui') || id.includes('/motion/') || id.includes('/sonner/'))
+            return 'vendor-ui'
+          if (id.includes('@tanstack') || id.includes('/axios/') || id.includes('/zod/'))
+            return 'vendor-query'
           if (id.includes('i18next')) return 'vendor-i18n'
           if (id.includes('lucide-react')) return 'vendor-icons'
           return 'vendor-misc'
