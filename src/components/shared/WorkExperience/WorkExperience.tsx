@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, SingleAccordionTrigger } fr
 import { usePageTranslation } from '@/lib/hooks'
 
 import { WorkExperienceItem } from './WorkExperienceItem'
-import { workExperienceData } from './work-experiente.data'
+import { workExperienceData } from './work-experience.data'
 
 const WorkExperience = () => {
   const { t } = usePageTranslation('work-experience')

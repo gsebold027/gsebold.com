@@ -45,12 +45,13 @@ const LanguageSwitcher = () => {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
+          aria-label={t('header.select_language')}
           className="flex items-center px-2 gap-2 [&>svg]:text-muted-foreground/80 data-[state=open]:bg-secondary">
           <GlobeIcon size={16} aria-hidden={true} />
-          <span className="font-medium text-sm w-5">
+          <span className="font-medium text-sm w-5" aria-hidden="true">
             {currentLanguage.charAt(0).toUpperCase() + currentLanguage.slice(1)}
           </span>
-          <ChevronDownIcon className="h-4 w-4" />
+          <ChevronDownIcon className="h-4 w-4" aria-hidden={true} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px]">
@@ -63,10 +64,11 @@ const LanguageSwitcher = () => {
             <DropdownMenuItem
               key={language.value}
               className="group"
+              aria-current={currentLanguage === language.value ? 'true' : undefined}
               onClick={() => changeLanguage(language.value)}>
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-2">
-                  <Flag country={language.flagReference} size={16} />
+                  <Flag country={language.flagReference} size={16} aria-hidden={true} />
                   <span
                     className={cn(
                       'text-muted-foreground group-hover:text-foreground',
@@ -75,7 +77,10 @@ const LanguageSwitcher = () => {
                     {language.label}
                   </span>
                 </div>
-                <Dot className={cn('hidden', currentLanguage === language.value && 'block')} />
+                <Dot
+                  className={cn('hidden', currentLanguage === language.value && 'block')}
+                  aria-hidden={true}
+                />
               </div>
             </DropdownMenuItem>
           ))}

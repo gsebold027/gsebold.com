@@ -33,7 +33,7 @@ const handleRetry = (failureCount: number, error: Error) => {
 const useGet = <T>(
   keys: QueryKey,
   useQueryOptions?: QueryOptions<T>,
-  axiosOptions?: AxiosRequestConfig<any>
+  axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
 
@@ -57,7 +57,7 @@ const useGet = <T>(
 const useGetWithId = <T>(
   keys: QueryKey,
   useQueryOptions?: QueryOptions<T>,
-  axiosOptions?: AxiosRequestConfig<any>
+  axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
 
@@ -79,7 +79,7 @@ const useGetWithId = <T>(
 const usePost = <T, U>(
   url: string,
   useMutationOptions?: MutationOptions<T, U>,
-  axiosOptions?: AxiosRequestConfig<any>
+  axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
 
@@ -102,7 +102,7 @@ const usePut = <
 >(
   url: string,
   useMutationOptions?: MutationOptions<T, U>,
-  axiosOptions?: AxiosRequestConfig<any>
+  axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
 
@@ -127,7 +127,7 @@ const usePatch = <
 >(
   url: string,
   useMutationOptions?: MutationOptions<T, U>,
-  axiosOptions?: AxiosRequestConfig<any>
+  axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
 
@@ -152,7 +152,7 @@ const useDelete = <
 >(
   url: string,
   useMutationOptions?: MutationOptions<T, U>,
-  axiosOptions?: AxiosRequestConfig<any>
+  axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
 
@@ -169,4 +169,4 @@ const useDelete = <
   })
 }
 
-export { useGet, useGetWithId, usePost, usePut, usePatch, useDelete }
+export { useGet, useGetWithId, usePost, usePut, usePatch, useDelete, handleRetry }

@@ -24,7 +24,7 @@ const WorkExperienceItem = ({ data }: WorkExperienceItemProps) => {
           )}
         </TypographyP>
       </div>
-      <div className="flex relative items-center">
+      <div className="flex relative items-center" aria-hidden="true">
         <div className="absolute top-[1.375rem] left-1/2 -translate-1/2">
           <div className="border border-foreground w-8 md:w-10 absolute top-1/2 -left-1 -translate-y-1/2 z-10"></div>
           <div className="rounded-full bg-background border-2 border-foreground size-[1.125rem] z-20 relative"></div>
