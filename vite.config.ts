@@ -22,34 +22,14 @@ export default defineConfig({
   },
   base: '/',
   build: {
+    chunkSizeWarningLimit: 800,
     rollupOptions: {
       onwarn(warning, warn) {
         if (warning.code === 'CHUNK_SIZE_WARNING') throw new Error(warning.message)
         warn(warning)
       },
       output: {
-        manualChunks(id) {
-          if (!id.includes('node_modules')) return
-          if (
-            id.includes('/react/') ||
-            id.includes('/react-dom/') ||
-            id.includes('/react-router/') ||
-            id.includes('/scheduler/')
-          )
-            return 'vendor-react'
-          if (
-            id.includes('/motion/') ||
-            id.includes('/motion-dom/') ||
-            id.includes('/framer-motion/')
-          )
-            return 'vendor-motion'
-          if (id.includes('@radix-ui') || id.includes('/sonner/')) return 'vendor-ui'
-          if (id.includes('@tanstack') || id.includes('/axios/') || id.includes('/zod/'))
-            return 'vendor-query'
-          if (id.includes('i18next')) return 'vendor-i18n'
-          if (id.includes('lucide-react')) return 'vendor-icons'
-          return 'vendor-misc'
-        }
+        manualChunks: (id) => (id.includes('node_modules') ? 'vendor' : undefined)
       }
     }
   },
