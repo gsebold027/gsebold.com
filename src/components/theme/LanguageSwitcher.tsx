@@ -2,6 +2,7 @@ import { ChevronDownIcon, Dot, GlobeIcon } from 'lucide-react'
 import Flag from 'react-flagkit'
 import { useNavigate } from 'react-router'
 
+import { SupportedLang } from '@/config/languages'
 import { usePageTranslation } from '@/lib/hooks'
 import { cn } from '@/lib/utils'
 
@@ -15,9 +16,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '../ui'
-
-export const SUPPORTED_LANGS = ['en', 'pt'] as const
-export type SupportedLang = (typeof SUPPORTED_LANGS)[number]
 
 export type Language = {
   value: SupportedLang

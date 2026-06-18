@@ -1,15 +1,22 @@
-import CareerSection from '@/components/sections/CareerSection'
-import ContactSection from '@/components/sections/ContactSection'
+import { Suspense, lazy } from 'react'
+
 import HeroSection from '@/components/sections/HeroSection'
 
 import SeoHead from './SeoHead'
+
+const CareerSection = lazy(() => import('@/components/sections/CareerSection'))
+const ContactSection = lazy(() => import('@/components/sections/ContactSection'))
 
 const LandingPage = () => (
   <>
     <SeoHead />
     <HeroSection />
-    <CareerSection />
-    <ContactSection />
+    <Suspense fallback={<div className="min-h-screen" />}>
+      <CareerSection />
+    </Suspense>
+    <Suspense fallback={<div className="min-h-screen" />}>
+      <ContactSection />
+    </Suspense>
   </>
 )
 

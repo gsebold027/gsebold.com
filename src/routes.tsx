@@ -1,15 +1,17 @@
-import { lazy, useEffect } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 
 import { Navigate, useParams } from 'react-router'
 
-import LandingPage from '@/pages/landing-page/LandingPage'
+import { SUPPORTED_LANGS, SupportedLang } from '@/config/languages'
 
 import Layout from './components/Layout'
-import { RouteErrorBoundary } from './components/shared/RouteErrorBoundary'
-import { SUPPORTED_LANGS, SupportedLang } from './components/theme/LanguageSwitcher'
 import i18n from './lib/i18n'
 
+const LandingPage = lazy(() => import('@/pages/landing-page/LandingPage'))
 const NotFoundPage = lazy(() => import('@/pages/not-found-page/NotFoundPage'))
+const RouteErrorBoundary = lazy(() =>
+  import('./components/shared/RouteErrorBoundary').then((m) => ({ default: m.RouteErrorBoundary }))
+)
 
 const LangRedirect = () => {
   const detected = i18n.resolvedLanguage
@@ -42,7 +44,11 @@ export const routes = [
   {
     path: '/:lang',
     element: <LangLayout />,
-    errorElement: <RouteErrorBoundary />,
+    errorElement: (
+      <Suspense fallback={null}>
+        <RouteErrorBoundary />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
@@ -52,6 +58,10 @@ export const routes = [
   },
   {
     path: '*',
-    element: <NotFoundPage />
+    element: (
+      <Suspense fallback={null}>
+        <NotFoundPage />
+      </Suspense>
+    )
   }
 ]
