@@ -2,13 +2,19 @@ import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
 import path from 'path'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 // https://vite.dev/config/
 export default defineConfig({
   envDir: './src/environments',
-  plugins: [react(), tailwindcss(), tsconfigPaths()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    tsconfigPaths(),
+    visualizer({ open: true, gzipSize: true, brotliSize: true })
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')
@@ -16,7 +22,6 @@ export default defineConfig({
   },
   base: '/',
   build: {
-    chunkSizeWarningLimit: 300,
     rollupOptions: {
       onwarn(warning, warn) {
         if (warning.code === 'CHUNK_SIZE_WARNING') throw new Error(warning.message)
@@ -32,8 +37,13 @@ export default defineConfig({
             id.includes('/scheduler/')
           )
             return 'vendor-react'
-          if (id.includes('@radix-ui') || id.includes('/motion/') || id.includes('/sonner/'))
-            return 'vendor-ui'
+          if (
+            id.includes('/motion/') ||
+            id.includes('/motion-dom/') ||
+            id.includes('/framer-motion/')
+          )
+            return 'vendor-motion'
+          if (id.includes('@radix-ui') || id.includes('/sonner/')) return 'vendor-ui'
           if (id.includes('@tanstack') || id.includes('/axios/') || id.includes('/zod/'))
             return 'vendor-query'
           if (id.includes('i18next')) return 'vendor-i18n'
