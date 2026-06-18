@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 
-import { LanguageSwitcher, ThemeToggle } from '@/components/theme'
+import { LanguageSwitcher } from '@/components/theme/LanguageSwitcher'
+import { ThemeToggle } from '@/components/theme/ThemeToggle'
 import { Button, Highlighter, LineShadowText } from '@/components/ui'
 import { DotPattern } from '@/components/ui/dot-pattern'
 import { usePageTranslation } from '@/lib/hooks'

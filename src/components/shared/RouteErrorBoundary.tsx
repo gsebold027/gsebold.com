@@ -1,12 +1,20 @@
-import { LanguageSwitcher, ThemeToggle } from '@/components/theme'
+import { Suspense, lazy } from 'react'
+
+import { ThemeToggle } from '@/components/theme'
 import { Button, Highlighter, LineShadowText } from '@/components/ui'
 import { DotPattern } from '@/components/ui/dot-pattern'
+
+const LanguageSwitcher = lazy(() =>
+  import('@/components/theme/LanguageSwitcher').then((m) => ({ default: m.LanguageSwitcher }))
+)
 
 const RouteErrorBoundary = () => (
   <div className="min-h-screen flex items-center justify-center px-4">
     <div className="absolute top-0 flex items-center justify-between md:justify-end w-full h-14 px-4 gap-2">
       <ThemeToggle />
-      <LanguageSwitcher />
+      <Suspense fallback={<div className="w-[70px] h-9" />}>
+        <LanguageSwitcher />
+      </Suspense>
     </div>
     <div className="text-center space-y-8 max-w-md" role="alert">
       <div className="space-y-4">

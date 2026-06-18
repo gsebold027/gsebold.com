@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { Suspense, lazy, useEffect, useRef, useState } from 'react'
 
 import { Menu } from 'lucide-react'
 
 import { usePageTranslation, useSmoothScroll } from '@/lib/hooks'
 
 import { Logo } from '../icons'
-import { LanguageSwitcher, ThemeToggle } from '../theme'
+import { ThemeToggle } from '../theme/ThemeToggle'
 import {
   Button,
   NavigationMenu,
@@ -19,6 +19,10 @@ import {
   SheetTitle,
   SheetTrigger
 } from '../ui'
+
+const LanguageSwitcher = lazy(() =>
+  import('../theme/LanguageSwitcher').then((m) => ({ default: m.LanguageSwitcher }))
+)
 
 export type NavBarLink = {
   href: string
@@ -128,7 +132,9 @@ const NavBar = () => {
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <LanguageSwitcher />
+          <Suspense fallback={<div className="w-[70px] h-9" />}>
+            <LanguageSwitcher />
+          </Suspense>
           {isMobile && (
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
               <SheetTrigger asChild>
