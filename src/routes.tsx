@@ -2,12 +2,13 @@ import { lazy, useEffect } from 'react'
 
 import { Navigate, useParams } from 'react-router'
 
+import LandingPage from '@/pages/landing-page/LandingPage'
+
 import Layout from './components/Layout'
 import { RouteErrorBoundary } from './components/shared/RouteErrorBoundary'
 import { SUPPORTED_LANGS, SupportedLang } from './components/theme/LanguageSwitcher'
 import i18n from './lib/i18n'
 
-const LandingPage = lazy(() => import('@/pages/landing-page/LandingPage'))
 const NotFoundPage = lazy(() => import('@/pages/not-found-page/NotFoundPage'))
 
 const LangRedirect = () => {
