@@ -109,7 +109,12 @@ describe('ContactForm', () => {
       (options) =>
         ({
           mutate: () =>
-            options?.onSuccess?.(undefined as never, undefined as never, undefined as never),
+            options?.onSuccess?.(
+              undefined as never,
+              undefined as never,
+              undefined as never,
+              undefined as never
+            ),
           isPending: false
         }) as unknown as ReturnType<typeof useContactMe>
     )
@@ -133,7 +138,12 @@ describe('ContactForm', () => {
       (options) =>
         ({
           mutate: () =>
-            options?.onError?.(new Error('Server error'), undefined as never, undefined as never),
+            options?.onError?.(
+              new Error('Server error'),
+              undefined as never,
+              undefined as never,
+              undefined as never
+            ),
           isPending: false
         }) as unknown as ReturnType<typeof useContactMe>
     )
