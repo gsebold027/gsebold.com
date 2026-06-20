@@ -3,13 +3,6 @@ name: Landing · PR Validation
 on:
   pull_request:
     branches: [main]
-    paths:
-      - 'apps/landing/**'
-      - 'packages/**'
-      - 'package.json'
-      - 'pnpm-lock.yaml'
-      - 'tsconfig.base.json'
-      - 'turbo.json'
 
 jobs:
   validate:
