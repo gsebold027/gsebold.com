@@ -122,7 +122,9 @@ export const configureMiddleware = (app: express.Application): void => {
     },
   });
 
-  app.use(limiter);
+  // express-rate-limit v7 types conflict with @types/express v5 in pnpm; bypass needed
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  app.use(limiter as any);
 
   logger.info(
     {

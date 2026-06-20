@@ -1,5 +1,5 @@
 {
-  "name": "landing-page",
+  "name": "@gsebold/landing",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,10 +9,8 @@
     "clean": "rm -rf dist",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "lint:staged": "eslint --fix --no-warn-ignored",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "format:staged": "prettier --write --ignore-unknown",
     "typecheck": "tsc --noEmit --pretty",
     "test": "vitest",
     "test:run": "vitest run",
@@ -50,7 +48,6 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^19.8.1",
     "@eslint/js": "^9.33.0",
     "@react-router/dev": "^7.8.1",
     "@tailwindcss/vite": "^4.1.12",
@@ -65,7 +62,6 @@
     "@vitejs/plugin-react": "^5.0.0",
     "@vitest/coverage-v8": "^4.1.9",
     "autoprefixer": "^10.4.21",
-    "commitlint": "^19.8.1",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -73,7 +69,6 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
-    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",

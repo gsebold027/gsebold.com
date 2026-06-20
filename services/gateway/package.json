@@ -1,5 +1,5 @@
 {
-  "name": "gsebold-api-gateway",
+  "name": "@gsebold/gateway",
   "version": "1.0.0",
   "scripts": {
     "build": "swc src -d dist --strip-leading-paths",
@@ -8,7 +8,10 @@
     "dev": "tsx watch src/server.ts",
     "lint": "eslint src/",
     "format": "prettier --write src/",
-    "format:check": "prettier --check src/"
+    "format:check": "prettier --check src/",
+    "typecheck": "tsc --noEmit",
+    "test": "echo 'No tests yet' && exit 0",
+    "test:run": "echo 'No tests yet' && exit 0"
   },
   "dependencies": {
     "compression": "^1.7.4",

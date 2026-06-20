@@ -1,4 +1,5 @@
 import express from 'express';
+
 import logger from '../utils/logger';
 
 export const configureHealthRoutes = (app: express.Application): void => {
@@ -36,17 +37,23 @@ export const configureHealthRoutes = (app: express.Application): void => {
 
         if (!response.ok) {
           errors.push('Contact service is not responding properly');
-          logger.warn({
-            service: 'contact',
-            url: contactServiceUrl,
-            status: response.status
-          }, 'Contact service health check failed');
+          logger.warn(
+            {
+              service: 'contact',
+              url: contactServiceUrl,
+              status: response.status,
+            },
+            'Contact service health check failed',
+          );
         } else {
-          logger.debug({
-            service: 'contact',
-            url: contactServiceUrl,
-            status: response.status
-          }, 'Contact service health check passed');
+          logger.debug(
+            {
+              service: 'contact',
+              url: contactServiceUrl,
+              status: response.status,
+            },
+            'Contact service health check passed',
+          );
         }
       } catch (error) {
         services.contact = {
@@ -55,12 +62,15 @@ export const configureHealthRoutes = (app: express.Application): void => {
           error: error instanceof Error ? error.message : 'Unknown error',
         };
         errors.push('Contact service is not available');
-        
-        logger.error({
-          service: 'contact',
-          url: contactServiceUrl,
-          error: error instanceof Error ? error.message : 'Unknown error'
-        }, 'Contact service health check error');
+
+        logger.error(
+          {
+            service: 'contact',
+            url: contactServiceUrl,
+            error: error instanceof Error ? error.message : 'Unknown error',
+          },
+          'Contact service health check error',
+        );
       }
     } else {
       services.contact = {
@@ -74,10 +84,13 @@ export const configureHealthRoutes = (app: express.Application): void => {
       .every((s) => s.status === 'healthy');
 
     if (!allHealthy) {
-      logger.warn({
-        services,
-        errors
-      }, 'Readiness check failed - some services unhealthy');
+      logger.warn(
+        {
+          services,
+          errors,
+        },
+        'Readiness check failed - some services unhealthy',
+      );
 
       return res.status(503).json({
         status: 'not_ready',
@@ -121,10 +134,13 @@ export const configureHealthRoutes = (app: express.Application): void => {
       environment: process.env.NODE_ENV || 'development',
     };
 
-    logger.debug({
-      memory: statusData.process.memory,
-      uptime: statusData.system.uptime
-    }, 'System status requested');
+    logger.debug(
+      {
+        memory: statusData.process.memory,
+        uptime: statusData.system.uptime,
+      },
+      'System status requested',
+    );
 
     res.json(statusData);
   });

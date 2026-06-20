@@ -1,10 +1,10 @@
 opencollection: 1.0.0
 info:
-  name: "api-docs"
+  name: 'api-docs'
   type: workspace
 
 collections:
-  - name: "gateway"
+  - name: 'gateway'
     path: "collections\\gateway"
 
 specs:

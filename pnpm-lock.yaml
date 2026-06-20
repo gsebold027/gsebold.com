@@ -64,7 +64,7 @@ importers:
         version: 5.101.0(react@19.2.7)
       axios:
         specifier: ^1.11.0
-        version: 1.18.0
+        version: 1.18.0(debug@4.4.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -120,9 +120,6 @@ importers:
         specifier: ^4.3.6
         version: 4.4.3
     devDependencies:
-      '@commitlint/config-conventional':
-        specifier: ^19.8.1
-        version: 19.8.1
       '@eslint/js':
         specifier: ^9.33.0
         version: 9.39.4
@@ -165,9 +162,6 @@ importers:
       autoprefixer:
         specifier: ^10.4.21
         version: 10.5.0(postcss@8.5.15)
-      commitlint:
-        specifier: ^19.8.1
-        version: 19.8.1(@types/node@24.13.2)(typescript@5.8.3)
       eslint:
         specifier: ^9.33.0
         version: 9.39.4(jiti@2.7.0)
@@ -189,9 +183,6 @@ importers:
       globals:
         specifier: ^16.3.0
         version: 16.5.0
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
       jsdom:
         specifier: ^29.1.1
         version: 29.1.1(@noble/hashes@1.8.0)
@@ -7587,19 +7578,6 @@ snapshots:
   '@colors/colors@1.5.0':
     optional: true
 
-  '@commitlint/cli@19.8.1(@types/node@24.13.2)(typescript@5.8.3)':
-    dependencies:
-      '@commitlint/format': 19.8.1
-      '@commitlint/lint': 19.8.1
-      '@commitlint/load': 19.8.1(@types/node@24.13.2)(typescript@5.8.3)
-      '@commitlint/read': 19.8.1
-      '@commitlint/types': 19.8.1
-      tinyexec: 1.2.4
-      yargs: 17.7.3
-    transitivePeerDependencies:
-      - '@types/node'
-      - typescript
-
   '@commitlint/cli@19.8.1(@types/node@25.9.4)(typescript@5.8.3)':
     dependencies:
       '@commitlint/format': 19.8.1
@@ -7650,22 +7628,6 @@ snapshots:
       '@commitlint/parse': 19.8.1
       '@commitlint/rules': 19.8.1
       '@commitlint/types': 19.8.1
-
-  '@commitlint/load@19.8.1(@types/node@24.13.2)(typescript@5.8.3)':
-    dependencies:
-      '@commitlint/config-validator': 19.8.1
-      '@commitlint/execute-rule': 19.8.1
-      '@commitlint/resolve-extends': 19.8.1
-      '@commitlint/types': 19.8.1
-      chalk: 5.6.2
-      cosmiconfig: 9.0.2(typescript@5.8.3)
-      cosmiconfig-typescript-loader: 6.3.0(@types/node@24.13.2)(cosmiconfig@9.0.2(typescript@5.8.3))(typescript@5.8.3)
-      lodash.isplainobject: 4.0.6
-      lodash.merge: 4.6.2
-      lodash.uniq: 4.5.0
-    transitivePeerDependencies:
-      - '@types/node'
-      - typescript
 
   '@commitlint/load@19.8.1(@types/node@25.9.4)(typescript@5.8.3)':
     dependencies:
@@ -10439,7 +10401,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axios@1.18.0:
+  axios@1.18.0(debug@4.4.3):
     dependencies:
       follow-redirects: 1.16.0(debug@4.4.3)
       form-data: 4.0.6
@@ -10759,14 +10721,6 @@ snapshots:
       array-timsort: 1.0.3
       esprima: 4.0.1
 
-  commitlint@19.8.1(@types/node@24.13.2)(typescript@5.8.3):
-    dependencies:
-      '@commitlint/cli': 19.8.1(@types/node@24.13.2)(typescript@5.8.3)
-      '@commitlint/types': 19.8.1
-    transitivePeerDependencies:
-      - '@types/node'
-      - typescript
-
   commitlint@19.8.1(@types/node@25.9.4)(typescript@5.8.3):
     dependencies:
       '@commitlint/cli': 19.8.1(@types/node@25.9.4)(typescript@5.8.3)
@@ -10854,13 +10808,6 @@ snapshots:
     dependencies:
       object-assign: 4.1.1
       vary: 1.1.2
-
-  cosmiconfig-typescript-loader@6.3.0(@types/node@24.13.2)(cosmiconfig@9.0.2(typescript@5.8.3))(typescript@5.8.3):
-    dependencies:
-      '@types/node': 24.13.2
-      cosmiconfig: 9.0.2(typescript@5.8.3)
-      jiti: 2.6.1
-      typescript: 5.8.3
 
   cosmiconfig-typescript-loader@6.3.0(@types/node@25.9.4)(cosmiconfig@9.0.2(typescript@5.8.3))(typescript@5.8.3):
     dependencies:
