@@ -1,0 +1,44 @@
+name: Landing · PR Validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/landing/**'
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.base.json'
+      - 'turbo.json'
+
+jobs:
+  validate:
+    name: Typecheck · Lint · Test · Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm turbo run typecheck --filter=@gsebold/landing
+
+      - name: Lint
+        run: pnpm turbo run lint --filter=@gsebold/landing
+
+      - name: Test
+        run: pnpm turbo run test:run --filter=@gsebold/landing
+
+      - name: Build
+        run: pnpm turbo run build --filter=@gsebold/landing
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_DOMAIN: ${{ secrets.VITE_DOMAIN }}

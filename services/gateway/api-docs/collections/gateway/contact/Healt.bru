@@ -1,0 +1,16 @@
+meta {
+  name: Healt
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{gatewayUrl}}/contact/health
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

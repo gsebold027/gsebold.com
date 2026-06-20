@@ -1,0 +1,14 @@
+opencollection: 1.0.0
+info:
+  name: 'api-docs'
+  type: workspace
+
+collections:
+  - name: 'gateway'
+    path: "collections\\gateway"
+
+specs:
+
+docs: ''
+
+activeEnvironmentUid: 1y9b6v100000000000000
