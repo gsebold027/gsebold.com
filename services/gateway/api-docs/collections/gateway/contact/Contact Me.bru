@@ -1,0 +1,25 @@
+meta {
+  name: Contact Me
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{gatewayUrl}}/contact/email/contactMe
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "name": "Michael Davis",
+    "email": "michael.davis@example.com",
+    "subject": "Website development project",
+    "message": "Hi Gustavo, I'm interested in developing a new React application for my business. Could we schedule a call to discuss the requirements?"
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

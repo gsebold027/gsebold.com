@@ -1,0 +1,29 @@
+[build]
+builder = "RAILPACK"
+buildCommand = "pnpm run build"
+watchPatterns = ["src/**", "package.json"]
+
+[build.metal]
+enabled = true
+
+[deploy]
+startCommand = "pnpm run start:prod"
+healthcheckPath = "/health"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[deploy.teardown]
+enabled = true
+overlapSeconds = 0
+drainingSeconds = 0
+
+[deploy.serverless]
+enabled = true
+
+[environments.production.variables]
+NODE_ENV = "production"
+PORT = "3000"
+
+[networking]
+serviceName = "contact-service"
