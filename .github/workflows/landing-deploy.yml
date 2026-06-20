@@ -1,4 +1,4 @@
-name: Deploy
+name: Landing · Deploy
 
 on:
   push:

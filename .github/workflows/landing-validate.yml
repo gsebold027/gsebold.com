@@ -1,4 +1,4 @@
-name: PR Validation
+name: Landing · PR Validation
 
 on:
   pull_request:
