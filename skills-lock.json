@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "docker-expert": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/docker-expert/SKILL.md",
+      "computedHash": "7be30b1c18b91628dcd8437a89e7e20acce76bae4349533e4ebdeb376a660bcb"
+    },
     "github-actions-docs": {
       "source": "xixu-me/skills",
       "sourceType": "github",
@@ -30,6 +36,12 @@
       "sourceType": "github",
       "skillPath": "plugins/javascript-typescript/skills/typescript-advanced-types/SKILL.md",
       "computedHash": "bc33bc9653d649a461e49abe45634b6b11a7aeeae552b05ec4d54d4589d16739"
+    },
+    "use-railway": {
+      "source": "railwayapp/railway-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/railway/skills/use-railway/SKILL.md",
+      "computedHash": "691232ae8d23af8b213ed3a529e8e8c29b81876d86db1a9b926e2c67092d437a"
     }
   }
 }
