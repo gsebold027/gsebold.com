@@ -1,19 +1,19 @@
-import express from 'express';
-import { createProxyMiddleware } from 'http-proxy-middleware';
+import express from 'express'
+import { createProxyMiddleware } from 'http-proxy-middleware'
 
-import logger from '../utils/logger';
+import logger from '../utils/logger'
 
 export const configureProxyRoutes = (app: express.Application): void => {
-  const contactServiceUrl = process.env.CONTACT_SERVICE_URL;
+  const contactServiceUrl = process.env.CONTACT_SERVICE_URL
 
   if (contactServiceUrl) {
-    logger.info({ target: contactServiceUrl }, 'Setting up contact service proxy');
+    logger.info({ target: contactServiceUrl }, 'Setting up contact service proxy')
 
     const contactProxy = createProxyMiddleware({
       target: contactServiceUrl,
       changeOrigin: true,
       pathRewrite: {
-        '^/contact': '/',
+        '^/contact': '/'
       },
       on: {
         error: (err: any, req: any, res: any) => {
@@ -24,10 +24,10 @@ export const configureProxyRoutes = (app: express.Application): void => {
               method: req.method,
               url: req.url,
               target: contactServiceUrl,
-              service: 'contact',
+              service: 'contact'
             },
-            'Contact service proxy error',
-          );
+            'Contact service proxy error'
+          )
 
           if (!res.headersSent) {
             res.status(503).json({
@@ -35,9 +35,9 @@ export const configureProxyRoutes = (app: express.Application): void => {
                 message: 'Contact service temporarily unavailable',
                 statusCode: 503,
                 service: 'contact',
-                timestamp: new Date().toISOString(),
-              },
-            });
+                timestamp: new Date().toISOString()
+              }
+            })
           }
         },
         proxyReq: (proxyReq: any, req: any) => {
@@ -49,17 +49,17 @@ export const configureProxyRoutes = (app: express.Application): void => {
               service: 'contact',
               headers: {
                 'content-type': req.headers['content-type'],
-                'x-forwarded-host': req.headers.host,
-              },
+                'x-forwarded-host': req.headers.host
+              }
             },
-            'Proxying request to contact service',
-          );
+            'Proxying request to contact service'
+          )
 
           // Add headers for internal routing
-          proxyReq.setHeader('x-forwarded-host', req.headers.host || '');
-          proxyReq.setHeader('x-forwarded-proto', req.headers['x-forwarded-proto'] || 'https');
-          proxyReq.setHeader('x-gateway', 'gsebold-gateway');
-          proxyReq.setHeader('x-forwarded-for', req.ip || '');
+          proxyReq.setHeader('x-forwarded-host', req.headers.host || '')
+          proxyReq.setHeader('x-forwarded-proto', req.headers['x-forwarded-proto'] || 'https')
+          proxyReq.setHeader('x-gateway', 'gsebold-gateway')
+          proxyReq.setHeader('x-forwarded-for', req.ip || '')
         },
         proxyRes: (proxyRes: any, req: any) => {
           logger.info(
@@ -70,18 +70,18 @@ export const configureProxyRoutes = (app: express.Application): void => {
               statusMessage: proxyRes.statusMessage,
               service: 'contact',
               target: contactServiceUrl,
-              responseTime: Date.now() - req.startTime,
+              responseTime: Date.now() - req.startTime
             },
-            'Contact service response received',
-          );
-        },
-      },
-    } as any);
+            'Contact service response received'
+          )
+        }
+      }
+    } as any)
 
-    app.use('/contact', contactProxy);
-    logger.info('Contact service proxy configured');
+    app.use('/contact', contactProxy)
+    logger.info('Contact service proxy configured')
   } else {
-    logger.warn('CONTACT_SERVICE_URL not set, adding fallback contact routes');
+    logger.warn('CONTACT_SERVICE_URL not set, adding fallback contact routes')
 
     // Fallback routes for contact service
     app.all('/contact/*', (req, res) => {
@@ -90,21 +90,21 @@ export const configureProxyRoutes = (app: express.Application): void => {
           method: req.method,
           url: req.url,
           ip: req.ip,
-          service: 'contact',
+          service: 'contact'
         },
-        'Contact service not configured - serving fallback response',
-      );
+        'Contact service not configured - serving fallback response'
+      )
 
       res.status(503).json({
         error: {
           message: 'Contact service not configured',
           statusCode: 503,
           service: 'contact',
-          timestamp: new Date().toISOString(),
-        },
-      });
-    });
+          timestamp: new Date().toISOString()
+        }
+      })
+    })
 
-    logger.warn('Contact service fallback routes configured');
+    logger.warn('Contact service fallback routes configured')
   }
-};
+}

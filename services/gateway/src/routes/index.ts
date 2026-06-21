@@ -1,2 +1,2 @@
-export * from './health';
-export * from './proxy';
+export * from './health'
+export * from './proxy'
