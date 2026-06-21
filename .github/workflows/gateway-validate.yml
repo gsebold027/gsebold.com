@@ -1,10 +1,10 @@
-name: Contact Service · PR Validation
+name: Gateway · PR Validation
 
 on:
   pull_request:
     branches: [main]
     paths:
-      - 'services/contact-service/**'
+      - 'services/gateway/**'
       - 'packages/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
@@ -27,13 +27,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Typecheck
-        run: pnpm turbo run typecheck --filter=@gsebold/contact-service
+        run: pnpm turbo run typecheck --filter=@gsebold/gateway
 
       - name: Lint
-        run: pnpm turbo run lint --filter=@gsebold/contact-service
+        run: pnpm turbo run lint --filter=@gsebold/gateway
 
       - name: Test
-        run: pnpm turbo run test:run --filter=@gsebold/contact-service
+        run: pnpm turbo run test:run --filter=@gsebold/gateway
 
       - name: Build
-        run: pnpm turbo run build --filter=@gsebold/contact-service
+        run: pnpm turbo run build --filter=@gsebold/gateway

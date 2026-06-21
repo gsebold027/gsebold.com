@@ -1,5 +1,5 @@
-import pino from 'pino';
-import pinoHttp from 'pino-http';
+import pino from 'pino'
+import pinoHttp from 'pino-http'
 
 // Create the base logger instance
 export const logger = pino({
@@ -11,29 +11,29 @@ export const logger = pino({
           options: {
             colorize: true,
             translateTime: 'yyyy-mm-dd HH:MM:ss',
-            ignore: 'pid,hostname',
-          },
+            ignore: 'pid,hostname'
+          }
         }
       : undefined,
   serializers: {
     req: pino.stdSerializers.req,
     res: pino.stdSerializers.res,
-    err: pino.stdSerializers.err,
-  },
-});
+    err: pino.stdSerializers.err
+  }
+})
 
 // Create the HTTP logger middleware
 export const httpLogger = pinoHttp({
   logger,
   customLogLevel: (req, res, err) => {
     if (res.statusCode >= 400 && res.statusCode < 500) {
-      return 'warn';
+      return 'warn'
     } else if (res.statusCode >= 500 || err) {
-      return 'error';
+      return 'error'
     } else if (res.statusCode >= 300 && res.statusCode < 400) {
-      return 'silent';
+      return 'silent'
     }
-    return 'info';
+    return 'info'
   },
   serializers: {
     req: (req: any) => ({
@@ -42,22 +42,22 @@ export const httpLogger = pinoHttp({
       headers: {
         'user-agent': req.headers['user-agent'],
         'content-type': req.headers['content-type'],
-        authorization: req.headers['authorization'] ? '[REDACTED]' : undefined,
+        authorization: req.headers['authorization'] ? '[REDACTED]' : undefined
       },
       remoteAddress: req.remoteAddress,
-      remotePort: req.remotePort,
+      remotePort: req.remotePort
     }),
     res: (res: any) => ({
       statusCode: res.statusCode,
       headers: {
         'content-type': res.getHeader ? res.getHeader('content-type') : undefined,
-        'content-length': res.getHeader ? res.getHeader('content-length') : undefined,
-      },
-    }),
+        'content-length': res.getHeader ? res.getHeader('content-length') : undefined
+      }
+    })
   },
   customProps: (req: any, res: any) => ({
-    responseTime: res.responseTime,
-  }),
-});
+    responseTime: res.responseTime
+  })
+})
 
-export default logger;
+export default logger
