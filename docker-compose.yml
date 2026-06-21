@@ -1,0 +1,61 @@
+name: gsebold
+
+services:
+
+  # --- services ---
+  contact-service:
+    container_name: service-contact
+    build:
+      context: .
+      dockerfile: services/contact-service/Dockerfile
+    ports:
+      - "3001:3001"
+    env_file:
+      - services/contact-service/.env
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    restart: unless-stopped
+
+  # --- gateway ---
+  gateway:
+    container_name: gateway
+    build:
+      context: .
+      dockerfile: services/gateway/Dockerfile
+    ports:
+      - "3000:3000"
+    env_file:
+      - services/gateway/.env
+    environment:
+      CONTACT_SERVICE_URL: http://contact-service:3001
+      CORS_ORIGIN: http://localhost:8080
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # --- apps ---
+  landing:
+    container_name: landing
+    build:
+      context: .
+      dockerfile: apps/landing/Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:3000
+        VITE_DOMAIN: localhost
+    ports:
+      - "8080:80"
+    depends_on:
+      gateway:
+        condition: service_healthy
+      contact-service:
+        condition: service_healthy
+    restart: unless-stopped
+    profiles: [apps]
