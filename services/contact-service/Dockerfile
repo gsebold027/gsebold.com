@@ -5,16 +5,17 @@ RUN corepack enable && corepack prepare pnpm@11.5.2 --activate
 
 WORKDIR /app
 
-# Copy workspace manifests first for layer caching
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json ./
 COPY services/contact-service/package.json ./services/contact-service/package.json
 
-RUN pnpm install --frozen-lockfile --filter=@gsebold/contact-service
+# shamefully-hoist flattens node_modules so all bins resolve without
+# pnpm's symlink structure breaking on Alpine Linux
+ENV CI=true
+RUN pnpm install --frozen-lockfile --shamefully-hoist
 
-COPY tsconfig.base.json ./
 COPY services/contact-service ./services/contact-service
 
-RUN pnpm turbo run build --filter=@gsebold/contact-service
+RUN pnpm --filter=@gsebold/contact-service build
 
 # Stage 2: Production runner
 FROM node:22-alpine AS runner
@@ -26,7 +27,8 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY services/contact-service/package.json ./services/contact-service/package.json
 
-RUN pnpm install --frozen-lockfile --filter=@gsebold/contact-service --prod
+ENV CI=true
+RUN pnpm install --frozen-lockfile --filter=@gsebold/contact-service --prod --ignore-scripts
 
 COPY --from=builder /app/services/contact-service/dist ./services/contact-service/dist
 
