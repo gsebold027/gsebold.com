@@ -4,8 +4,7 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - 'services/gateway/src/**'
-      - 'services/gateway/package.json'
+      - 'services/gateway/**'
       - 'packages/**'
       - 'package.json'
       - 'pnpm-lock.yaml'
