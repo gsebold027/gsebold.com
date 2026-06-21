@@ -3,6 +3,12 @@ name: Contact Service · PR Validation
 on:
   pull_request:
     branches: [main]
+    paths:
+      - 'services/contact-service/src/**'
+      - 'services/contact-service/package.json'
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
 
 jobs:
   validate:

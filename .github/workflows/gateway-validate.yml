@@ -3,6 +3,12 @@ name: Gateway · PR Validation
 on:
   pull_request:
     branches: [main]
+    paths:
+      - 'services/gateway/src/**'
+      - 'services/gateway/package.json'
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
 
 jobs:
   validate:
