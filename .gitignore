@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 .turbo
+graphify-out
 
 # Editor directories and files
 .vscode/*
@@ -27,3 +28,9 @@ dist-ssr
 *storybook.log
 storybook-static
 *.env
+
+# Claude Code
+.claude/
+.agents/
+skills-lock.json
+docs/superpowers/
