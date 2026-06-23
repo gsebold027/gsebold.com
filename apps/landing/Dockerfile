@@ -5,12 +5,15 @@ RUN corepack enable && corepack prepare pnpm@11.5.2 --activate
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json turbo.json ./
+COPY apps/landing/package.json ./apps/landing/package.json
+COPY packages/schemas/package.json ./packages/schemas/package.json
 
 ENV CI=true
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile --shamefully-hoist
 
-COPY . .
+COPY apps/landing ./apps/landing
+COPY packages/schemas ./packages/schemas
 
 # Vite inlines these at build time — pass via --build-arg
 ARG VITE_API_BASE_URL
