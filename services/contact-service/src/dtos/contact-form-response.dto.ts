@@ -1,43 +1,30 @@
+import { ApiErrorResponse, ApiSuccessResponse, ContactFormResponseData } from '@gsebold/schemas';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ContactFormSuccessResponseDto {
-  @ApiProperty({
-    description: 'Indicates if the operation was successful',
-    example: true,
-  })
-  success: boolean;
+export class ContactFormSuccessResponseDto implements ApiSuccessResponse<ContactFormResponseData> {
+  @ApiProperty({ example: true })
+  success = true as const;
 
-  @ApiProperty({
-    description: 'Success message',
-    example: 'Contact form sent successfully',
-  })
+  @ApiProperty({ example: 'Contact form sent successfully' })
   message: string;
 
-  @ApiProperty({
-    description: 'Additional data from the email service',
-    example: { emailId: 'abc123', timestamp: '2024-01-01T00:00:00Z' },
-    required: false,
-  })
-  data?: any;
+  @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
+  timestamp: string;
+
+  @ApiProperty({ example: { emailId: 'abc123' } })
+  data: ContactFormResponseData;
 }
 
-export class ContactFormErrorResponseDto {
-  @ApiProperty({
-    description: 'Indicates if the operation was successful',
-    example: false,
-  })
-  success: boolean;
+export class ContactFormErrorResponseDto implements ApiErrorResponse {
+  @ApiProperty({ example: false })
+  success = false as const;
 
-  @ApiProperty({
-    description: 'Error message',
-    example: 'Failed to send contact form',
-  })
+  @ApiProperty({ example: 'Failed to send contact form' })
   message: string;
 
-  @ApiProperty({
-    description: 'Detailed error information',
-    example: 'SMTP connection failed',
-    required: false,
-  })
-  error?: string;
+  @ApiProperty({ example: '2024-01-01T00:00:00.000Z' })
+  timestamp: string;
+
+  @ApiProperty({ example: 'SMTP connection failed' })
+  error: string;
 }

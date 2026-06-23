@@ -11,7 +11,7 @@
     "experimentalDecorators": true,
     "target": "ES2023",
     "outDir": "./dist",
-    "baseUrl": "./",
+    "rootDir": "./src",
     "incremental": true,
     "strictPropertyInitialization": false,
     "strictNullChecks": true,
@@ -19,7 +19,7 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   }
 }

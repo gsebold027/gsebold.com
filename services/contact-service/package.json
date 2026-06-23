@@ -22,6 +22,7 @@
     "test:run": "jest --passWithNoTests"
   },
   "dependencies": {
+    "@gsebold/schemas": "workspace:*",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.3",
     "@nestjs/core": "^11.0.1",

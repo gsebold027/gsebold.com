@@ -1,5 +1,6 @@
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
+import { ApiErrorResponse } from '@gsebold/schemas';
 
 import logger from '../utils/logger';
 
@@ -30,14 +31,13 @@ export const configureProxyRoutes = (app: express.Application): void => {
           );
 
           if (!res.headersSent) {
-            res.status(503).json({
-              error: {
-                message: 'Contact service temporarily unavailable',
-                statusCode: 503,
-                service: 'contact',
-                timestamp: new Date().toISOString(),
-              },
-            });
+            const body: ApiErrorResponse = {
+              success: false,
+              message: 'Contact service temporarily unavailable',
+              timestamp: new Date().toISOString(),
+              error: err.message ?? 'Proxy error',
+            };
+            res.status(503).json(body);
           }
         },
         proxyReq: (proxyReq: any, req: any) => {
@@ -95,14 +95,13 @@ export const configureProxyRoutes = (app: express.Application): void => {
         'Contact service not configured - serving fallback response',
       );
 
-      res.status(503).json({
-        error: {
-          message: 'Contact service not configured',
-          statusCode: 503,
-          service: 'contact',
-          timestamp: new Date().toISOString(),
-        },
-      });
+      const body: ApiErrorResponse = {
+        success: false,
+        message: 'Contact service not configured',
+        timestamp: new Date().toISOString(),
+        error: 'CONTACT_SERVICE_URL environment variable is not set',
+      };
+      res.status(503).json(body);
     });
 
     logger.warn('Contact service fallback routes configured');
