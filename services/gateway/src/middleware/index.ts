@@ -1,8 +1,9 @@
-import compression from 'compression'
-import cors from 'cors'
-import express from 'express'
-import rateLimit from 'express-rate-limit'
-import helmet from 'helmet'
+import compression from 'compression';
+import cors from 'cors';
+import express from 'express';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import { ApiErrorResponse } from '@gsebold/schemas';
 
 import { httpLogger, logger } from '../utils/logger'
 
@@ -92,13 +93,6 @@ export const configureMiddleware = (app: express.Application): void => {
   const limiter = rateLimit({
     windowMs: parseInt(process.env.RATE_LIMIT_WINDOW || '900000'), // 15 minutes
     max: parseInt(process.env.RATE_LIMIT_MAX || '100'),
-    message: {
-      error: {
-        message: 'Rate limit exceeded',
-        statusCode: 429,
-        timestamp: new Date().toISOString()
-      }
-    },
     standardHeaders: true,
     legacyHeaders: false,
     // Log rate limit hits
@@ -112,15 +106,15 @@ export const configureMiddleware = (app: express.Application): void => {
         'Rate limit exceeded'
       )
 
-      res.status(429).json({
-        error: {
-          message: 'Rate limit exceeded',
-          statusCode: 429,
-          timestamp: new Date().toISOString()
-        }
-      })
-    }
-  })
+      const body: ApiErrorResponse = {
+        success: false,
+        message: 'Rate limit exceeded',
+        timestamp: new Date().toISOString(),
+        error: 'Too many requests, please try again later',
+      };
+      res.status(429).json(body);
+    },
+  });
 
   // express-rate-limit v7 types conflict with @types/express v5 in pnpm; bypass needed
   app.use(limiter as any)
@@ -162,16 +156,14 @@ export const configureErrorHandling = (app: express.Application): void => {
 
     const statusCode = (err as any).statusCode || (err as any).status || 500
 
-    res.status(statusCode).json({
-      error: {
-        message: statusCode === 500 ? 'Internal Server Error' : err.message,
-        statusCode,
-        timestamp: new Date().toISOString(),
-        path: req.url,
-        method: req.method
-      }
-    })
-  })
+    const body: ApiErrorResponse = {
+      success: false,
+      message: statusCode === 500 ? 'Internal Server Error' : err.message,
+      timestamp: new Date().toISOString(),
+      error: err.message,
+    };
+    res.status(statusCode).json(body);
+  });
 
   // 404 handler
   app.use((req: express.Request, res: express.Response) => {
@@ -185,16 +177,14 @@ export const configureErrorHandling = (app: express.Application): void => {
       'Route not found'
     )
 
-    res.status(404).json({
-      error: {
-        message: 'Route not found',
-        statusCode: 404,
-        timestamp: new Date().toISOString(),
-        path: req.url,
-        method: req.method
-      }
-    })
-  })
+    const body: ApiErrorResponse = {
+      success: false,
+      message: 'Route not found',
+      timestamp: new Date().toISOString(),
+      error: `${req.method} ${req.url} is not a valid route`,
+    };
+    res.status(404).json(body);
+  });
 
   logger.info('Error handling configured')
 }

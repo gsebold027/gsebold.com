@@ -40,6 +40,7 @@ export class EmailController {
       return {
         success: true,
         message: 'Contact form sent successfully',
+        timestamp: new Date().toISOString(),
         data: result,
       };
     } catch (error) {
@@ -49,6 +50,7 @@ export class EmailController {
         {
           success: false,
           message: 'Failed to send contact form',
+          timestamp: new Date().toISOString(),
           error: errorMessage,
         },
         HttpStatus.INTERNAL_SERVER_ERROR,
