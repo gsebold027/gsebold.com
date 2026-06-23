@@ -1,0 +1,12 @@
+node_modules/
+dist/
+*.generated.py
+graphify-out/
+
+# index the actual monorepo source dirs
+!apps/
+!apps/**
+!packages/
+!packages/**
+!services/
+!services/**
