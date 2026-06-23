@@ -5,8 +5,9 @@ RUN corepack enable && corepack prepare pnpm@11.5.2 --activate
 
 WORKDIR /app
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json ./
 COPY services/gateway/package.json ./services/gateway/package.json
+COPY packages/schemas/package.json ./packages/schemas/package.json
 
 # shamefully-hoist flattens node_modules so all bins resolve without
 # pnpm's symlink structure breaking on Alpine Linux
@@ -14,6 +15,7 @@ ENV CI=true
 RUN pnpm install --frozen-lockfile --shamefully-hoist
 
 COPY services/gateway ./services/gateway
+COPY packages/schemas ./packages/schemas
 
 RUN pnpm --filter=@gsebold/gateway build
 
