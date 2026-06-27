@@ -68,11 +68,13 @@ describe('ContactForm', () => {
     expect(screen.getByPlaceholderText('contact.fields.message.placeholder')).toBeInTheDocument()
   })
 
-  it('shows validation errors when submitted with empty fields', async () => {
+  it('shows validation errors when a required field is cleared and blurred', async () => {
     const user = userEvent.setup()
     render(<ContactForm />)
 
-    await user.click(screen.getByRole('button', { name: 'contact.submit_button' }))
+    await user.type(screen.getByPlaceholderText('contact.fields.name.placeholder'), 'a')
+    await user.clear(screen.getByPlaceholderText('contact.fields.name.placeholder'))
+    await user.tab()
 
     await waitFor(() => {
       expect(screen.getAllByRole('alert').length).toBeGreaterThanOrEqual(1)
@@ -83,7 +85,7 @@ describe('ContactForm', () => {
     setupMutation({ isPending: true })
     render(<ContactForm />)
 
-    expect(screen.getByRole('button')).toBeDisabled()
+    expect(screen.getByRole('button', { name: /contact\.submitting_button/i })).toBeDisabled()
   })
 
   it('calls mutate with the form values on a valid submission', async () => {
