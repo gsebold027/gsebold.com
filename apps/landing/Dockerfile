@@ -30,6 +30,10 @@ FROM nginx:alpine AS runner
 COPY --from=builder /app/apps/landing/dist /usr/share/nginx/html
 COPY apps/landing/nginx.conf /etc/nginx/templates/default.conf.template
 
+# Default to empty so envsubst always replaces ${NGINX_CONNECT_SRC_EXTRA}
+# even when no value is passed at runtime — nginx rejects undefined nginx variables
+ENV NGINX_CONNECT_SRC_EXTRA=""
+
 EXPOSE 80
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
