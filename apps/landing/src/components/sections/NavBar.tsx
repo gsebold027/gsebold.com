@@ -4,25 +4,26 @@ import { Menu } from 'lucide-react'
 
 import { usePageTranslation, useSmoothScroll } from '@/lib/hooks'
 
-import { Logo } from '../icons'
+import { Logo } from '../icons/logo'
 import { ThemeToggle } from '../theme/ThemeToggle'
+import { Button } from '../ui/button'
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '../ui/navigation-menu'
+import { Separator } from '../ui/separator'
 import {
-  Button,
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-  Separator,
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger
-} from '../ui'
+} from '../ui/sheet'
 
 const LanguageSwitcher = lazy(() =>
   import('../theme/LanguageSwitcher').then((m) => ({ default: m.LanguageSwitcher }))
 )
+
+// Hrefs are static strings — module-scope so the effect needs no reactive deps.
+const SECTION_HREFS = ['#home', '#career', '#technologies', '#contact'] as const
 
 export type NavBarLink = {
   href: string
@@ -31,7 +32,7 @@ export type NavBarLink = {
 }
 
 const NavBar = () => {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768)
   const [isSheetOpen, setIsSheetOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('#home')
   const containerRef = useRef<HTMLElement>(null)
@@ -66,36 +67,27 @@ const NavBar = () => {
       }
     )
 
-    const sections = defaultNavigationLinks
-      .map((link) => document.querySelector(link.href))
-      .filter(Boolean)
-
-    sections.forEach((section) => {
-      if (section) observer.observe(section)
+    SECTION_HREFS.forEach((href) => {
+      const el = document.querySelector(href)
+      if (el) observer.observe(el)
     })
 
     return () => observer.disconnect()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     const checkWidth = () => {
       if (containerRef.current) {
-        const width = containerRef.current.offsetWidth
-        setIsMobile(width < 768)
+        setIsMobile(containerRef.current.offsetWidth < 768)
       }
     }
-
-    checkWidth()
 
     const resizeObserver = new ResizeObserver(checkWidth)
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current)
     }
 
-    return () => {
-      resizeObserver.disconnect()
-    }
+    return () => resizeObserver.disconnect()
   }, [])
 
   return (
@@ -114,8 +106,8 @@ const NavBar = () => {
           {!isMobile && (
             <NavigationMenu className="flex" aria-label={t('header.primary_navigation')}>
               <NavigationMenuList className="gap-1">
-                {defaultNavigationLinks.map((link, index) => (
-                  <NavigationMenuItem key={index}>
+                {defaultNavigationLinks.map((link) => (
+                  <NavigationMenuItem key={link.href}>
                     <Button
                       variant="ghost"
                       className="text-secondary-foreground font-medium"
@@ -154,8 +146,8 @@ const NavBar = () => {
                 <div className="flex justify-between items-center -mb-2"></div>
                 <NavigationMenu className="max-h-fit min-w-full  [&_div]:min-w-full">
                   <NavigationMenuList className="gap-1 flex-col items-start min-w-full">
-                    {defaultNavigationLinks.map((link, index) => (
-                      <NavigationMenuItem key={index} className="w-full">
+                    {defaultNavigationLinks.map((link) => (
+                      <NavigationMenuItem key={link.href} className="w-full">
                         <Button
                           variant="ghost"
                           className="text-secondary-foreground font-medium min-w-full justify-start px-2"

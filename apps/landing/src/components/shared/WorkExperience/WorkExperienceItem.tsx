@@ -47,15 +47,15 @@ const WorkExperienceItem = ({ data }: WorkExperienceItemProps) => {
           </TypographyP>
         </div>
         <div className="flex gap-1 flex-wrap">
-          {data.tags.map((tag, index) => (
-            <Badge key={index} variant="secondary">
+          {data.tags.map((tag) => (
+            <Badge key={tag} variant="secondary">
               {tag}
             </Badge>
           ))}
         </div>
         <ul className="list-disc pl-5 space-y-1">
-          {data.responsibilities.map((responsibility, index) => (
-            <li key={index} className="text-sm">
+          {data.responsibilities.map((responsibility) => (
+            <li key={responsibility} className="text-sm">
               {t(`responsibilities.${responsibility}`)}
             </li>
           ))}

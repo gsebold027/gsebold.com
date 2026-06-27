@@ -3,14 +3,17 @@ import {
   UseMutationOptions,
   UseQueryOptions,
   useMutation,
-  useQuery
+  useQuery,
+  useQueryClient
 } from '@tanstack/react-query'
 
 import { AxiosRequestConfig, isAxiosError } from 'axios'
 
 import { useAxios } from './axios.facade'
 
-export type MutationOptions<T, U> = Omit<UseMutationOptions<U, Error, T>, 'mutationFn'>
+export type MutationOptions<T, U> = Omit<UseMutationOptions<U, Error, T>, 'mutationFn'> & {
+  invalidateQueryKey?: QueryKey
+}
 
 export type QueryOptions<T> = Omit<UseQueryOptions<T>, 'queryKey' | 'queryFn'>
 
@@ -82,6 +85,8 @@ const usePost = <T, U>(
   axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
+  const queryClient = useQueryClient()
+  const { invalidateQueryKey, onSuccess, ...restOptions } = useMutationOptions ?? {}
 
   return useMutation<U, Error, T>({
     mutationFn: async (data: T) => {
@@ -89,8 +94,12 @@ const usePost = <T, U>(
 
       return res.data
     },
+    onSuccess: (data, variables, context, mutation) => {
+      if (invalidateQueryKey) queryClient.invalidateQueries({ queryKey: invalidateQueryKey })
+      onSuccess?.(data, variables, context, mutation)
+    },
     retry: handleRetry,
-    ...useMutationOptions
+    ...restOptions
   })
 }
 
@@ -105,6 +114,8 @@ const usePut = <
   axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
+  const queryClient = useQueryClient()
+  const { invalidateQueryKey, onSuccess, ...restOptions } = useMutationOptions ?? {}
 
   return useMutation<U, Error, T>({
     mutationFn: async (data: T) => {
@@ -114,8 +125,12 @@ const usePut = <
 
       return res.data
     },
+    onSuccess: (data, variables, context, mutation) => {
+      if (invalidateQueryKey) queryClient.invalidateQueries({ queryKey: invalidateQueryKey })
+      onSuccess?.(data, variables, context, mutation)
+    },
     retry: handleRetry,
-    ...useMutationOptions
+    ...restOptions
   })
 }
 
@@ -130,6 +145,8 @@ const usePatch = <
   axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
+  const queryClient = useQueryClient()
+  const { invalidateQueryKey, onSuccess, ...restOptions } = useMutationOptions ?? {}
 
   return useMutation<U, Error, T>({
     mutationFn: async (data: T) => {
@@ -139,8 +156,12 @@ const usePatch = <
 
       return res.data
     },
+    onSuccess: (data, variables, context, mutation) => {
+      if (invalidateQueryKey) queryClient.invalidateQueries({ queryKey: invalidateQueryKey })
+      onSuccess?.(data, variables, context, mutation)
+    },
     retry: handleRetry,
-    ...useMutationOptions
+    ...restOptions
   })
 }
 
@@ -155,6 +176,8 @@ const useDelete = <
   axiosOptions?: AxiosRequestConfig
 ) => {
   const axios = useAxios()
+  const queryClient = useQueryClient()
+  const { invalidateQueryKey, onSuccess, ...restOptions } = useMutationOptions ?? {}
 
   return useMutation<U, Error, T>({
     mutationFn: async (data: T) => {
@@ -164,8 +187,12 @@ const useDelete = <
 
       return res.data
     },
+    onSuccess: (data, variables, context, mutation) => {
+      if (invalidateQueryKey) queryClient.invalidateQueries({ queryKey: invalidateQueryKey })
+      onSuccess?.(data, variables, context, mutation)
+    },
     retry: handleRetry,
-    ...useMutationOptions
+    ...restOptions
   })
 }
 

@@ -2,8 +2,9 @@ import { ChevronsDown, Mouse } from 'lucide-react'
 
 import { usePageTranslation, useSmoothScroll } from '@/lib/hooks'
 
-import { Button } from '../ui'
-import { TypographyH1, TypographyH2, TypographyP } from '../ui/typography'
+import { Button } from '../ui/button'
+import { TypographyH1, TypographyH2 } from '../ui/typography/heading'
+import { TypographyP } from '../ui/typography/paragraph'
 
 const HeroSection = () => {
   const { t } = usePageTranslation('landing-page')

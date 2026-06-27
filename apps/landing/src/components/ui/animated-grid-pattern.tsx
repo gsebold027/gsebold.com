@@ -1,8 +1,28 @@
 import { ComponentPropsWithoutRef, useEffect, useId, useRef, useState } from 'react'
 
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 
 import { cn } from '@/lib/utils'
+
+// Pure helpers at module scope so effects can list their real deps without wrapping in useCallback.
+function getPos(dims: { width: number; height: number }, cellW: number, cellH: number) {
+  return [
+    Math.floor((Math.random() * dims.width) / cellW),
+    Math.floor((Math.random() * dims.height) / cellH)
+  ]
+}
+
+function generateSquares(
+  count: number,
+  dims: { width: number; height: number },
+  cellW: number,
+  cellH: number
+) {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    pos: getPos(dims, cellW, cellH)
+  }))
+}
 
 export type AnimatedGridPatternProps = {
   width?: number
@@ -31,68 +51,39 @@ const AnimatedGridPattern = ({
 }: AnimatedGridPatternProps) => {
   const id = useId()
   const containerRef = useRef(null)
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
-  const [squares, setSquares] = useState(() => generateSquares(numSquares))
+  const dimensionsRef = useRef({ width: 0, height: 0 })
+  const [squares, setSquares] = useState(() =>
+    generateSquares(numSquares, { width: 0, height: 0 }, width, height)
+  )
 
-  function getPos() {
-    return [
-      Math.floor((Math.random() * dimensions.width) / width),
-      Math.floor((Math.random() * dimensions.height) / height)
-    ]
-  }
-
-  // Adjust the generateSquares function to return objects with an id, x, and y
-  function generateSquares(count: number) {
-    return Array.from({ length: count }, (_, i) => ({
-      id: i,
-      pos: getPos()
-    }))
-  }
-
-  // Function to update a single square's position
   const updateSquarePosition = (id: number) => {
     setSquares((currentSquares) =>
       currentSquares.map((sq) =>
-        sq.id === id
-          ? {
-              ...sq,
-              pos: getPos()
-            }
-          : sq
+        sq.id === id ? { ...sq, pos: getPos(dimensionsRef.current, width, height) } : sq
       )
     )
   }
 
-  // Update squares to animate in
   useEffect(() => {
-    if (dimensions.width && dimensions.height) {
-      setSquares(generateSquares(numSquares))
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dimensions, numSquares])
+    const element = containerRef.current
+    if (!element) return
 
-  // Resize observer to update container dimensions
-  useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        setDimensions({
+        const dims = {
           width: entry.contentRect.width,
           height: entry.contentRect.height
-        })
+        }
+        dimensionsRef.current = dims
+        if (dims.width && dims.height) {
+          setSquares(generateSquares(numSquares, dims, width, height))
+        }
       }
     })
 
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current)
-    }
-
-    return () => {
-      if (containerRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        resizeObserver.unobserve(containerRef.current)
-      }
-    }
-  }, [containerRef])
+    resizeObserver.observe(element)
+    return () => resizeObserver.unobserve(element)
+  }, [numSquares, width, height])
 
   return (
     <svg
@@ -110,18 +101,18 @@ const AnimatedGridPattern = ({
       </defs>
       <rect width="100%" height="100%" fill={`url(#${id})`} />
       <svg x={x} y={y} className="overflow-visible">
-        {squares.map(({ pos: [x, y], id }, index) => (
-          <motion.rect
+        {squares.map(({ pos: [x, y], id }) => (
+          <m.rect
             initial={{ opacity: 0 }}
             animate={{ opacity: maxOpacity }}
             transition={{
               duration,
               repeat: 1,
-              delay: index * 0.1,
+              delay: id * 0.1,
               repeatType: 'reverse'
             }}
             onAnimationComplete={() => updateSquarePosition(id)}
-            key={`${x}-${y}-${index}`}
+            key={`${x}-${y}-${id}`}
             width={width - 1}
             height={height - 1}
             x={x * width + 1}

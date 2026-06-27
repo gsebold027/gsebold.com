@@ -50,6 +50,8 @@ services:
       args:
         VITE_API_BASE_URL: http://localhost:3000
         VITE_DOMAIN: localhost
+    environment:
+      NGINX_CONNECT_SRC_EXTRA: http://localhost:3000
     ports:
       - "8080:80"
     depends_on:

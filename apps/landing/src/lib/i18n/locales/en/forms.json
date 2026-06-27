@@ -45,6 +45,7 @@
         }
       }
     },
+    "required_label": "(required)",
     "submit_button": "Send",
     "submitting_button": "Sending",
     "submit_button_help": "Submit the contact form to send your message",
@@ -55,11 +56,11 @@
       },
       "warning": {
         "title": "Failed to send message",
-        "description": "There was a problem sending your message. Please try again later or contact me directly."
+        "description": "There was a problem sending your message. Please try again later or send an email to contact@gsebold.com"
       },
       "error": {
         "title": "Unexpected error",
-        "description": "An unexpected error occurred. Please try again later or contact me directly."
+        "description": "An unexpected error occurred. Send an email to contact@gsebold.com"
       }
     }
   }

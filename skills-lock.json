@@ -11,19 +11,25 @@
       "source": "xixu-me/skills",
       "sourceType": "github",
       "skillPath": "skills/github-actions-docs/SKILL.md",
-      "computedHash": "b06bc480f7608c43896f85257bc61b1de6d48f005468b734713155b849daed6a"
+      "computedHash": "ead3fa2aff18e829c468dee593e1dc897aa95dc7a07d9ff8ff9f30c296b19af8"
     },
     "nestjs-best-practices": {
       "source": "kadajett/agent-nestjs-skills",
       "sourceType": "github",
       "skillPath": "SKILL.md",
-      "computedHash": "68658903272e1015f3ec5084c7d0988216a47f42f675ed819a675250fc6a23cd"
+      "computedHash": "3cc2e763f1e2923cce1b5173dd9cafbb0aca8df1644102c82dde263375de1ac7"
     },
     "pnpm": {
-      "source": "onmax/nuxt-skills",
+      "source": "antfu/skills",
       "sourceType": "github",
       "skillPath": "skills/pnpm/SKILL.md",
-      "computedHash": "999ed1ace847ce7897ec596fa92630bafb3532b592956045a3915136499d6635"
+      "computedHash": "20bca721bb934e39c8ff2dc3df2cd1712f9efb5419afe2cb847267f6fe0eacbc"
+    },
+    "pnpm-workspace": {
+      "source": "oakoss/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/pnpm-workspace/SKILL.md",
+      "computedHash": "a84e48fce20ab5e6d3a311e72d2aabb277d98dca0bf1c066c7cd12c5266d5c6e"
     },
     "turborepo": {
       "source": "vercel/turborepo",

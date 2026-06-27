@@ -6,8 +6,8 @@ import { SupportedLang } from '@/config/languages'
 import { usePageTranslation } from '@/lib/hooks'
 import { cn } from '@/lib/utils'
 
+import { Button } from '../ui/button'
 import {
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
@@ -15,7 +15,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from '../ui'
+} from '../ui/dropdown-menu'
 
 export type Language = {
   value: SupportedLang

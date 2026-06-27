@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "format:staged": "prettier --write --ignore-unknown",
-    "prepare": "husky"
+    "prepare": "husky",
+    "doctor": "npx react-doctor@latest"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^19.8.1",

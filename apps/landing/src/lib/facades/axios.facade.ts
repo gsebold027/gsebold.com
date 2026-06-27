@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, use } from 'react'
 
 import Axios, { AxiosInstance } from 'axios'
 
@@ -22,6 +22,6 @@ export const AxiosContext = createContext<AxiosInstance>(
   })
 )
 
-export const useAxios = () => useContext(AxiosContext)
+export const useAxios = () => use(AxiosContext)
 
 export default axios

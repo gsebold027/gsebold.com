@@ -6,22 +6,14 @@ import { Link } from 'react-router'
 import { socialLinks } from '@/config/social-links'
 import { usePageTranslation, useSmoothScroll } from '@/lib/hooks'
 
-import { Logo } from '../icons'
-import {
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-  Separator,
-  ShineBorder
-} from '../ui'
-import { TypographyH3, TypographyH4, TypographyP } from '../ui/typography'
+import { Logo } from '../icons/logo'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '../ui/navigation-menu'
+import { Separator } from '../ui/separator'
+import { ShineBorder } from '../ui/shine-border'
+import { TypographyH3, TypographyH4 } from '../ui/typography/heading'
+import { TypographyP } from '../ui/typography/paragraph'
 import { NavBarLink } from './NavBar'
 
 const Footer = () => {
@@ -106,8 +98,8 @@ const Footer = () => {
               <nav aria-label={t('footer.footer_navigation')}>
                 <NavigationMenu className="max-h-fit min-w-full [&_div]:min-w-full">
                   <NavigationMenuList className="gap-2 flex-col items-start min-w-full">
-                    {defaultNavigationLinks.map((link, index) => (
-                      <NavigationMenuItem key={index}>
+                    {defaultNavigationLinks.map((link) => (
+                      <NavigationMenuItem key={link.href}>
                         <Button
                           variant="link"
                           className="text-secondary-foreground font-medium min-w-full justify-start hover:text-accent-foreground transition-colors p-0 h-auto"
