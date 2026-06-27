@@ -241,8 +241,33 @@
   }
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::view-transition-old(root) {
   animation: none;
   mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-new(root) {
+    animation: vt-circle-expand 700ms ease-in-out forwards;
+    clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
+  }
+
+  @keyframes vt-circle-expand {
+    to {
+      clip-path: circle(var(--vt-max-rad, 100vmax) at var(--vt-x, 50%) var(--vt-y, 50%));
+    }
+  }
 }

@@ -45,6 +45,7 @@
         }
       }
     },
+    "required_label": "(obrigatório)",
     "submit_button": "Enviar",
     "submitting_button": "Enviando",
     "submit_button_help": "Enviar o formulário de contato para mandar sua mensagem",
@@ -55,11 +56,11 @@
       },
       "warning": {
         "title": "Falha ao enviar mensagem",
-        "description": "Houve um problema ao enviar sua mensagem. Tente novamente mais tarde ou entre em contato diretamente."
+        "description": "Houve um problema ao enviar sua mensagem. Tente novamente mais tarde ou envie um email para contato@gsebold.com"
       },
       "error": {
         "title": "Erro inesperado",
-        "description": "Ocorreu um erro inesperado. Tente novamente mais tarde ou entre em contato diretamente."
+        "description": "Ocorreu um erro inesperado. Envie um email para contato@gsebold.com"
       }
     }
   }

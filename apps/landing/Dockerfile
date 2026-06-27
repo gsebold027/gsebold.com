@@ -28,7 +28,7 @@ RUN pnpm turbo run build --filter=@gsebold/landing
 FROM nginx:alpine AS runner
 
 COPY --from=builder /app/apps/landing/dist /usr/share/nginx/html
-COPY apps/landing/nginx.conf /etc/nginx/conf.d/default.conf
+COPY apps/landing/nginx.conf /etc/nginx/templates/default.conf.template
 
 EXPOSE 80
 

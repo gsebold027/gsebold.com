@@ -1,11 +1,10 @@
-export const formatDate = (
-  date: Date | string | null | undefined,
-  locale = 'en-US',
-  options: Intl.DateTimeFormatOptions = {
-    month: 'short',
-    year: 'numeric'
-  }
-): string => {
+const DATE_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = { month: 'short', year: 'numeric' }
+const dateFormatters: Record<string, Intl.DateTimeFormat> = {
+  'en-US': new Intl.DateTimeFormat('en-US', DATE_FORMAT_OPTIONS),
+  'pt-BR': new Intl.DateTimeFormat('pt-BR', DATE_FORMAT_OPTIONS)
+}
+
+const formatDate = (date: Date | string | null | undefined, locale = 'en-US'): string => {
   if (!date) return '-'
 
   const newDate = new Date(date)
@@ -14,17 +13,14 @@ export const formatDate = (
     return '-'
   }
 
-  const formatter = new Intl.DateTimeFormat(locale, options)
+  const formatter = dateFormatters[locale] ?? dateFormatters['en-US']
   return formatter.format(newDate)
 }
 
-export const formatWorkDate = (date: Date, language: string): string => {
+const formatWorkDate = (date: Date, language: string): string => {
   const locale = language === 'pt' ? 'pt-BR' : 'en-US'
 
-  const formatted = formatDate(date, locale, {
-    month: 'short',
-    year: 'numeric'
-  })
+  const formatted = formatDate(date, locale)
 
   if (language === 'pt') {
     // Convert "mai. de 2021" to "Mai/2021"

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
-import { TypographyH3, TypographyP } from '../ui/typography'
+import { TypographyH3 } from '../ui/typography/heading'
+import { TypographyP } from '../ui/typography/paragraph'
 
 type ContactInfoProps = {
   icon: ReactNode
@@ -9,7 +10,7 @@ type ContactInfoProps = {
 }
 
 const ContactInfo = ({ icon, title, value }: ContactInfoProps) => (
-  <div role="group" aria-label={title} className="flex items-center gap-3">
+  <address aria-label={title} className="flex items-center gap-3 not-italic">
     <div
       className="bg-background text-secondary-foreground shadow-2xl aspect-square h-10 rounded-full flex items-center justify-center"
       aria-hidden="true">
@@ -27,7 +28,7 @@ const ContactInfo = ({ icon, title, value }: ContactInfoProps) => (
         {value}
       </TypographyP>
     </div>
-  </div>
+  </address>
 )
 
 export { ContactInfo }

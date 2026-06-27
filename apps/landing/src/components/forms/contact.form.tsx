@@ -5,25 +5,15 @@ import { toast } from 'sonner'
 
 import { usePageTranslation } from '@/lib/hooks'
 
-import {
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupTextarea,
-  Spinner
-} from '../ui'
+import { Button } from '../ui/button'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
+import { Field, FieldError, FieldGroup, FieldLabel } from '../ui/field'
+import { Input } from '../ui/input'
+import { InputGroup } from '../ui/input-group/InputGroup'
+import { InputGroupAddon } from '../ui/input-group/InputGroupAddon'
+import { InputGroupText } from '../ui/input-group/InputGroupText'
+import { InputGroupTextarea } from '../ui/input-group/InputGroupTextarea'
+import { Spinner } from '../ui/spinner'
 import { createContactSchema } from './contact.schema'
 import { useContactMe } from './contact.service'
 
@@ -55,6 +45,7 @@ const ContactForm = () => {
       message: ''
     },
     validators: {
+      onChange: formSchema,
       onSubmit: formSchema
     },
     onSubmit: ({ value }) => {
@@ -86,17 +77,21 @@ const ContactForm = () => {
             form.handleSubmit()
           }}>
           <FieldGroup role="group" aria-label={t('contact.form_fields_aria')}>
-            <Field className="gap-3 flex-col sm:flex-row" orientation="horizontal">
-              <form.Field
-                name="name"
-                children={(field) => {
-                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+            <Field className="gap-3 flex-col sm:flex-row items-start" orientation="horizontal">
+              <form.Field name="name">
+                {(field) => {
+                  const isInvalid = field.state.meta.isBlurred && !field.state.meta.isValid
                   const errorId = `${field.name}-error`
                   const helpId = `${field.name}-help`
 
                   return (
                     <Field data-invalid={isInvalid}>
-                      <FieldLabel htmlFor={field.name}>{t('contact.fields.name.label')}</FieldLabel>
+                      <FieldLabel htmlFor={field.name} className="flex items-end">
+                        {t('contact.fields.name.label')}
+                        <span className="text-muted-foreground text-xs font-normal h-fit">
+                          {t('contact.required_label')}
+                        </span>
+                      </FieldLabel>
                       <Input
                         id={field.name}
                         name={field.name}
@@ -119,18 +114,20 @@ const ContactForm = () => {
                     </Field>
                   )
                 }}
-              />
-              <form.Field
-                name="email"
-                children={(field) => {
-                  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+              </form.Field>
+              <form.Field name="email">
+                {(field) => {
+                  const isInvalid = field.state.meta.isBlurred && !field.state.meta.isValid
                   const errorId = `${field.name}-error`
                   const helpId = `${field.name}-help`
 
                   return (
                     <Field data-invalid={isInvalid}>
-                      <FieldLabel htmlFor={field.name}>
+                      <FieldLabel htmlFor={field.name} className="flex items-end">
                         {t('contact.fields.email.label')}
+                        <span className="text-muted-foreground text-xs font-normal h-fit">
+                          {t('contact.required_label')}
+                        </span>
                       </FieldLabel>
                       <Input
                         id={field.name}
@@ -155,19 +152,21 @@ const ContactForm = () => {
                     </Field>
                   )
                 }}
-              />
+              </form.Field>
             </Field>
-            <form.Field
-              name="subject"
-              children={(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+            <form.Field name="subject">
+              {(field) => {
+                const isInvalid = field.state.meta.isBlurred && !field.state.meta.isValid
                 const errorId = `${field.name}-error`
                 const helpId = `${field.name}-help`
 
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>
+                    <FieldLabel htmlFor={field.name} className="flex items-end">
                       {t('contact.fields.subject.label')}
+                      <span className="text-muted-foreground text-xs font-normal h-fit">
+                        {t('contact.required_label')}
+                      </span>
                     </FieldLabel>
                     <Input
                       id={field.name}
@@ -191,21 +190,23 @@ const ContactForm = () => {
                   </Field>
                 )
               }}
-            />
-            <form.Field
-              name="message"
-              children={(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+            </form.Field>
+            <form.Field name="message">
+              {(field) => {
+                const isInvalid = field.state.meta.isBlurred && !field.state.meta.isValid
                 const errorId = `${field.name}-error`
                 const helpId = `${field.name}-help`
                 const charCountId = `${field.name}-char-count`
 
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>
+                    <FieldLabel htmlFor={field.name} className="flex items-end">
                       {t('contact.fields.message.label')}
+                      <span className="text-muted-foreground text-xs font-normal h-fit">
+                        {t('contact.required_label')}
+                      </span>
                     </FieldLabel>
-                    <InputGroup>
+                    <InputGroup className="bg-transparent!">
                       <InputGroupTextarea
                         id={field.name}
                         name={field.name}
@@ -214,7 +215,7 @@ const ContactForm = () => {
                         onChange={(e) => field.handleChange(e.target.value)}
                         placeholder={t('contact.fields.message.placeholder')}
                         rows={6}
-                        className="min-h-24 resize-none"
+                        className="min-h-24 resize-none bg-transparent"
                         aria-invalid={isInvalid}
                         aria-describedby={
                           isInvalid
@@ -249,29 +250,36 @@ const ContactForm = () => {
                   </Field>
                 )
               }}
-            />
+            </form.Field>
           </FieldGroup>
         </form>
       </CardContent>
       <CardFooter>
-        <Button
-          className="w-full"
-          type="submit"
-          form="contact-form"
-          disabled={contactMeMutation.isPending}
-          aria-describedby="submit-button-help">
-          {contactMeMutation.isPending ? (
-            <>
-              {t('contact.submitting_button')}
-              <Spinner />
-            </>
-          ) : (
-            <>
-              {t('contact.submit_button')}
-              <Send className="size-4" aria-hidden="true" />
-            </>
+        <form.Subscribe
+          selector={(state) =>
+            state.canSubmit && Object.values(state.values).every((v) => v.trim().length > 0)
+          }>
+          {(canSubmit) => (
+            <Button
+              className="w-full"
+              type="submit"
+              form="contact-form"
+              disabled={!canSubmit || contactMeMutation.isPending}
+              aria-describedby="submit-button-help">
+              {contactMeMutation.isPending ? (
+                <>
+                  {t('contact.submitting_button')}
+                  <Spinner />
+                </>
+              ) : (
+                <>
+                  {t('contact.submit_button')}
+                  <Send className="size-4" aria-hidden="true" />
+                </>
+              )}
+            </Button>
           )}
-        </Button>
+        </form.Subscribe>
 
         <div id="submit-button-help" className="sr-only max-w-full">
           {t('contact.submit_button_help')}

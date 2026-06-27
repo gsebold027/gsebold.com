@@ -2,7 +2,8 @@ import * as React from 'react'
 
 import { cn } from '@/lib/utils/index'
 
-import { TypographyH4, TypographyP } from './typography'
+import { TypographyH4 } from './typography/heading'
+import { TypographyP } from './typography/paragraph'
 
 const Card = ({ className, ...props }: React.ComponentProps<'div'>) => (
   <div

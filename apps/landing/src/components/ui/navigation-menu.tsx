@@ -97,7 +97,6 @@ const NavigationMenuIndicator = ({
 )
 
 export {
-  navigationMenuTriggerStyle,
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,

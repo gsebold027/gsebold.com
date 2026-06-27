@@ -1,6 +1,6 @@
-import React, { useEffect, useId, useRef, useState } from 'react'
+import React, { useCallback, useId, useRef, useSyncExternalStore } from 'react'
 
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 
 import { cn } from '@/lib/utils/index'
 
@@ -17,6 +17,8 @@ type DotPatternProps = {
   [key: string]: unknown
 } & React.SVGProps<SVGSVGElement>
 
+const emptyDimensions = { width: 0, height: 0 }
+
 export const DotPattern = ({
   width = 16,
   height = 16,
@@ -29,20 +31,29 @@ export const DotPattern = ({
 }: DotPatternProps) => {
   const id = useId()
   const containerRef = useRef<SVGSVGElement>(null)
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const snapshotRef = useRef(emptyDimensions)
 
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect()
-        setDimensions({ width, height })
+  const subscribe = useCallback((notify: () => void) => {
+    const element = containerRef.current
+    if (!element) return () => {}
+
+    const observer = new ResizeObserver(([entry]) => {
+      snapshotRef.current = {
+        width: entry.contentRect.width,
+        height: entry.contentRect.height
       }
-    }
+      notify()
+    })
 
-    updateDimensions()
-    window.addEventListener('resize', updateDimensions)
-    return () => window.removeEventListener('resize', updateDimensions)
+    observer.observe(element)
+    return () => observer.disconnect()
   }, [])
+
+  const dimensions = useSyncExternalStore(
+    subscribe,
+    () => snapshotRef.current,
+    () => emptyDimensions
+  )
 
   const dots = Array.from(
     {
@@ -76,7 +87,7 @@ export const DotPattern = ({
         </radialGradient>
       </defs>
       {dots.map((dot) => (
-        <motion.circle
+        <m.circle
           key={`${dot.x}-${dot.y}`}
           cx={dot.x}
           cy={dot.y}

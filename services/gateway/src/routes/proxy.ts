@@ -3,6 +3,14 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { ApiErrorResponse } from '@gsebold/schemas';
 
 import logger from '../utils/logger';
+import { createRateLimiter } from '../utils/rate-limiter';
+
+const contactFormLimiter = (): express.RequestHandler =>
+  createRateLimiter({
+    windowMs: 60 * 15 * 1000,
+    max: 5,
+    logLabel: 'Contact form rate limit exceeded',
+  });
 
 export const configureProxyRoutes = (app: express.Application): void => {
   const contactServiceUrl = process.env.CONTACT_SERVICE_URL;
@@ -77,6 +85,8 @@ export const configureProxyRoutes = (app: express.Application): void => {
         },
       },
     } as any);
+
+    app.post('/contact/email/contactMe', contactFormLimiter(), contactProxy);
 
     app.use('/contact', contactProxy);
     logger.info('Contact service proxy configured');

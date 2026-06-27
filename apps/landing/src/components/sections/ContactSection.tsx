@@ -2,9 +2,10 @@ import { Mail, MapPin } from 'lucide-react'
 
 import { usePageTranslation } from '@/lib/hooks'
 
-import { ContactForm } from '../forms'
-import { ContactInfo } from '../shared'
-import { TypographyH2, TypographyP } from '../ui/typography'
+import { ContactForm } from '../forms/contact.form'
+import { ContactInfo } from '../shared/ContactInfo'
+import { TypographyH2 } from '../ui/typography/heading'
+import { TypographyP } from '../ui/typography/paragraph'
 
 const ContactSection = () => {
   const { t } = usePageTranslation('landing-page')
@@ -22,25 +23,24 @@ const ContactSection = () => {
           {t('contact.title')}
         </TypographyH2>
         <TypographyP className="max-w-xl mb-8">{t('contact.description')}</TypographyP>
-        <div
-          className="flex flex-col gap-4"
-          role="list"
+        <ul
+          className="flex flex-col gap-4 list-none p-0"
           aria-label={t('contact.contact_info_aria')}>
-          <div role="listitem">
+          <li>
             <ContactInfo
               icon={<Mail />}
               title={t('contact.email_label')}
               value={t('contact.email_value')}
             />
-          </div>
-          <div role="listitem">
+          </li>
+          <li>
             <ContactInfo
               icon={<MapPin />}
               title={t('contact.location_label')}
               value={t('contact.location_value')}
             />
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
       <ContactForm />
     </section>

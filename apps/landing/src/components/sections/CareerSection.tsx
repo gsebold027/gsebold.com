@@ -1,32 +1,30 @@
 import { usePageTranslation } from '@/lib/hooks'
 
-import {
-  CSharpIcon,
-  CssIcon,
-  DockerIcon,
-  DotNetIcon,
-  ExpressIcon,
-  FramerMotionIcon,
-  GitHubIcon,
-  GitIcon,
-  HtmlIcon,
-  JavascriptIcon,
-  MSSQLIcon,
-  MongoDBIcon,
-  NestIcon,
-  NodeIcon,
-  PostgreSQLIcon,
-  PowerBIIcon,
-  RailwayIcon,
-  ReactIcon,
-  ReactRouterIcon,
-  ShadcnIcon,
-  TailwindIcon,
-  TypescriptIcon,
-  ViteIcon
-} from '../icons'
+import { CSharpIcon } from '../icons/devicon/CSharpIcon'
+import { CssIcon } from '../icons/devicon/CssIcon'
+import { DockerIcon } from '../icons/devicon/DockerIcon'
+import { DotNetIcon } from '../icons/devicon/DotNetIcon'
+import { ExpressIcon } from '../icons/devicon/ExpressIcon'
+import { FramerMotionIcon } from '../icons/devicon/FramerMotionIcon'
+import { GitIcon } from '../icons/devicon/GitIcon'
+import { GitHubIcon } from '../icons/devicon/GithubIcon'
+import { HtmlIcon } from '../icons/devicon/HtmlIcon'
+import { JavascriptIcon } from '../icons/devicon/JavascriptIcon'
+import { MongoDBIcon } from '../icons/devicon/MongoIcon'
+import { MSSQLIcon } from '../icons/devicon/MsSqlIcon'
+import { NestIcon } from '../icons/devicon/NestIcon'
+import { NodeIcon } from '../icons/devicon/NodeIcon'
+import { PostgreSQLIcon } from '../icons/devicon/PostgresIcon'
+import { PowerBIIcon } from '../icons/devicon/PowerBiIcon'
+import { RailwayIcon } from '../icons/devicon/RailwayIcon'
+import { ReactIcon } from '../icons/devicon/ReactIcon'
+import { ReactRouterIcon } from '../icons/devicon/ReactRouter'
+import { ShadcnIcon } from '../icons/devicon/ShadcnIcon'
+import { TailwindIcon } from '../icons/devicon/TailwindIcon'
+import { TypescriptIcon } from '../icons/devicon/TypescriptIcon'
+import { ViteIcon } from '../icons/devicon/ViteIcon'
 import { WorkExperience } from '../shared/WorkExperience/WorkExperience'
-import { TypographyH2, TypographyH3, TypographyH4 } from '../ui/typography'
+import { TypographyH2, TypographyH3, TypographyH4 } from '../ui/typography/heading'
 
 const CareerSection = () => {
   const { t } = usePageTranslation('landing-page')
@@ -96,10 +94,9 @@ const CareerSection = () => {
 
       <div className="flex flex-col gap-8 sm:gap-16">
         {skills.map((section, sectionIndex) => (
-          <div
+          <section
             key={`${section}-${sectionIndex}`}
             className="flex md:flex-row flex-col gap-6 sm:gap-8 items-start"
-            role="region"
             aria-labelledby={`skill-category-${sectionIndex}`}>
             <div className="w-full md:w-1/5 text-lg font-bold sticky">
               <TypographyH4 id={`skill-category-${sectionIndex}`} className="uppercase">
@@ -116,7 +113,7 @@ const CareerSection = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </section>
         ))}
       </div>
     </section>

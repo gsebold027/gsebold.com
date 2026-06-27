@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { memo } from 'react'
 
 import { type VariantProps, cva } from 'class-variance-authority'
 
@@ -48,34 +48,36 @@ const FieldGroup = ({ className, ...props }: React.ComponentProps<'div'>) => (
   />
 )
 
-const fieldVariants = cva('group/field data-[invalid=true]:text-destructive flex w-full relative', {
-  variants: {
-    orientation: {
-      vertical: ['flex-col [&>*]:w-full [&>.sr-only]:w-auto'],
-      horizontal: [
-        'flex-row items-center justify-top',
-        '[&>[data-slot=field-label]]:flex-auto',
-        'has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px has-[>[data-slot=field-content]]:items-start'
-      ],
-      responsive: [
-        '@md/field-group:flex-row @md/field-group:items-center @md/field-group:[&>*]:w-auto flex-col [&>*]:w-full [&>.sr-only]:w-auto',
-        '@md/field-group:[&>[data-slot=field-label]]:flex-auto',
-        '@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px'
-      ]
+const fieldVariants = cva(
+  'group/field data-[invalid=true]:text-destructive flex w-full relative not-italic',
+  {
+    variants: {
+      orientation: {
+        vertical: ['flex-col [&>*]:w-full [&>.sr-only]:w-auto'],
+        horizontal: [
+          'flex-row items-center justify-top',
+          '[&>[data-slot=field-label]]:flex-auto',
+          'has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px has-[>[data-slot=field-content]]:items-start'
+        ],
+        responsive: [
+          '@md/field-group:flex-row @md/field-group:items-center @md/field-group:[&>*]:w-auto flex-col [&>*]:w-full [&>.sr-only]:w-auto',
+          '@md/field-group:[&>[data-slot=field-label]]:flex-auto',
+          '@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px'
+        ]
+      }
+    },
+    defaultVariants: {
+      orientation: 'vertical'
     }
-  },
-  defaultVariants: {
-    orientation: 'vertical'
   }
-})
+)
 
 const Field = ({
   className,
   orientation = 'vertical',
   ...props
-}: React.ComponentProps<'div'> & VariantProps<typeof fieldVariants>) => (
-  <div
-    role="group"
+}: React.ComponentProps<'address'> & VariantProps<typeof fieldVariants>) => (
+  <address
     data-slot="field"
     data-orientation={orientation}
     className={cn(fieldVariants({ orientation }), className)}
@@ -154,6 +156,18 @@ const FieldSeparator = ({
   </div>
 )
 
+const FieldErrorList = memo(function FieldErrorList({
+  errors
+}: {
+  errors: Array<{ message?: string } | undefined>
+}) {
+  return (
+    <ul className="ml-4 flex list-disc flex-col gap-1">
+      {errors.map((error) => error?.message && <li key={error.message}>{error.message}</li>)}
+    </ul>
+  )
+})
+
 const FieldError = ({
   className,
   children,
@@ -162,29 +176,7 @@ const FieldError = ({
 }: React.ComponentProps<'div'> & {
   errors?: Array<{ message?: string } | undefined>
 }) => {
-  const content = useMemo(() => {
-    if (children) {
-      return children
-    }
-
-    if (!errors) {
-      return null
-    }
-
-    if (errors?.length === 1 && errors[0]?.message) {
-      return errors[0].message
-    }
-
-    return (
-      <ul className="ml-4 flex list-disc flex-col gap-1">
-        {errors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}
-      </ul>
-    )
-  }, [children, errors])
-
-  if (!content) {
-    return null
-  }
+  if (!children && !errors) return null
 
   return (
     <div
@@ -192,7 +184,7 @@ const FieldError = ({
       data-slot="field-error"
       className={cn('text-destructive text-sm font-normal', className)}
       {...props}>
-      {content}
+      {children ?? <FieldErrorList errors={errors!} />}
     </div>
   )
 }

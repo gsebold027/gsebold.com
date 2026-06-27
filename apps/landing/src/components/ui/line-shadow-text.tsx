@@ -1,12 +1,13 @@
-import { MotionProps, motion } from 'motion/react'
+import { MotionProps, m } from 'motion/react'
 
 import { cn } from '@/lib/utils/index'
 
 type LineShadowTextProps = {
   shadowColor?: string
   as?: React.ElementType
-} & Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps> &
-  MotionProps
+  children: string
+} & Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps | 'children'> &
+  Omit<MotionProps, 'children'>
 
 export const LineShadowText = ({
   children,
@@ -15,12 +16,7 @@ export const LineShadowText = ({
   as: Component = 'span',
   ...props
 }: LineShadowTextProps) => {
-  const MotionComponent = motion.create(Component)
-  const content = typeof children === 'string' ? children : null
-
-  if (!content) {
-    throw new Error('LineShadowText only accepts string content')
-  }
+  const MotionComponent = m.create(Component)
 
   return (
     <MotionComponent
@@ -33,9 +29,9 @@ export const LineShadowText = ({
         'after:animate-line-shadow',
         className
       )}
-      data-text={content}
+      data-text={children}
       {...props}>
-      {content}
+      {children}
     </MotionComponent>
   )
 }
