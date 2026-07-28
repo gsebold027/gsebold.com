@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { flushSync } from 'react-dom'
 
 import { MoonIcon, SunIcon } from 'lucide-react'
+import { flushSync } from 'react-dom'
 
 import { useTheme } from '@/contexts/ThemeProvider'
 import { usePageTranslation } from '@/lib/hooks'
