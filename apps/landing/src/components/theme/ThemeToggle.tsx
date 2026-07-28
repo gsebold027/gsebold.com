@@ -1,6 +1,7 @@
-import { startTransition, useRef } from 'react'
+import { useRef } from 'react'
 
 import { MoonIcon, SunIcon } from 'lucide-react'
+import { flushSync } from 'react-dom'
 
 import { useTheme } from '@/contexts/ThemeProvider'
 import { usePageTranslation } from '@/lib/hooks'
@@ -28,8 +29,15 @@ const ThemeToggle = () => {
     document.documentElement.style.setProperty('--vt-y', `${y}px`)
     document.documentElement.style.setProperty('--vt-max-rad', `${maxRad}px`)
 
-    startTransition(() => {
+    if (!document.startViewTransition) {
       setTheme(newTheme)
+      return
+    }
+
+    document.startViewTransition(() => {
+      flushSync(() => {
+        setTheme(newTheme)
+      })
     })
   }
 
