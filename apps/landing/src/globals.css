@@ -268,7 +268,7 @@ html.vt-theme::view-transition-new(root) {
 
 @media (prefers-reduced-motion: no-preference) {
   html.vt-theme::view-transition-new(root) {
-    animation: vt-circle-expand 300ms ease-in-out forwards;
+    animation: vt-circle-expand 700ms ease-in-out forwards;
     clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
   }
 
