@@ -1,4 +1,4 @@
-import { lazy, useEffect } from 'react'
+import { Suspense, lazy, useEffect } from 'react'
 
 import { Navigate, useParams } from 'react-router'
 
@@ -30,7 +30,11 @@ export const LangLayout = () => {
   }, [lang, isValid])
 
   if (!isValid) {
-    return <Navigate to="/en" replace />
+    return (
+      <Suspense fallback={null}>
+        <NotFoundPage />
+      </Suspense>
+    )
   }
 
   return <Layout />

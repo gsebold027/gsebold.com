@@ -22,7 +22,7 @@ const RouteErrorBoundary = () => (
           <LineShadowText shadowColor="var(--primary)">500</LineShadowText>
         </h1>
         <h2 className="text-3xl font-semibold text-foreground">
-          <Highlighter action="underline" color="#DA611B">
+          <Highlighter action="underline" color="#DA611B" animationDuration={300}>
             Something went wrong
           </Highlighter>
         </h2>
@@ -35,7 +35,7 @@ const RouteErrorBoundary = () => (
       </div>
     </div>
     <div className="fixed inset-0 -z-10" aria-hidden="true">
-      <DotPattern className="[mask-image:radial-gradient(60vh_circle_at_center,white,transparent)]" />
+      <DotPattern className="mask-[radial-gradient(60vh_circle_at_center,white,transparent)]" />
     </div>
   </div>
 )

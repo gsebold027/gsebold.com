@@ -242,7 +242,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  /* .rough-annotation (Highlighter's rough-notation SVG) is exempt: it's a brief,
+     single-shot, on-view stroke draw, not the kind of looping/parallax motion this
+     rule exists to suppress. */
+  *:not(.rough-annotation, .rough-annotation *),
+  *:not(.rough-annotation, .rough-annotation *)::before,
+  *:not(.rough-annotation, .rough-annotation *)::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -250,18 +255,20 @@
   }
 }
 
-::view-transition-old(root) {
+/* Scoped to .vt-theme (set by ThemeToggle around its own transition only) so other
+   view transitions — e.g. route changes — get the browser's default cross-fade instead. */
+html.vt-theme::view-transition-old(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-::view-transition-new(root) {
+html.vt-theme::view-transition-new(root) {
   mix-blend-mode: normal;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  ::view-transition-new(root) {
-    animation: vt-circle-expand 700ms ease-in-out forwards;
+  html.vt-theme::view-transition-new(root) {
+    animation: vt-circle-expand 300ms ease-in-out forwards;
     clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
   }
 

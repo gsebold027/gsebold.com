@@ -17,7 +17,7 @@ const WorkExperience = () => {
       ))}
       <Accordion className="w-full" type="single" collapsible>
         <AccordionItem value="shipping">
-          <AccordionContent className="overflow-visible">
+          <AccordionContent>
             {olderExperiences.map((experience) => (
               <WorkExperienceItem key={experience.id} data={experience} />
             ))}
