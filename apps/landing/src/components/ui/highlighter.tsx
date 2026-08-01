@@ -64,24 +64,52 @@ export const Highlighter = ({
       multiline
     }
 
-    const annotation = annotate(element, annotationConfig)
+    let cancelled = false
+    let resizeObserver: ResizeObserver | null = null
+    let rafId: number | null = null
 
-    annotationRef.current = annotation
-    annotationRef.current.show()
+    // rough-notation attaches its own ResizeObserver the moment annotate() runs, debounced
+    // 400ms: if the element's measured rect differs at all when that fires (a scrollbar
+    // appearing after first paint, a font swap settling), it silently redraws with
+    // animate:false — a hard snap to fully-drawn partway through our entrance animation.
+    // Waiting for fonts + a settled frame before measuring means that baseline rect is
+    // already final, so the 400ms-later recheck finds nothing changed.
+    const start = () => {
+      if (cancelled || !elementRef.current) return
 
-    const resizeObserver = new ResizeObserver(() => {
-      annotation.hide()
+      const annotation = annotate(elementRef.current, annotationConfig)
+      annotationRef.current = annotation
       annotation.show()
+
+      // ResizeObserver fires once immediately on observe() with the baseline size,
+      // even with no real resize — skip that first call so mount doesn't redraw twice.
+      let isInitialObservation = true
+      resizeObserver = new ResizeObserver(() => {
+        if (isInitialObservation) {
+          isInitialObservation = false
+          return
+        }
+        annotation.hide()
+        annotation.show()
+      })
+      resizeObserver.observe(elementRef.current)
+      resizeObserver.observe(document.body)
+    }
+
+    const fontsReady = document.fonts?.ready ?? Promise.resolve()
+    fontsReady.then(() => {
+      if (cancelled) return
+      rafId = requestAnimationFrame(() => {
+        rafId = requestAnimationFrame(start)
+      })
     })
 
-    resizeObserver.observe(element)
-    resizeObserver.observe(document.body)
-
     return () => {
-      if (element) {
-        annotate(element, { type: action }).remove()
-        resizeObserver.disconnect()
-      }
+      cancelled = true
+      if (rafId !== null) cancelAnimationFrame(rafId)
+      resizeObserver?.disconnect()
+      annotationRef.current?.remove()
+      annotationRef.current = null
     }
   }, [shouldShow, action, color, strokeWidth, animationDuration, iterations, padding, multiline])
 

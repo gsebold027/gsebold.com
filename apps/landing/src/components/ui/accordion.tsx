@@ -68,9 +68,9 @@ const AccordionContent = ({
 }: React.ComponentProps<typeof AccordionPrimitive.Content>) => (
   <AccordionPrimitive.Content
     data-slot="accordion-content"
-    className="text-sm data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className="text-sm overflow-hidden animation-duration-300 data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
     {...props}>
-    <div className={cn('pb-4 pt-0 overflow-hidden', className)}>{children}</div>
+    <div className={cn('pb-4 pt-0', className)}>{children}</div>
   </AccordionPrimitive.Content>
 )
 

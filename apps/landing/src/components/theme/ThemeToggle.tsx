@@ -34,10 +34,18 @@ const ThemeToggle = () => {
       return
     }
 
-    document.startViewTransition(() => {
+    // Scopes the circle-expand effect (globals.css) to this transition only, so other
+    // view transitions (e.g. route changes) fall back to the browser's default cross-fade.
+    document.documentElement.classList.add('vt-theme')
+
+    const transition = document.startViewTransition(() => {
       flushSync(() => {
         setTheme(newTheme)
       })
+    })
+
+    transition.finished.finally(() => {
+      document.documentElement.classList.remove('vt-theme')
     })
   }
 
