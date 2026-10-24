@@ -8,7 +8,7 @@ export const createContactSchema = (t: (key: string) => string) =>
       .string()
       .min(C.name.min, { message: t('contact.fields.name.validation.min') })
       .max(C.name.max, { message: t('contact.fields.name.validation.max') })
-      .regex(/^[a-zA-Z\s]+$/, { message: t('contact.fields.name.validation.format') })
+      .regex(/^[\p{L}\p{M}\s'.-]*$/u, { message: t('contact.fields.name.validation.format') })
       .transform((val) => val.trim()),
 
     email: z

@@ -38,11 +38,12 @@ export const ThemeProvider = ({
   storageKey = environment.localStorageKeys.theme,
   ...props
 }: ThemeProviderProps) => {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    const stored = (localStorage.getItem(storageKey) as Theme) || defaultTheme
-    applyThemeClass(stored)
-    return stored
-  })
+  const [theme, setThemeState] = useState<Theme>(defaultTheme)
+
+  useLayoutEffect(() => {
+    const stored = localStorage.getItem(storageKey) as Theme | null
+    if (stored) setThemeState(stored)
+  }, [storageKey])
 
   useLayoutEffect(() => {
     applyThemeClass(theme)

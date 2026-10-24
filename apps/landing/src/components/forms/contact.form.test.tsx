@@ -81,6 +81,25 @@ describe('ContactForm', () => {
     })
   })
 
+  it('keeps the submit button enabled before the form is filled', () => {
+    render(<ContactForm />)
+
+    expect(screen.getByRole('button', { name: 'contact.submit_button' })).toBeEnabled()
+  })
+
+  it('validates on submit: shows every error, focuses the first field, and does not send', async () => {
+    const user = userEvent.setup()
+    render(<ContactForm />)
+
+    await user.click(screen.getByRole('button', { name: 'contact.submit_button' }))
+
+    await waitFor(() => {
+      expect(screen.getAllByRole('alert')).toHaveLength(4)
+    })
+    expect(screen.getByPlaceholderText('contact.fields.name.placeholder')).toHaveFocus()
+    expect(mockMutate).not.toHaveBeenCalled()
+  })
+
   it('disables the submit button while the mutation is pending', () => {
     setupMutation({ isPending: true })
     render(<ContactForm />)

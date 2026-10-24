@@ -11,7 +11,7 @@
         "validation": {
           "min": "Nome completo deve ter pelo menos 2 caracteres",
           "max": "Nome completo deve ter no máximo 50 caracteres",
-          "format": "Nome completo pode conter apenas letras e espaços"
+          "format": "Nome completo pode conter apenas letras, espaços, hífens e apóstrofos"
         }
       },
       "email": {

@@ -14,7 +14,6 @@ dist-ssr
 build
 *.local
 .turbo
-graphify-out
 
 # Test coverage
 coverage
@@ -54,3 +53,9 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 .agents/
 skills-lock.json
 docs/superpowers/
+
+# playwright-cli session logs
+.playwright-cli/
+
+# React Router generated route types
+.react-router/

@@ -11,7 +11,7 @@
         "validation": {
           "min": "Full name must be at least 2 characters",
           "max": "Full name must be at most 50 characters",
-          "format": "Full name can only contain letters and spaces"
+          "format": "Full name can only contain letters, spaces, hyphens and apostrophes"
         }
       },
       "email": {

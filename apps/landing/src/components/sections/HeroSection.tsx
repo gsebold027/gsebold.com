@@ -16,10 +16,10 @@ const HeroSection = () => {
       className="min-h-dvh py-[clamp(1rem,_2.5vw_+_0rem,_2rem)] flex items-center relative"
       aria-labelledby="hero-heading">
       <div className="max-w-4xl xl:px-0">
-        <TypographyP className="text-base font-mono text-primary mb-2" aria-hidden="true">
+        <TypographyP className="text-base font-pixel text-primary mb-2" aria-hidden="true">
           {t('hero.greeting')}
         </TypographyP>
-        <TypographyH1 id="hero-heading" className="mb-4">
+        <TypographyH1 id="hero-heading" className="mb-4 font-display font-bold tracking-[-0.03em]">
           Gustavo Sebold
         </TypographyH1>
         <TypographyH2 className="mb-[clamp(1rem,_2.5vw_+_0rem,_2rem)] text-muted-foreground">
