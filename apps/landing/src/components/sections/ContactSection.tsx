@@ -1,11 +1,14 @@
+import { Suspense, lazy } from 'react'
+
 import { Mail, MapPin } from 'lucide-react'
 
 import { usePageTranslation } from '@/lib/hooks'
 
-import { ContactForm } from '../forms/contact.form'
 import { ContactInfo } from '../shared/ContactInfo'
 import { TypographyH2 } from '../ui/typography/heading'
 import { TypographyP } from '../ui/typography/paragraph'
+
+const ContactFormRoot = lazy(() => import('../forms/contact.form-root'))
 
 const ContactSection = () => {
   const { t } = usePageTranslation('landing-page')
@@ -42,7 +45,9 @@ const ContactSection = () => {
           </li>
         </ul>
       </div>
-      <ContactForm />
+      <Suspense fallback={null}>
+        <ContactFormRoot />
+      </Suspense>
     </section>
   )
 }

@@ -1,4 +1,4 @@
-import { Badge } from '@/components/ui'
+import { Badge } from '@/components/ui/badge'
 import { TypographyH4, TypographyP } from '@/components/ui/typography'
 import { usePageTranslation } from '@/lib/hooks'
 import { WorkExperienceData } from '@/lib/types'

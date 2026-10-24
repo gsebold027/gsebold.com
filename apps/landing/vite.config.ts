@@ -8,7 +8,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 // https://vite.dev/config/
 // React Router builds twice: the client bundle that ships, and a server bundle used only to
-// prerender /en and /pt. Chunking and the bundle report only apply to the client build.
+// prerender /en and /pt. The bundle report only applies to the client build.
+// No manualChunks: grouping by package put code only lazy parts use (dropdown, rough-notation,
+// zod) into chunks every page preloads. Rollup's own split follows the import graph.
 export default defineConfig(({ isSsrBuild }) => ({
   envDir: './src/environments',
   plugins: [
@@ -26,27 +28,6 @@ export default defineConfig(({ isSsrBuild }) => ({
   build: {
     chunkSizeWarningLimit: 800,
     rollupOptions: {
-      output: isSsrBuild
-        ? undefined
-        : {
-            manualChunks: {
-              'react-vendor': ['react', 'react-dom'],
-              motion: ['motion'],
-              i18n: ['i18next', 'react-i18next', 'i18next-browser-languagedetector'],
-              router: ['react-router'],
-              query: ['@tanstack/react-query', '@tanstack/react-form'],
-              radix: [
-                '@radix-ui/react-accordion',
-                '@radix-ui/react-dialog',
-                '@radix-ui/react-dropdown-menu',
-                '@radix-ui/react-label',
-                '@radix-ui/react-navigation-menu',
-                '@radix-ui/react-separator',
-                '@radix-ui/react-slot'
-              ],
-              utils: ['axios', 'zod', 'lucide-react', 'clsx', 'tailwind-merge']
-            }
-          },
       onwarn(warning, warn) {
         if (warning.code === 'CHUNK_SIZE_WARNING') throw new Error(warning.message)
         warn(warning)

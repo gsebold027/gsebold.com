@@ -2,8 +2,10 @@ import { Link } from 'react-router'
 
 import { LanguageSwitcher } from '@/components/theme/LanguageSwitcher'
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
-import { Button, Highlighter, LineShadowText } from '@/components/ui'
+import { Button } from '@/components/ui/button'
 import { DotPattern } from '@/components/ui/dot-pattern'
+import { Highlighter } from '@/components/ui/highlighter'
+import { LineShadowText } from '@/components/ui/line-shadow-text'
 import { usePageTranslation } from '@/lib/hooks'
 
 const NotFoundPage = () => {

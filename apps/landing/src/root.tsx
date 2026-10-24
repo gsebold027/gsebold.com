@@ -1,15 +1,11 @@
 import '@fontsource/space-grotesk/700.css'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { useState } from 'react'
-
-import { LazyMotion, MotionConfig, domAnimation } from 'motion/react'
+import { LazyMotion, MotionConfig } from 'motion/react'
 import { Links, Meta, Outlet, Scripts, useLocation } from 'react-router'
 
 import { ThemeProvider } from './contexts/ThemeProvider'
 import { environment } from './environments/environment'
 import './globals.css'
-import axios, { AxiosContext } from './lib/facades/axios.facade'
 import './lib/i18n'
 
 // Runs before first paint so the prerendered page shows the saved theme instead of flashing the
@@ -54,34 +50,19 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-const App = () => {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            refetchOnReconnect: false,
-            refetchOnWindowFocus: false,
-            staleTime: 1000 * 60 * 5 // 5 minutes
-          }
-        }
-      })
-  )
+// The query client and axios provider live in components/forms/contact.form-root.tsx, the only
+// place that calls the API, so they load with the contact form instead of with every page.
+const loadMotionFeatures = () => import('./lib/motion-features').then((m) => m.default)
 
-  return (
-    <LazyMotion features={domAnimation}>
-      <MotionConfig reducedMotion="user">
-        <AxiosContext.Provider value={axios}>
-          <QueryClientProvider client={queryClient}>
-            <ThemeProvider defaultTheme="dark">
-              <Outlet />
-            </ThemeProvider>
-          </QueryClientProvider>
-        </AxiosContext.Provider>
-      </MotionConfig>
-    </LazyMotion>
-  )
-}
+const App = () => (
+  <LazyMotion features={loadMotionFeatures}>
+    <MotionConfig reducedMotion="user">
+      <ThemeProvider defaultTheme="dark">
+        <Outlet />
+      </ThemeProvider>
+    </MotionConfig>
+  </LazyMotion>
+)
 
 // The SPA fallback (/, unknown paths) has nothing prerendered; render nothing until the client takes over.
 export const HydrateFallback = () => null
