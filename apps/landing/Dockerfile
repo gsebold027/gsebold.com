@@ -27,7 +27,8 @@ RUN pnpm turbo run build --filter=@gsebold/landing
 # Stage 2: Serve
 FROM nginx:alpine AS runner
 
-COPY --from=builder /app/apps/landing/dist /usr/share/nginx/html
+# React Router writes the static site (prerendered /en, /pt + SPA fallback) to dist/client
+COPY --from=builder /app/apps/landing/dist/client /usr/share/nginx/html
 COPY apps/landing/nginx.conf /etc/nginx/templates/default.conf.template
 
 # Default to empty so envsubst always replaces ${NGINX_CONNECT_SRC_EXTRA}

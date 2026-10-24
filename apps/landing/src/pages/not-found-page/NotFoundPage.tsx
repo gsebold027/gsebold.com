@@ -6,16 +6,12 @@ import { Button, Highlighter, LineShadowText } from '@/components/ui'
 import { DotPattern } from '@/components/ui/dot-pattern'
 import { usePageTranslation } from '@/lib/hooks'
 
-import SeoHead from './SeoHead'
-
 const NotFoundPage = () => {
   const { t, i18n } = usePageTranslation('not-found-page')
   const lang = i18n.resolvedLanguage === 'pt' ? 'pt' : 'en'
 
   return (
     <>
-      <SeoHead />
-
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="absolute top-0 flex items-center justify-between md:justify-end w-full h-14 px-4 gap-2">
           <ThemeToggle />

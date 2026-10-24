@@ -1,4 +1,4 @@
-import { useForm } from '@tanstack/react-form'
+import { useForm, useStore } from '@tanstack/react-form'
 
 import { Send } from 'lucide-react'
 import { toast } from 'sonner'
@@ -16,6 +16,8 @@ import { InputGroupTextarea } from '../ui/input-group/InputGroupTextarea'
 import { Spinner } from '../ui/spinner'
 import { createContactSchema } from './contact.schema'
 import { useContactMe } from './contact.service'
+
+const FIELD_ORDER = ['name', 'email', 'subject', 'message'] as const
 
 const ContactForm = () => {
   const { t } = usePageTranslation('forms')
@@ -48,6 +50,10 @@ const ContactForm = () => {
       onChange: formSchema,
       onSubmit: formSchema
     },
+    onSubmitInvalid: ({ formApi }) => {
+      const firstInvalid = FIELD_ORDER.find((name) => !formApi.getFieldMeta(name)?.isValid)
+      if (firstInvalid) document.getElementById(firstInvalid)?.focus()
+    },
     onSubmit: ({ value }) => {
       try {
         contactMeMutation.mutate(value)
@@ -59,6 +65,9 @@ const ContactForm = () => {
       }
     }
   })
+
+  // Errors show once a field is left, or on every field after the first submit attempt.
+  const hasSubmitted = useStore(form.store, (state) => state.submissionAttempts > 0)
 
   return (
     <Card className="w-full relative">
@@ -80,7 +89,8 @@ const ContactForm = () => {
             <Field className="gap-3 flex-col sm:flex-row items-start" orientation="horizontal">
               <form.Field name="name">
                 {(field) => {
-                  const isInvalid = field.state.meta.isBlurred && !field.state.meta.isValid
+                  const isInvalid =
+                    (field.state.meta.isBlurred || hasSubmitted) && !field.state.meta.isValid
                   const errorId = `${field.name}-error`
                   const helpId = `${field.name}-help`
 
@@ -117,7 +127,8 @@ const ContactForm = () => {
               </form.Field>
               <form.Field name="email">
                 {(field) => {
-                  const isInvalid = field.state.meta.isBlurred && !field.state.meta.isValid
+                  const isInvalid =
+                    (field.state.meta.isBlurred || hasSubmitted) && !field.state.meta.isValid
                   const errorId = `${field.name}-error`
                   const helpId = `${field.name}-help`
 
@@ -156,7 +167,8 @@ const ContactForm = () => {
             </Field>
             <form.Field name="subject">
               {(field) => {
-                const isInvalid = field.state.meta.isBlurred && !field.state.meta.isValid
+                const isInvalid =
+                  (field.state.meta.isBlurred || hasSubmitted) && !field.state.meta.isValid
                 const errorId = `${field.name}-error`
                 const helpId = `${field.name}-help`
 
@@ -193,7 +205,8 @@ const ContactForm = () => {
             </form.Field>
             <form.Field name="message">
               {(field) => {
-                const isInvalid = field.state.meta.isBlurred && !field.state.meta.isValid
+                const isInvalid =
+                  (field.state.meta.isBlurred || hasSubmitted) && !field.state.meta.isValid
                 const errorId = `${field.name}-error`
                 const helpId = `${field.name}-help`
                 const charCountId = `${field.name}-char-count`
@@ -255,31 +268,24 @@ const ContactForm = () => {
         </form>
       </CardContent>
       <CardFooter>
-        <form.Subscribe
-          selector={(state) =>
-            state.canSubmit && Object.values(state.values).every((v) => v.trim().length > 0)
-          }>
-          {(canSubmit) => (
-            <Button
-              className="w-full"
-              type="submit"
-              form="contact-form"
-              disabled={!canSubmit || contactMeMutation.isPending}
-              aria-describedby="submit-button-help">
-              {contactMeMutation.isPending ? (
-                <>
-                  {t('contact.submitting_button')}
-                  <Spinner />
-                </>
-              ) : (
-                <>
-                  {t('contact.submit_button')}
-                  <Send className="size-4" aria-hidden="true" />
-                </>
-              )}
-            </Button>
+        <Button
+          className="w-full"
+          type="submit"
+          form="contact-form"
+          disabled={contactMeMutation.isPending}
+          aria-describedby="submit-button-help">
+          {contactMeMutation.isPending ? (
+            <>
+              {t('contact.submitting_button')}
+              <Spinner />
+            </>
+          ) : (
+            <>
+              {t('contact.submit_button')}
+              <Send className="size-4" aria-hidden="true" />
+            </>
           )}
-        </form.Subscribe>
+        </Button>
 
         <div id="submit-button-help" className="sr-only max-w-full">
           {t('contact.submit_button_help')}

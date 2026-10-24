@@ -1,11 +1,29 @@
 {
   "version": 1,
   "skills": {
+    "animation-performance": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/animation-performance/SKILL.md",
+      "computedHash": "01effa412b72097494cd89613ce15c166e9dae04e2a578eb015a45f4a89b7e29"
+    },
+    "break-ui": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/break-ui/SKILL.md",
+      "computedHash": "79e9e01e3f2fe2ced55448b55de1835c6e641826ee0a81991289e79d3f50cdc7"
+    },
     "docker-expert": {
       "source": "sickn33/antigravity-awesome-skills",
       "sourceType": "github",
       "skillPath": "skills/docker-expert/SKILL.md",
       "computedHash": "7be30b1c18b91628dcd8437a89e7e20acce76bae4349533e4ebdeb376a660bcb"
+    },
+    "emil-design-eng": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "computedHash": "77853cec799207f80868c611374c6ed5fdf34a55355c5ab544b59e791c63ad98"
     },
     "github-actions-docs": {
       "source": "xixu-me/skills",
@@ -13,11 +31,41 @@
       "skillPath": "skills/github-actions-docs/SKILL.md",
       "computedHash": "ead3fa2aff18e829c468dee593e1dc897aa95dc7a07d9ff8ff9f30c296b19af8"
     },
+    "img2threejs": {
+      "source": "img2threejs/img2threejs",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "cc7227efeed4e92ebf265b39e91b8f1a0c62267fbf9eb0366ce6a436c7871fb4"
+    },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "a63ff9098acef3b4b914c1dcc5dcffdf7b6abe4d4b820df2efe74ab618447dec"
+    },
+    "improve-animations": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/improve-animations/SKILL.md",
+      "computedHash": "b913ec7ef2b1aa900060eb6e5dbdccc94b6ea631059ec3474c4b61e2ffefeeb4"
+    },
+    "mobile-native": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/mobile-native/SKILL.md",
+      "computedHash": "8d77850a34ec20f745aed3215aa0d587e90438599bb09dc72d9d09ce896a5765"
+    },
     "nestjs-best-practices": {
       "source": "kadajett/agent-nestjs-skills",
       "sourceType": "github",
       "skillPath": "SKILL.md",
       "computedHash": "3cc2e763f1e2923cce1b5173dd9cafbb0aca8df1644102c82dde263375de1ac7"
+    },
+    "playwright-cli": {
+      "source": "microsoft/playwright-cli",
+      "sourceType": "github",
+      "skillPath": "skills/playwright-cli/SKILL.md",
+      "computedHash": "d4983e06b5daae441e48604b4b813a0c38784f3d87ea58f8391d2b5ffeb803fd"
     },
     "pnpm": {
       "source": "antfu/skills",
@@ -30,6 +78,12 @@
       "sourceType": "github",
       "skillPath": "skills/pnpm-workspace/SKILL.md",
       "computedHash": "a84e48fce20ab5e6d3a311e72d2aabb277d98dca0bf1c066c7cd12c5266d5c6e"
+    },
+    "review-animations": {
+      "source": "emilkowalski/skills",
+      "sourceType": "github",
+      "skillPath": "skills/review-animations/SKILL.md",
+      "computedHash": "8c2befeb28bb484bf2de7b2fc228774857e266d32a65d76895e78651a536d8cf"
     },
     "turborepo": {
       "source": "vercel/turborepo",

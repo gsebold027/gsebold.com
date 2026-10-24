@@ -39,6 +39,22 @@ describe('contactSchema', () => {
     it('accepts names with spaces', () => {
       expect(schema.safeParse({ ...valid, name: 'John Doe' }).success).toBe(true)
     })
+
+    it.each(['João Silva', 'Conceição Araújo', 'Jean-Luc Picard', "Seán O'Brien", 'José Jr.'])(
+      'accepts accented and punctuated names: %s',
+      (name) => {
+        expect(schema.safeParse({ ...valid, name }).success).toBe(true)
+      }
+    )
+
+    it('reports only the min-length error for an empty name', () => {
+      const result = schema.safeParse({ ...valid, name: '' })
+      expect(result.success).toBe(false)
+      if (!result.success)
+        expect(result.error.issues.map((issue) => issue.message)).toEqual([
+          'contact.fields.name.validation.min'
+        ])
+    })
   })
 
   describe('email', () => {
