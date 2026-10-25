@@ -1,4 +1,9 @@
-import { Accordion, AccordionContent, AccordionItem, SingleAccordionTrigger } from '@/components/ui'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  SingleAccordionTrigger
+} from '@/components/ui/accordion'
 import { usePageTranslation } from '@/lib/hooks'
 
 import { WorkExperienceItem } from './WorkExperienceItem'

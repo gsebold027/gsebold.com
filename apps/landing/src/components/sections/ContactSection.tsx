@@ -1,11 +1,14 @@
+import { Suspense, lazy } from 'react'
+
 import { Mail, MapPin } from 'lucide-react'
 
 import { usePageTranslation } from '@/lib/hooks'
 
-import { ContactForm } from '../forms/contact.form'
 import { ContactInfo } from '../shared/ContactInfo'
 import { TypographyH2 } from '../ui/typography/heading'
 import { TypographyP } from '../ui/typography/paragraph'
+
+const ContactFormRoot = lazy(() => import('../forms/contact.form-root'))
 
 const ContactSection = () => {
   const { t } = usePageTranslation('landing-page')
@@ -16,7 +19,7 @@ const ContactSection = () => {
       aria-labelledby="contact-heading"
       className="py-[clamp(1rem,_2.5vw_+_0rem,_2rem)] flex items-center relative gap-8 md:gap-16 flex-col md:flex-row">
       <div className="w-full">
-        <TypographyP className="text-base font-pixel text-primary mb-2" aria-hidden="true">
+        <TypographyP className="text-base font-pixel text-primary-text mb-2" aria-hidden="true">
           {t('contact.section_label')}
         </TypographyP>
         <TypographyH2 id="contact-heading" className="mb-[clamp(1rem,_2.5vw_+_0rem,_2rem)]">
@@ -42,7 +45,9 @@ const ContactSection = () => {
           </li>
         </ul>
       </div>
-      <ContactForm />
+      <Suspense fallback={null}>
+        <ContactFormRoot />
+      </Suspense>
     </section>
   )
 }

@@ -2,6 +2,8 @@ import { CONTACT_CONSTRAINTS as C } from '@gsebold/schemas'
 
 import * as z from 'zod'
 
+z.config({ jitless: true })
+
 export const createContactSchema = (t: (key: string) => string) =>
   z.object({
     name: z

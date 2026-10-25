@@ -1,0 +1,28 @@
+# Gustavo Sebold
+
+> Personal site of Gustavo Sebold, a senior full-stack developer from Curitiba, Brazil, who builds performant, accessible web applications with React, TypeScript, Node.js/NestJS and .NET. The site is a single page, available in English and Brazilian Portuguese, covering his work experience, skills and how to contact him.
+
+## Pages
+
+- [Home (English)](https://gsebold.com/en): Introduction, work experience, skills and contact form
+- [Home (Português)](https://gsebold.com/pt): The same page in Brazilian Portuguese
+
+## Experience
+
+- Senior Full Stack Developer at RFA Mortgage (Sep 2024 – present): React and Next.js front ends on RESTful APIs, scalable front-end architecture, NestJS and .NET endpoints following Clean Architecture, headless CMS (Directus) integration
+- Full Stack Developer at Wise Systems (Jan 2024 – Aug 2024): React and NestJS, GraphQL APIs, PostgreSQL and MongoDB
+- Full Stack Developer at D18 (Jan 2022 – Dec 2023): Ruby on Rails back ends, Vue.js admin dashboards, HTML/CSS/JavaScript interfaces, CI/CD on Heroku, legacy modernization
+- Intern at SSW Sistemas (May 2021 – Nov 2021): Object Pascal back ends, RESTful APIs, EDI integrations, PostgreSQL tuning
+
+## Skills
+
+- Frontend: HTML, CSS, JavaScript, TypeScript, React, Tailwind CSS, shadcn/ui, Framer Motion, React Router
+- Backend: Node.js, NestJS, Express, C#, .NET
+- Databases: PostgreSQL, MSSQL, MongoDB
+- Tools: Docker, Git, GitHub, Power BI, Railway, Vite
+
+## Contact
+
+- [Email](mailto:contact@gsebold.com): contact@gsebold.com
+- [LinkedIn](https://www.linkedin.com/in/gustavo-sebold): Professional profile
+- [GitHub](https://github.com/gsebold027): Code and projects

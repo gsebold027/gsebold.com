@@ -15,6 +15,7 @@ colors:
     popover-foreground: "oklch(0.1054 0.0149 255.8858)"
     primary: "oklch(0.5006 0.2131 263.289)"
     primary-foreground: "oklch(1 0 0)"
+    primary-text: "{colors.primary}"
     secondary: "oklch(0.9393 0.0011 197.1379)"
     secondary-foreground: "oklch(0.436 0.0071 239.9647)"
     muted: "oklch(0.9602 0.0034 247.8587)"
@@ -48,6 +49,7 @@ colors:
     popover-foreground: "oklch(0.9752 0.0034 247.858)"
     primary: "oklch(0.5006 0.2131 263.289)"
     primary-foreground: "oklch(1 0 0)"
+    primary-text: "color-mix(in oklch, {colors.primary}, white 30%)"
     secondary: "oklch(0.1874 0.0083 274.4503)"
     secondary-foreground: "oklch(0.7281 0.0278 276.2439)"
     muted: "oklch(0.2487 0.0136 272.7904)"
@@ -153,7 +155,7 @@ components:
   button-outline:
     backgroundColor: transparent
     borderColor: "{colors.primary}"
-    textColor: "{colors.primary}"
+    textColor: "{colors.primary-text}"
     rounded: "{rounded.md}"
     shadow: "{shadow.sm}"
   button-secondary:
@@ -166,7 +168,7 @@ components:
     hoverBackground: "{colors.accent}"
     rounded: "{rounded.md}"
   button-link:
-    textColor: "{colors.primary}"
+    textColor: "{colors.primary-text}"
     textDecoration: "underline on hover, offset 4px"
   button-sm:
     height: 32px
@@ -187,7 +189,7 @@ components:
     shadow: "{shadow.DEFAULT}"
   badge-secondary:
     backgroundColor: "{colors.secondary}"
-    textColor: "{colors.primary}"
+    textColor: "{colors.primary-text}"
     rounded: "{rounded.full}"
   badge-destructive:
     backgroundColor: "{colors.destructive}"
@@ -325,7 +327,7 @@ The component layer is shadcn/ui (Radix primitives + `class-variance-authority` 
 **Key characteristics:**
 - One accent color, `{colors.primary}` — a saturated blue at `oklch(0.5006 0.2131 263.289)` — used identically in light and dark mode. No secondary brand hue exists.
 - Fluid `clamp()` scaling for both type (`heading1`–`heading4`, `paragraph`) and section rhythm (`fluid-section-y`, `fluid-gutter-x`) — the whole page breathes continuously rather than snapping at breakpoints.
-- Section eyebrow labels (e.g. "hero.greeting", "contact.section_label") are set in `{typography.font-mono}` at `text-primary` — the one place mono type appears outside of code contexts.
+- Section eyebrow labels (e.g. "hero.greeting", "contact.section_label") are set in `{typography.font-mono}` at `text-primary-text` — the one place mono type appears outside of code contexts.
 - Shadows are extremely subtle multi-layer stacks (2–5% black opacity) that flip to white-based glows in dark mode — never a heavy single drop-shadow.
 - A small set of signature motion primitives — `dot-pattern`, `animated-grid-pattern`, `shine-border`, `highlighter`, `line-shadow-text`, and the circular `theme-toggle-transition` — are what give an otherwise minimal shadcn base its personality. They are used sparingly (one or two per page), not as blanket decoration.
 - Full reduced-motion support: a global `prefers-reduced-motion: reduce` media query collapses all animation/transition durations to near-zero, and the theme-toggle transition explicitly checks for `document.startViewTransition` before using it.
@@ -335,6 +337,7 @@ The component layer is shadcn/ui (Radix primitives + `class-variance-authority` 
 ### Brand
 - **Primary** (`{colors.primary}` — `oklch(0.5006 0.2131 263.289)`): A saturated azure blue. The only accent color in the system — every button default, focus ring, link, and eyebrow label uses it. Identical value in light and dark mode.
 - **Primary Foreground** (`{colors.primary-foreground}` — `oklch(1 0 0)`): Pure white text/icon color for anything sitting on `{colors.primary}`.
+- **Primary Text** (`{colors.primary-text}`): `{colors.primary}` used as a text color on page surfaces — eyebrow labels, outline/link buttons, secondary badges. Equals `{colors.primary}` in light mode; in dark mode it is `{colors.primary}` mixed with 30% white, because the base blue is only 3.25:1 on the dark background (6.25:1 with the tint, 5.66:1 on `{colors.secondary}`). Same hue, so it still reads as the one brand accent. Fills, borders and focus rings keep `{colors.primary}`.
 
 ### Surface (light / dark)
 - **Background** (`{colors.background}`): `oklch(0.9909 0.0029 264.5422)` light (near-white, faint blue cast) → `oklch(0.1054 0.0149 255.8858)` dark (near-black navy). Page body, Card, Popover all share this value in each mode.
