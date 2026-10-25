@@ -19,7 +19,7 @@ const ContactSection = () => {
       aria-labelledby="contact-heading"
       className="py-[clamp(1rem,_2.5vw_+_0rem,_2rem)] flex items-center relative gap-8 md:gap-16 flex-col md:flex-row">
       <div className="w-full">
-        <TypographyP className="text-base font-pixel text-primary mb-2" aria-hidden="true">
+        <TypographyP className="text-base font-pixel text-primary-text mb-2" aria-hidden="true">
           {t('contact.section_label')}
         </TypographyP>
         <TypographyH2 id="contact-heading" className="mb-[clamp(1rem,_2.5vw_+_0rem,_2rem)]">
