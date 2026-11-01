@@ -1,3 +1,5 @@
+import { TypographyH2, TypographyH3, TypographyH4 } from '@gsebold/ui/components/typography'
+
 import { usePageTranslation } from '@/lib/hooks'
 
 import { CSharpIcon } from '../icons/devicon/CSharpIcon'
@@ -24,7 +26,6 @@ import { TailwindIcon } from '../icons/devicon/TailwindIcon'
 import { TypescriptIcon } from '../icons/devicon/TypescriptIcon'
 import { ViteIcon } from '../icons/devicon/ViteIcon'
 import { WorkExperience } from '../shared/WorkExperience/WorkExperience'
-import { TypographyH2, TypographyH3, TypographyH4 } from '../ui/typography/heading'
 
 const CareerSection = () => {
   const { t } = usePageTranslation('landing-page')

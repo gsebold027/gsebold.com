@@ -26,16 +26,25 @@ All three run as separate Railway services, each built from its own Docker image
 
 pnpm workspaces + Turborepo. Every workspace is named `@gsebold/<name>`.
 
-| Workspace                          | Kind                                               | Owns                                                                                                           |
-| ---------------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `apps/landing`                     | React 19 + React Router 7 (framework mode, static) | The website: UI, content, i18n, SEO, the CSP                                                                   |
-| `services/gateway`                 | Express 4                                          | Public API edge: CORS, security headers, rate limits, proxying to internal services                            |
-| `services/contact-service`         | NestJS 11                                          | Validating contact submissions and sending them as email through Resend                                        |
-| `packages/schemas`                 | TypeScript types + constants                       | The API contract shared by every workspace                                                                     |
-| `packages/tailwind`, `packages/ui` | Empty, planned                                     | Tailwind theme and shadcn/ui components, to be extracted from `apps/landing` once a second frontend needs them |
-| `packages/env`, `packages/hooks`   | Empty, planned                                     | Shared env loading and React hooks, for the same reason                                                        |
+| Workspace                        | Kind                                               | Owns                                                                                                     |
+| -------------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `apps/landing`                   | React 19 + React Router 7 (framework mode, static) | The website: UI, content, i18n, SEO, the CSP                                                             |
+| `services/gateway`               | Express 4                                          | Public API edge: CORS, security headers, rate limits, proxying to internal services                      |
+| `services/contact-service`       | NestJS 11                                          | Validating contact submissions and sending them as email through Resend                                  |
+| `packages/schemas`               | TypeScript types + constants                       | The API contract shared by every workspace                                                               |
+| `packages/tailwind`              | CSS (source-only)                                  | The visual identity: Tailwind v4 tokens, light/dark variables, fonts, base styles (`src/theme.css`)      |
+| `packages/ui`                    | React components (source-only)                     | shadcn/ui + magicui components, typography, `cn`, theme/language switchers, the shared preference cookie |
+| `packages/env`, `packages/hooks` | Empty, planned                                     | Shared env loading and React hooks, for the same reason                                                  |
 
 Rule for `packages/*`: code moves there when a **second** consumer needs it, not before. Until then it lives in the app that uses it.
+
+`packages/tailwind` and `packages/ui` have no build step: their `exports` point at source (`.css`, `.tsx`) and each app's Vite compiles them. An app consumes them like this:
+
+- CSS: `@import 'tailwindcss'; @import '@gsebold/tailwind/theme.css'; @source '<relative path>/packages/ui/src';`. The `@source` is required: Tailwind doesn't scan `node_modules`, so without it the classes used only inside `@gsebold/ui` are never generated.
+- Components: per-file imports, `@gsebold/ui/components/<name>` and `@gsebold/ui/lib/<name>`. Inside `packages/ui`, imports are relative.
+- New shadcn components: run `pnpm dlx shadcn add <name>` in `packages/ui` (it has its own `components.json`), then make the generated imports relative.
+- Components take translated strings as props; `@gsebold/ui` depends on neither i18next nor react-router. Each app keeps its own i18n init, locales and routing glue (see `apps/landing/src/components/theme/`).
+- Landing's Dockerfile copies each workspace package it depends on by hand; add new ones there too.
 
 ## Request flow: contact form
 
@@ -105,12 +114,16 @@ The browser enforces both policies, so only inline scripts with matching hashes 
 
 ### Theme
 
-An inline script in `root.tsx` applies the saved theme class before first paint, so the prerendered page doesn't flash the wrong theme. `ThemeProvider` takes over after hydration. The two must agree on the `localStorage` key and the default (`dark`).
+An inline script in `root.tsx` applies the saved theme class before first paint, so the prerendered page doesn't flash the wrong theme. `ThemeProvider` (`@gsebold/ui`) takes over after hydration. The two must agree on the storage key (`PREFERENCE_KEYS.theme`), the lookup order (cookie, then `localStorage`) and the default (`dark`).
+
+### Shared preferences
+
+Theme and language are stored in cookies on the parent domain (`Domain=gsebold.com`, `SameSite=Lax`, one year), so a choice made on one `*.gsebold.com` app applies to the others. `packages/ui/src/lib/preferences.ts` owns the keys and the domain logic. `localStorage` is written too, as a per-origin fallback: localhost and IPs get a host-only cookie, and public-suffix preview hosts reject the parent-domain cookie.
 
 ### i18n
 
 - `i18next` with resources bundled at build time from `src/lib/i18n/locales/{en,pt}/*.json`. Each file is a namespace: `common`, `forms`, `landing-page`, `not-found-page`, `work-experience`.
-- The language comes from the first path segment, then `localStorage`, then the browser. `SUPPORTED_LANGS` in `src/config/languages.ts` is the source of truth.
+- The language comes from the first path segment, then the shared cookie, then `localStorage`, then the browser. The detector writes the choice back to the cookie and `localStorage`. `SUPPORTED_LANGS` in `src/config/languages.ts` is the source of truth.
 - `usePageTranslation(ns)` always adds `common`.
 - Structured content (for example career entries in `work-experience.data.ts`) holds translation **keys**. The text itself lives in the locale JSON.
 
@@ -142,7 +155,7 @@ Each deployable unit (`landing`, `gateway`, `contact-service`) has the same thre
 
 | Workflow              | Trigger                                                            | Does                                                                                                                |
 | --------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| `<unit>-validate.yml` | PR to `main` touching that unit (or `packages/**`, root manifests) | Typecheck → lint → test → build, filtered to the unit                                                               |
+| `<unit>-validate.yml` | PR to `main` touching that unit (or `packages/**`, root manifests) | Typecheck → lint → test → build, filtered to the unit (typecheck and lint also cover the packages it depends on)    |
 | `<unit>-release.yml`  | Push to `main` with the same path filter                           | Bumps the patch version and pushes the tag `<unit>-vX.Y.Z`                                                          |
 | `<unit>-deploy.yml`   | That tag                                                           | Builds the Docker image → pushes it to GHCR (`ghcr.io/<repo>`, `/gateway`, `/contact-service`) → `railway redeploy` |
 
@@ -169,6 +182,6 @@ Each deployable unit (`landing`, `gateway`, `contact-service`) has the same thre
 5. An entry in `docker-compose.yml`.
 6. Request and response types in `packages/schemas`.
 
-**A new frontend**: this is when `packages/tailwind` and `packages/ui` stop being empty. Move the theme tokens and shared components there first, then build the new app on top of them.
+**A new frontend**: build it on `@gsebold/tailwind` and `@gsebold/ui` (see [Repository layout](#repository-layout) for the CSS and import setup). Wire the theme and language switchers to the shared preference cookie so the choice carries across subdomains.
 
 **A new language**: add it to `SUPPORTED_LANGS`, add a locale folder with every namespace, register it in `translations.ts`, add it to `prerender` in `react-router.config.ts`, and update the sitemap and `hrefLang` links.

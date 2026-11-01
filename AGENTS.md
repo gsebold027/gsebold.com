@@ -1,6 +1,6 @@
 # AGENTS.md
 
-pnpm + Turborepo monorepo: `apps/landing` (React 19, Vite, Tailwind v4, shadcn/ui, `motion`), `services/gateway` (Express) + `services/contact-service` (NestJS), shared `packages/*`.
+pnpm + Turborepo monorepo: `apps/landing` (React 19, Vite, Tailwind v4, shadcn/ui, `motion`), `services/gateway` (Express) + `services/contact-service` (NestJS), shared `packages/*` (`@gsebold/tailwind` holds the design tokens and fonts, `@gsebold/ui` the shadcn/ui components; see `ARCHITECTURE.md`).
 
 ## Architecture source of truth
 

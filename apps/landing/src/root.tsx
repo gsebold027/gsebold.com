@@ -1,17 +1,18 @@
-import '@fontsource/space-grotesk/700.css'
+import { ThemeProvider } from '@gsebold/ui/components/theme-provider'
+import { PREFERENCE_KEYS } from '@gsebold/ui/lib/preferences'
 
 import { LazyMotion, MotionConfig } from 'motion/react'
 import { Links, Meta, Outlet, Scripts, useLocation } from 'react-router'
 
-import { ThemeProvider } from './contexts/ThemeProvider'
-import { environment } from './environments/environment'
 import './globals.css'
 import './lib/i18n'
 
 // Runs before first paint so the prerendered page shows the saved theme instead of flashing the
-// default. Mirrors ThemeProvider's applyThemeClass; its hash is allowed by the CSP meta tag that
-// scripts/csp-hashes.mjs adds after the build.
-const themeScript = `(function(){var c=document.documentElement.classList;try{var t=localStorage.getItem(${JSON.stringify(environment.localStorageKeys.theme)})||'dark';if(t==='system')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';c.add(t)}catch(e){c.add('dark')}})()`
+// default. Mirrors ThemeProvider (readPreference: the shared cookie, then localStorage, then
+// applyThemeClass); its hash is allowed by the CSP meta tag that scripts/csp-hashes.mjs adds after
+// the build.
+const themeKey = JSON.stringify(PREFERENCE_KEYS.theme)
+const themeScript = `(function(){var c=document.documentElement.classList;try{var m=document.cookie.match(new RegExp('(?:^|; )'+${themeKey}+'=([^;]*)'));var t=(m&&decodeURIComponent(m[1]))||localStorage.getItem(${themeKey})||'dark';if(t==='system')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';c.add(t)}catch(e){c.add('dark')}})()`
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   // The root Layout sits outside the matched routes in the browser, so useParams() is empty here;

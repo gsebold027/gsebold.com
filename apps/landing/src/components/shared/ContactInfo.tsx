@@ -1,7 +1,6 @@
-import { ReactNode } from 'react'
+import { TypographyH3, TypographyP } from '@gsebold/ui/components/typography'
 
-import { TypographyH3 } from '../ui/typography/heading'
-import { TypographyP } from '../ui/typography/paragraph'
+import { ReactNode } from 'react'
 
 type ContactInfoProps = {
   icon: ReactNode

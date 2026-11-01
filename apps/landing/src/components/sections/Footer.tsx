@@ -1,3 +1,21 @@
+import { Button } from '@gsebold/ui/components/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@gsebold/ui/components/card'
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList
+} from '@gsebold/ui/components/navigation-menu'
+import { Separator } from '@gsebold/ui/components/separator'
+import { ShineBorder } from '@gsebold/ui/components/shine-border'
+import { TypographyH3, TypographyH4, TypographyP } from '@gsebold/ui/components/typography'
+
 import { useState } from 'react'
 
 import { Check, Copy, Github, Heart, Linkedin } from 'lucide-react'
@@ -7,13 +25,6 @@ import { socialLinks } from '@/config/social-links'
 import { usePageTranslation, useSmoothScroll } from '@/lib/hooks'
 
 import { Logo } from '../icons/logo'
-import { Button } from '../ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '../ui/navigation-menu'
-import { Separator } from '../ui/separator'
-import { ShineBorder } from '../ui/shine-border'
-import { TypographyH3, TypographyH4 } from '../ui/typography/heading'
-import { TypographyP } from '../ui/typography/paragraph'
 import { NavBarLink } from './NavBar'
 
 const Footer = () => {

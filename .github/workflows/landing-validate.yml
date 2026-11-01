@@ -28,11 +28,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # "landing..." also checks the workspace packages landing depends on (@gsebold/ui, ...).
       - name: Typecheck
-        run: pnpm turbo run typecheck --filter=@gsebold/landing
+        run: pnpm turbo run typecheck --filter=@gsebold/landing...
 
       - name: Lint
-        run: pnpm turbo run lint --filter=@gsebold/landing
+        run: pnpm turbo run lint --filter=@gsebold/landing...
 
       - name: Test
         run: pnpm turbo run test:run --filter=@gsebold/landing

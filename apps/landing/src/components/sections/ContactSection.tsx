@@ -1,3 +1,5 @@
+import { TypographyH2, TypographyP } from '@gsebold/ui/components/typography'
+
 import { Suspense, lazy } from 'react'
 
 import { Mail, MapPin } from 'lucide-react'
@@ -5,8 +7,6 @@ import { Mail, MapPin } from 'lucide-react'
 import { usePageTranslation } from '@/lib/hooks'
 
 import { ContactInfo } from '../shared/ContactInfo'
-import { TypographyH2 } from '../ui/typography/heading'
-import { TypographyP } from '../ui/typography/paragraph'
 
 const ContactFormRoot = lazy(() => import('../forms/contact.form-root'))
 

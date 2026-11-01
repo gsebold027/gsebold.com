@@ -9,9 +9,13 @@ import Footer from './sections/Footer'
 import NavBar from './sections/NavBar'
 
 const AnimatedGridPattern = lazy(() =>
-  import('./ui/animated-grid-pattern').then((m) => ({ default: m.AnimatedGridPattern }))
+  import('@gsebold/ui/components/animated-grid-pattern').then((m) => ({
+    default: m.AnimatedGridPattern
+  }))
 )
-const Toaster = lazy(() => import('./ui/sonner').then((m) => ({ default: m.Toaster })))
+const Toaster = lazy(() =>
+  import('@gsebold/ui/components/sonner').then((m) => ({ default: m.Toaster }))
+)
 
 const Layout = () => {
   const { t } = usePageTranslation()

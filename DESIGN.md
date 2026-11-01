@@ -2,7 +2,7 @@
 version: 1.0
 name: gsebold-landing-design
 description: Personal landing page (apps/landing) design system — a calm, developer-portfolio surface built on shadcn/ui primitives over Tailwind v4 CSS variables. Near-white/near-black oklch surfaces, a single vivid-blue primary, a fluid clamp()-based type and spacing scale, and a small set of signature motion primitives (dot/grid backgrounds, shine border, hand-drawn highlighter, line-shadow text, and a circular View Transitions theme toggle) that carry all of the brand's personality.
-source: apps/landing/src/globals.css, apps/landing/src/components/ui/**, apps/landing/src/components/sections/**, apps/landing/src/components/theme/**
+source: packages/tailwind/src/theme.css, packages/ui/src/components/**, apps/landing/src/components/sections/**, apps/landing/src/components/theme/**
 generated: extracted directly from source (not reverse-engineered from a live site)
 
 colors:
@@ -320,7 +320,7 @@ components:
 
 This is a solo developer's personal landing page — a single long-scroll page (Hero → Career/Skills → Contact → Footer), not a product marketing site. The visual system is deliberately restrained: a near-white `{colors.background}` in light mode / near-black `{colors.background}` in dark mode, a single vivid-blue `{colors.primary}` that carries every call-to-action and accent, and almost no other hue in the interface chrome. Both modes share the exact same `{colors.primary}` value, so the brand accent reads identically regardless of theme — only the surrounding neutrals invert.
 
-Every color, radius, and shadow is a CSS custom property resolved through Tailwind v4's `@theme inline` block (`apps/landing/src/globals.css`), not hardcoded utility values — this is a token-driven system, and the tokens are the source of truth for this document. Typography and section spacing use CSS `clamp()` fluid scaling almost everywhere instead of responsive breakpoint overrides: a heading or section padding is one continuous formula from mobile to desktop rather than a stepped set of `sm:`/`lg:` overrides. This is the system's most distinctive structural choice.
+Every color, radius, and shadow is a CSS custom property resolved through Tailwind v4's `@theme inline` block (`packages/tailwind/src/theme.css`, shared by every app), not hardcoded utility values — this is a token-driven system, and the tokens are the source of truth for this document. Typography and section spacing use CSS `clamp()` fluid scaling almost everywhere instead of responsive breakpoint overrides: a heading or section padding is one continuous formula from mobile to desktop rather than a stepped set of `sm:`/`lg:` overrides. This is the system's most distinctive structural choice.
 
 The component layer is shadcn/ui (Radix primitives + `class-variance-authority` + Tailwind), so most components (Button, Card, Input, Accordion, Sheet, DropdownMenu, NavigationMenu) will look immediately familiar to anyone who has used shadcn — this document exists to record the specific token values and the small set of custom decorative primitives layered on top, not to reinvent shadcn's conventions.
 
@@ -356,7 +356,7 @@ The component layer is shadcn/ui (Radix primitives + `class-variance-authority` 
 - **Ring** (`{colors.ring}`): equals `{colors.primary}` in both modes — focus rings always render in the brand blue.
 
 ### Reserved (not yet used on this page)
-- **Chart 1–5** and the full **Sidebar** token set exist in `globals.css` as part of the shadcn theme scaffold but have no corresponding component in the current page (no charts, no app-shell sidebar). Keep them in sync if you add either later — don't invent new ad-hoc tokens for those use cases.
+- **Chart 1–5** and the full **Sidebar** token set exist in `theme.css` as part of the shadcn theme scaffold but have no corresponding component in the current page (no charts, no app-shell sidebar). Keep them in sync if you add either later — don't invent new ad-hoc tokens for those use cases.
 
 ## Typography
 
@@ -456,7 +456,7 @@ These are the pieces that make the page recognizable beyond "a shadcn theme":
 - **`shine-border`** — an animated conic-style sweep clipped to a 1px border ring via a CSS `mask`, currently applied to the Footer's contact `Card`. `--duration` defaults to 14s linear infinite; color defaults to `var(--primary)` so it always tracks the current theme's accent without prop overrides.
 - **`highlighter`** — wraps `rough-notation` to hand-draw an annotation (highlight/underline/box/circle/strike-through/crossed-off/bracket) over inline text, defaulting to a soft pink (`#ffd1dc`) highlight; supports `isView` to defer the draw until scroll-into-view via `useInView`.
 - **`line-shadow-text`** — clips a duplicated copy of the text behind itself with a hard 45°-diagonal gradient edge and animates the clip position (`animate-line-shadow`, 15s linear infinite) — reads as a moving flat drop-shadow rather than a blurred one.
-- **`theme-toggle-transition`** — the dark/light switch drives the native View Transitions API directly: it computes the toggle button's screen center and the farthest viewport corner, sets those as CSS custom properties (`--vt-x`, `--vt-y`, `--vt-max-rad`), and lets a `::view-transition-new(root)` `clip-path: circle()` keyframe (defined globally in `globals.css`) expand from that point over 700ms. Falls back to an instant theme swap when `document.startViewTransition` isn't available, and the whole animation collapses under the global `prefers-reduced-motion: reduce` rule.
+- **`theme-toggle-transition`** — the dark/light switch drives the native View Transitions API directly: it computes the toggle button's screen center and the farthest viewport corner, sets those as CSS custom properties (`--vt-x`, `--vt-y`, `--vt-max-rad`), and lets a `::view-transition-new(root)` `clip-path: circle()` keyframe (defined globally in `packages/tailwind/src/theme.css`) expand from that point over 700ms. Falls back to an instant theme swap when `document.startViewTransition` isn't available, and the whole animation collapses under the global `prefers-reduced-motion: reduce` rule.
 
 ## Do's and Don'ts
 
@@ -467,7 +467,7 @@ These are the pieces that make the page recognizable beyond "a shadcn theme":
 - Reach for `{rounded.md}` on controls and `{rounded.full}` on pills/badges/icon-buttons; use `{rounded.xl}` only for the Card surface itself.
 - Build new elevated surfaces from the existing `{shadow.*}` stack (multi-layer, low-opacity) rather than a hand-rolled single drop-shadow.
 - Add any new signature/decorative primitive as `aria-hidden` and respect `prefers-reduced-motion`, matching `dot-pattern`, `animated-grid-pattern`, and the theme-toggle transition.
-- Reference semantic tokens (`bg-primary`, `text-muted-foreground`, `border-border`) — never a raw oklch/hex value in component code. `globals.css` is the only place tokens are defined.
+- Reference semantic tokens (`bg-primary`, `text-muted-foreground`, `border-border`) — never a raw oklch/hex value in component code. `packages/tailwind/src/theme.css` is the only place tokens are defined; app stylesheets import it and never redefine tokens.
 
 ### Don't
 - Don't add a second brand color. Semantic colors (`destructive`) exist for status, not decoration.
@@ -475,4 +475,4 @@ These are the pieces that make the page recognizable beyond "a shadcn theme":
 - Don't push H2–H4 to `font-extrabold`; 800 weight is reserved for the single page H1.
 - Don't introduce a fourth radius step alongside `md`/`full`/`xl` without a clear reason — the system intentionally uses only three.
 - Don't stack the `shine-border`, `highlighter`, and `line-shadow-text` effects on the same element — each is used exactly once per page today; treat them as rare accents, not a toolkit to combine freely.
-- Don't ship a new animation without checking it degrades correctly under the global `prefers-reduced-motion: reduce` rule in `globals.css` — it's a blanket rule, but custom `motion/react` animations and the View Transition circle-expand need their own explicit guards (as the theme toggle already does).
+- Don't ship a new animation without checking it degrades correctly under the global `prefers-reduced-motion: reduce` rule in `theme.css` — it's a blanket rule, but custom `motion/react` animations and the View Transition circle-expand need their own explicit guards (as the theme toggle already does).

@@ -5,8 +5,7 @@ import { handleRetry } from './query.facade'
 
 vi.mock('@/environments/environment', () => ({
   environment: {
-    urls: { baseUrl: 'http://localhost:3001', domain: 'localhost' },
-    localStorageKeys: { language: 'i18nextLng', theme: 'theme' }
+    urls: { baseUrl: 'http://localhost:3001', domain: 'localhost' }
   }
 }))
 

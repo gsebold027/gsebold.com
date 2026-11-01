@@ -3,7 +3,8 @@ import {
   AccordionContent,
   AccordionItem,
   SingleAccordionTrigger
-} from '@/components/ui/accordion'
+} from '@gsebold/ui/components/accordion'
+
 import { usePageTranslation } from '@/lib/hooks'
 
 import { WorkExperienceItem } from './WorkExperienceItem'

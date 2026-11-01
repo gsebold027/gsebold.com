@@ -1,3 +1,21 @@
+import { Button } from '@gsebold/ui/components/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@gsebold/ui/components/card'
+import { Field, FieldError, FieldGroup, FieldLabel } from '@gsebold/ui/components/field'
+import { Input } from '@gsebold/ui/components/input'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroupTextarea
+} from '@gsebold/ui/components/input-group'
+import { Spinner } from '@gsebold/ui/components/spinner'
 import { useForm, useStore } from '@tanstack/react-form'
 
 import { Send } from 'lucide-react'
@@ -5,15 +23,6 @@ import { toast } from 'sonner'
 
 import { usePageTranslation } from '@/lib/hooks'
 
-import { Button } from '../ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../ui/card'
-import { Field, FieldError, FieldGroup, FieldLabel } from '../ui/field'
-import { Input } from '../ui/input'
-import { InputGroup } from '../ui/input-group/InputGroup'
-import { InputGroupAddon } from '../ui/input-group/InputGroupAddon'
-import { InputGroupText } from '../ui/input-group/InputGroupText'
-import { InputGroupTextarea } from '../ui/input-group/InputGroupTextarea'
-import { Spinner } from '../ui/spinner'
 import { createContactSchema } from './contact.schema'
 import { useContactMe } from './contact.service'
 

@@ -1,5 +1,6 @@
-import { Badge } from '@/components/ui/badge'
-import { TypographyH4, TypographyP } from '@/components/ui/typography'
+import { Badge } from '@gsebold/ui/components/badge'
+import { TypographyH4, TypographyP } from '@gsebold/ui/components/typography'
+
 import { usePageTranslation } from '@/lib/hooks'
 import { WorkExperienceData } from '@/lib/types'
 import { formatWorkPeriod } from '@/lib/utils'

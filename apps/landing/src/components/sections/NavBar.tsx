@@ -1,3 +1,19 @@
+import { Button } from '@gsebold/ui/components/button'
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList
+} from '@gsebold/ui/components/navigation-menu'
+import { Separator } from '@gsebold/ui/components/separator'
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from '@gsebold/ui/components/sheet'
+
 import { Suspense, lazy, useEffect, useState } from 'react'
 
 import { Menu } from 'lucide-react'
@@ -6,17 +22,6 @@ import { usePageTranslation, useSmoothScroll } from '@/lib/hooks'
 
 import { Logo } from '../icons/logo'
 import { ThemeToggle } from '../theme/ThemeToggle'
-import { Button } from '../ui/button'
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '../ui/navigation-menu'
-import { Separator } from '../ui/separator'
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from '../ui/sheet'
 
 const LanguageSwitcher = lazy(() =>
   import('../theme/LanguageSwitcher').then((m) => ({ default: m.LanguageSwitcher }))

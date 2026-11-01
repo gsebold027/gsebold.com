@@ -1,4 +1,8 @@
-import { environment } from '@/environments/environment'
+import {
+  PREFERENCE_KEYS,
+  PREFERENCE_MAX_AGE_SECONDS,
+  sharedCookieDomain
+} from '@gsebold/ui/lib/preferences'
 
 export const i18nConfig = {
   fallbackLng: 'en',
@@ -8,10 +12,16 @@ export const i18nConfig = {
     escapeValue: false
   },
 
+  // The path decides on /en and /pt. The shared cookie (see @gsebold/ui/lib/preferences) carries
+  // the choice to "/" and to other gsebold.com apps; localStorage is the per-origin fallback.
   detection: {
-    order: ['path', 'localStorage', 'navigator', 'htmlTag'],
+    order: ['path', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
     lookupFromPathIndex: 0,
-    caches: ['localStorage'],
-    lookupLocalStorage: environment.localStorageKeys.language
+    caches: ['cookie', 'localStorage'],
+    lookupCookie: PREFERENCE_KEYS.language,
+    lookupLocalStorage: PREFERENCE_KEYS.language,
+    cookieMinutes: PREFERENCE_MAX_AGE_SECONDS / 60,
+    cookieDomain: sharedCookieDomain(),
+    cookieOptions: { path: '/', sameSite: 'lax' as const }
   }
 }

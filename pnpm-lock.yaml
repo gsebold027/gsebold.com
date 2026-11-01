@@ -38,33 +38,15 @@ importers:
 
   apps/landing:
     dependencies:
-      '@fontsource/space-grotesk':
-        specifier: ^5.3.0
-        version: 5.3.0
       '@gsebold/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
-      '@radix-ui/react-accordion':
-        specifier: ^1.2.12
-        version: 1.2.14(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@radix-ui/react-dialog':
-        specifier: ^1.1.15
-        version: 1.1.17(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@radix-ui/react-dropdown-menu':
-        specifier: ^2.1.16
-        version: 2.1.18(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@radix-ui/react-label':
-        specifier: ^2.1.8
-        version: 2.1.10(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@radix-ui/react-navigation-menu':
-        specifier: ^1.2.14
-        version: 1.2.16(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@radix-ui/react-separator':
-        specifier: ^1.1.7
-        version: 1.1.10(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      '@radix-ui/react-slot':
-        specifier: ^1.2.3
-        version: 1.3.0(@types/react@19.2.17)(react@19.2.7)
+      '@gsebold/tailwind':
+        specifier: workspace:*
+        version: link:../../packages/tailwind
+      '@gsebold/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@tanstack/react-form':
         specifier: ^1.28.0
         version: 1.33.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -74,12 +56,6 @@ importers:
       axios:
         specifier: ^1.11.0
         version: 1.18.0(debug@4.4.3)
-      class-variance-authority:
-        specifier: ^0.7.1
-        version: 0.7.1
-      clsx:
-        specifier: ^2.1.1
-        version: 2.1.1
       i18next:
         specifier: ^25.3.6
         version: 25.10.10(typescript@5.8.3)
@@ -98,24 +74,15 @@ importers:
       react-dom:
         specifier: ^19.1.1
         version: 19.2.7(react@19.2.7)
-      react-flagkit:
-        specifier: ^2.0.4
-        version: 2.0.4(react@19.2.7)
       react-i18next:
         specifier: ^15.6.1
         version: 15.7.4(i18next@25.10.10(typescript@5.8.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.8.3)
       react-router:
         specifier: ^7.8.1
         version: 7.18.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      rough-notation:
-        specifier: ^0.5.1
-        version: 0.5.1
       sonner:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      tailwind-merge:
-        specifier: ^3.3.1
-        version: 3.6.0
       zod:
         specifier: ^4.3.6
         version: 4.4.3
@@ -192,9 +159,6 @@ importers:
       tailwindcss:
         specifier: ^4.1.12
         version: 4.3.1
-      tw-animate-css:
-        specifier: ^1.3.7
-        version: 1.4.0
       typescript:
         specifier: ~5.8.3
         version: 5.8.3
@@ -219,6 +183,109 @@ importers:
       typescript:
         specifier: ^5.7.3
         version: 5.9.3
+
+  packages/tailwind:
+    dependencies:
+      '@fontsource/space-grotesk':
+        specifier: ^5.3.0
+        version: 5.3.0
+      tailwindcss:
+        specifier: ^4.1.12
+        version: 4.3.1
+      tw-animate-css:
+        specifier: ^1.3.7
+        version: 1.4.0
+
+  packages/ui:
+    dependencies:
+      '@radix-ui/react-accordion':
+        specifier: ^1.2.12
+        version: 1.2.14(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@radix-ui/react-dialog':
+        specifier: ^1.1.15
+        version: 1.1.17(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@radix-ui/react-dropdown-menu':
+        specifier: ^2.1.16
+        version: 2.1.18(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@radix-ui/react-label':
+        specifier: ^2.1.8
+        version: 2.1.10(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@radix-ui/react-navigation-menu':
+        specifier: ^1.2.14
+        version: 1.2.16(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@radix-ui/react-separator':
+        specifier: ^1.1.7
+        version: 1.1.10(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@radix-ui/react-slot':
+        specifier: ^1.2.3
+        version: 1.3.0(@types/react@19.2.17)(react@19.2.7)
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      lucide-react:
+        specifier: ^0.540.0
+        version: 0.540.0(react@19.2.7)
+      react-flagkit:
+        specifier: ^2.0.4
+        version: 2.0.4(react@19.2.7)
+      rough-notation:
+        specifier: ^0.5.1
+        version: 0.5.1
+      sonner:
+        specifier: ^2.0.7
+        version: 2.0.7(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      tailwind-merge:
+        specifier: ^3.3.1
+        version: 3.6.0
+    devDependencies:
+      '@eslint/js':
+        specifier: ^9.33.0
+        version: 9.39.4
+      '@types/react':
+        specifier: ^19.1.10
+        version: 19.2.17
+      '@types/react-dom':
+        specifier: ^19.1.7
+        version: 19.2.3(@types/react@19.2.17)
+      eslint:
+        specifier: ^9.33.0
+        version: 9.39.4(jiti@2.7.0)
+      eslint-config-prettier:
+        specifier: ^10.1.8
+        version: 10.1.8(eslint@9.39.4(jiti@2.7.0))
+      eslint-plugin-prettier:
+        specifier: ^5.5.4
+        version: 5.5.6(@types/eslint@9.6.1)(eslint-config-prettier@10.1.8(eslint@9.39.4(jiti@2.7.0)))(eslint@9.39.4(jiti@2.7.0))(prettier@3.8.4)
+      eslint-plugin-react:
+        specifier: ^7.37.5
+        version: 7.37.5(eslint@9.39.4(jiti@2.7.0))
+      eslint-plugin-react-hooks:
+        specifier: ^5.2.0
+        version: 5.2.0(eslint@9.39.4(jiti@2.7.0))
+      globals:
+        specifier: ^16.3.0
+        version: 16.5.0
+      motion:
+        specifier: ^12.23.12
+        version: 12.40.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      react:
+        specifier: ^19.1.1
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.1.1
+        version: 19.2.7(react@19.2.7)
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      typescript-eslint:
+        specifier: ^8.39.1
+        version: 8.61.1(eslint@9.39.4(jiti@2.7.0))(typescript@5.8.3)
 
   services/contact-service:
     dependencies:
@@ -4451,7 +4518,7 @@ packages:
   git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
-    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   glob-parent@6.0.2:
