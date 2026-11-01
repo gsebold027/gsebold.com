@@ -23,7 +23,7 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('NestJS Review API')
+    .setTitle('Contact Service API')
     .setDescription(
       'A microservice for handling contact form submissions and email communications.',
     )
@@ -33,13 +33,6 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
-
-  app.enableCors({
-    origin: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    allowedHeaders: '*',
-  });
 
   await app.listen(port ?? 3000);
 
