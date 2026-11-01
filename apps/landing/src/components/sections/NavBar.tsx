@@ -1,4 +1,5 @@
 import { Button } from '@gsebold/ui/components/button'
+import { Logo } from '@gsebold/ui/components/logo'
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -20,7 +21,6 @@ import { Menu } from 'lucide-react'
 
 import { usePageTranslation, useSmoothScroll } from '@/lib/hooks'
 
-import { Logo } from '../icons/logo'
 import { ThemeToggle } from '../theme/ThemeToggle'
 
 const LanguageSwitcher = lazy(() =>

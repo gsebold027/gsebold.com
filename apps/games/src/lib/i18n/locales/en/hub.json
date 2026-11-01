@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "title": "Games · Gustavo Sebold"
+  },
+  "greeting": "Pull up a chair",
+  "title": "Games",
+  "subtitle": "Small browser games, built with the same care as everything else here.",
+  "list_label": "Games",
+  "coming_soon": "Coming soon",
+  "games": {
+    "blackjack": {
+      "title": "Blackjack",
+      "description": "Beat the dealer to 21. Six-deck shoe, blackjack pays 3:2."
+    }
+  }
+}

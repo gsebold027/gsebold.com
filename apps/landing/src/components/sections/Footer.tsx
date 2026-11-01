@@ -7,6 +7,7 @@ import {
   CardHeader,
   CardTitle
 } from '@gsebold/ui/components/card'
+import { Logo } from '@gsebold/ui/components/logo'
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -24,7 +25,6 @@ import { Link } from 'react-router'
 import { socialLinks } from '@/config/social-links'
 import { usePageTranslation, useSmoothScroll } from '@/lib/hooks'
 
-import { Logo } from '../icons/logo'
 import { NavBarLink } from './NavBar'
 
 const Footer = () => {

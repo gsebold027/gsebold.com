@@ -1,0 +1,28 @@
+name: Games · Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/games/**'
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+
+jobs:
+  tag:
+    name: Create version tag
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bump version and push tag
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GH_PAT }}
+          tag_prefix: games-v
+          default_bump: patch

@@ -1,7 +1,6 @@
 name: gsebold
 
 services:
-
   # --- services ---
   contact-service:
     container_name: service-contact
@@ -9,11 +8,11 @@ services:
       context: .
       dockerfile: services/contact-service/Dockerfile
     ports:
-      - "3001:3001"
+      - '3001:3001'
     env_file:
       - services/contact-service/.env
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:3001/health"]
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:3001/health']
       interval: 30s
       timeout: 5s
       start_period: 15s
@@ -27,14 +26,14 @@ services:
       context: .
       dockerfile: services/gateway/Dockerfile
     ports:
-      - "3000:3000"
+      - '3000:3000'
     env_file:
       - services/gateway/.env
     environment:
       CONTACT_SERVICE_URL: http://contact-service:3001
       CORS_ORIGIN: http://localhost:8080
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:3000/health']
       interval: 30s
       timeout: 5s
       start_period: 10s
@@ -53,11 +52,21 @@ services:
     environment:
       NGINX_CONNECT_SRC_EXTRA: http://localhost:3000
     ports:
-      - "8080:80"
+      - '8080:80'
     depends_on:
       gateway:
         condition: service_healthy
       contact-service:
         condition: service_healthy
+    restart: unless-stopped
+    profiles: [apps]
+
+  games:
+    container_name: games
+    build:
+      context: .
+      dockerfile: apps/games/Dockerfile
+    ports:
+      - '8081:80'
     restart: unless-stopped
     profiles: [apps]

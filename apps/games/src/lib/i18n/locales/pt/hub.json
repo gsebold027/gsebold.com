@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "title": "Jogos · Gustavo Sebold"
+  },
+  "greeting": "Puxe uma cadeira",
+  "title": "Jogos",
+  "subtitle": "Pequenos jogos de navegador, feitos com o mesmo cuidado que todo o resto aqui.",
+  "list_label": "Jogos",
+  "coming_soon": "Em breve",
+  "games": {
+    "blackjack": {
+      "title": "Blackjack",
+      "description": "Vença o dealer chegando a 21. Sapato de seis baralhos, blackjack paga 3:2."
+    }
+  }
+}

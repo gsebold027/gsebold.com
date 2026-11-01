@@ -1,0 +1,42 @@
+name: Games · PR Validation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/games/**'
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.base.json'
+      - 'turbo.json'
+
+jobs:
+  validate:
+    name: Typecheck · Lint · Test · Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # "landing..." also checks the workspace packages landing depends on (@gsebold/ui, ...).
+      - name: Typecheck
+        run: pnpm turbo run typecheck --filter=@gsebold/games...
+
+      - name: Lint
+        run: pnpm turbo run lint --filter=@gsebold/games...
+
+      - name: Test
+        run: pnpm turbo run test:run --filter=@gsebold/games
+
+      - name: Build
+        run: pnpm turbo run build --filter=@gsebold/games

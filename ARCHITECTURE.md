@@ -8,6 +8,7 @@ How gsebold.com is put together: what each part owns, how a request moves throug
                         ┌─────────────── Cloudflare (DNS, TLS, CDN) ───────────────┐
                         │                                                          │
  Browser ── page load ──┼──▶ gsebold.com ──────▶ landing   (nginx, static files)   │
+    │                   ├──▶ games.gsebold.com ▶ games     (nginx, static SPA)     │
     │                   │                                                          │
     └── contact form ───┼──▶ api.gsebold.com ──▶ gateway   (Express)               │
                         └──────────────────────────────┬───────────────────────────┘
@@ -17,10 +18,11 @@ How gsebold.com is put together: what each part owns, how a request moves throug
 ```
 
 - **landing** is a static site. There is no app server in production: nginx serves prebuilt HTML, JS and CSS.
+- **games** is a client-only SPA, also served by nginx. It calls no API.
 - **gateway** is the only public API. The browser talks to it and nothing else.
 - **contact-service** is internal. It has no public domain and no CORS, and only the gateway can reach it.
 
-All three run as separate Railway services, each built from its own Docker image.
+All four run as separate Railway services, each built from its own Docker image.
 
 ## Repository layout
 
@@ -29,6 +31,7 @@ pnpm workspaces + Turborepo. Every workspace is named `@gsebold/<name>`.
 | Workspace                        | Kind                                               | Owns                                                                                                     |
 | -------------------------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | `apps/landing`                   | React 19 + React Router 7 (framework mode, static) | The website: UI, content, i18n, SEO, the CSP                                                             |
+| `apps/games`                     | React 19 + Vite SPA (React Router library mode)    | games.gsebold.com: the games hub and each game                                                           |
 | `services/gateway`               | Express 4                                          | Public API edge: CORS, security headers, rate limits, proxying to internal services                      |
 | `services/contact-service`       | NestJS 11                                          | Validating contact submissions and sending them as email through Resend                                  |
 | `packages/schemas`               | TypeScript types + constants                       | The API contract shared by every workspace                                                               |
@@ -44,7 +47,7 @@ Rule for `packages/*`: code moves there when a **second** consumer needs it, not
 - Components: per-file imports, `@gsebold/ui/components/<name>` and `@gsebold/ui/lib/<name>`. Inside `packages/ui`, imports are relative.
 - New shadcn components: run `pnpm dlx shadcn add <name>` in `packages/ui` (it has its own `components.json`), then make the generated imports relative.
 - Components take translated strings as props; `@gsebold/ui` depends on neither i18next nor react-router. Each app keeps its own i18n init, locales and routing glue (see `apps/landing/src/components/theme/`).
-- Landing's Dockerfile copies each workspace package it depends on by hand; add new ones there too.
+- Each app's Dockerfile copies the workspace packages it depends on by hand; add new ones there too.
 
 ## Request flow: contact form
 
@@ -135,6 +138,14 @@ Theme and language are stored in cookies on the parent domain (`Domain=gsebold.c
 
 `public/sitemap.xml`, `robots.txt` and `llms.txt` are maintained **by hand**. When career, skills or page content changes, update `llms.txt` to match. When routes or languages change, update the sitemap and the `hrefLang` links in `routes/landing.tsx`.
 
+## Games app
+
+- **Plain Vite SPA**, no prerender or SSR: a game is client state only. `src/router.tsx` lazy-loads each page. `/` redirects by the language detector (path, shared cookie, `localStorage`, browser), then `/:lang` is the hub and `/:lang/<game>` a game.
+- **CSP is a plain header** (`apps/games/nginx.conf`): `script-src 'self'`, no `'unsafe-inline'`, no hashes. Vite emits only external scripts, and the pre-paint theme script is the static file `public/theme-init.js`, not inline. Keep it that way: an inline script would be blocked.
+- `public/theme-init.js` mirrors `ThemeProvider` like landing's inline script does: same key (`PREFERENCE_KEYS.theme`), same lookup order, same default (`dark`).
+- **i18n** follows landing (same detection config, en/pt, path-prefixed URLs), with its own namespaces: `common`, `hub`, `not-found`. Pages set `document.title` with `useDocumentTitle`; `index.html` holds the static title and Open Graph tags.
+- No build-time env: nothing is inlined from `VITE_*`.
+
 ## Gateway
 
 - **CORS**: `CORS_ORIGIN` is a comma-separated allow-list. Any `gsebold.com` origin automatically gets its `api.gsebold.com` counterpart added. With no `CORS_ORIGIN`, all origins are allowed only when `NODE_ENV=development`.
@@ -151,23 +162,23 @@ Theme and language are stored in cookies on the parent domain (`Domain=gsebold.c
 
 ## Build, release and deploy
 
-Each deployable unit (`landing`, `gateway`, `contact-service`) has the same three workflows in `.github/workflows/`:
+Each deployable unit (`landing`, `games`, `gateway`, `contact-service`) has the same three workflows in `.github/workflows/`:
 
-| Workflow              | Trigger                                                            | Does                                                                                                                |
-| --------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| `<unit>-validate.yml` | PR to `main` touching that unit (or `packages/**`, root manifests) | Typecheck → lint → test → build, filtered to the unit (typecheck and lint also cover the packages it depends on)    |
-| `<unit>-release.yml`  | Push to `main` with the same path filter                           | Bumps the patch version and pushes the tag `<unit>-vX.Y.Z`                                                          |
-| `<unit>-deploy.yml`   | That tag                                                           | Builds the Docker image → pushes it to GHCR (`ghcr.io/<repo>`, `/gateway`, `/contact-service`) → `railway redeploy` |
+| Workflow              | Trigger                                                            | Does                                                                                                                          |
+| --------------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `<unit>-validate.yml` | PR to `main` touching that unit (or `packages/**`, root manifests) | Typecheck → lint → test → build, filtered to the unit (typecheck and lint also cover the packages it depends on)              |
+| `<unit>-release.yml`  | Push to `main` with the same path filter                           | Bumps the patch version and pushes the tag `<unit>-vX.Y.Z`                                                                    |
+| `<unit>-deploy.yml`   | That tag                                                           | Builds the Docker image → pushes it to GHCR (`ghcr.io/<repo>`, `/games`, `/gateway`, `/contact-service`) → `railway redeploy` |
 
 - The release tag is pushed with `GH_PAT`, not `GITHUB_TOKEN`, because tags pushed with `GITHUB_TOKEN` don't trigger other workflows.
 - A change under `packages/**` releases **every** unit.
 - Docker images use the same two stages for every unit: install the full workspace with `--shamefully-hoist` and run `turbo build --filter`, then install `--prod` for that one workspace and copy only `dist/`. The build context is always the repo root.
-- Repository secrets: `VITE_API_BASE_URL`, `VITE_DOMAIN`, `GH_PAT`, `RAILWAY_TOKEN`, and one Railway service ID per unit (`RAILWAY_SERVICE_ID`, `GATEWAY_RAILWAY_SERVICE_ID`, `CONTACT_SERVICE_RAILWAY_SERVICE_ID`).
+- Repository secrets: `VITE_API_BASE_URL`, `VITE_DOMAIN`, `GH_PAT`, `RAILWAY_TOKEN`, and one Railway service ID per unit (`RAILWAY_SERVICE_ID`, `GAMES_RAILWAY_SERVICE_ID`, `GATEWAY_RAILWAY_SERVICE_ID`, `CONTACT_SERVICE_RAILWAY_SERVICE_ID`).
 
 ## Local development
 
-- **Full stack in containers:** `docker compose --profile apps up --build`. This starts landing on `:8080`, the gateway on `:3000` and contact-service on `:3001`, already wired together. Leave out `--profile apps` to run only the backend.
-- **Per workspace:** `pnpm --filter @gsebold/<name> <script>`. Each service reads its own `.env` (copy `.env.example`).
+- **Full stack in containers:** `docker compose --profile apps up --build`. This starts landing on `:8080`, games on `:8081`, the gateway on `:3000` and contact-service on `:3001`, already wired together. Leave out `--profile apps` to run only the backend.
+- **Per workspace:** `pnpm --filter @gsebold/<name> <script>`. Dev servers: landing `:3000`, games `:3002`. Each service reads its own `.env` (copy `.env.example`).
 - **Root scripts** (`build`, `lint`, `typecheck`, `test:run`) run through Turbo across all workspaces.
 - **Commits**: Conventional Commits, enforced by commitlint. The pre-commit hook runs `pnpm typecheck` for the whole repo.
 

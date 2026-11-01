@@ -1,6 +1,6 @@
 # AGENTS.md
 
-pnpm + Turborepo monorepo: `apps/landing` (React 19, Vite, Tailwind v4, shadcn/ui, `motion`), `services/gateway` (Express) + `services/contact-service` (NestJS), shared `packages/*` (`@gsebold/tailwind` holds the design tokens and fonts, `@gsebold/ui` the shadcn/ui components; see `ARCHITECTURE.md`).
+pnpm + Turborepo monorepo: `apps/landing` (React 19, React Router framework mode, Tailwind v4, shadcn/ui, `motion`), `apps/games` (React 19 Vite SPA, same stack), `services/gateway` (Express) + `services/contact-service` (NestJS), shared `packages/*` (`@gsebold/tailwind` holds the design tokens and fonts, `@gsebold/ui` the shadcn/ui components; see `ARCHITECTURE.md`).
 
 ## Architecture source of truth
 
