@@ -36,9 +36,9 @@ RUN pnpm install --frozen-lockfile --filter=@gsebold/contact-service --prod --ig
 COPY --from=builder /app/services/contact-service/dist ./services/contact-service/dist
 COPY --from=builder /app/packages/schemas/dist ./packages/schemas/dist
 
-EXPOSE 3000
+EXPOSE 3001
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD wget -qO- http://localhost:3000/health || exit 1
+    CMD wget -qO- http://localhost:${PORT:-3001}/health || exit 1
 
 CMD ["node", "services/contact-service/dist/main"]

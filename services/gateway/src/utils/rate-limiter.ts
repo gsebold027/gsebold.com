@@ -1,5 +1,6 @@
 import express from 'express';
 import rateLimit from 'express-rate-limit';
+import { ApiErrorResponse } from '@gsebold/schemas';
 
 import logger from './logger';
 
@@ -23,6 +24,13 @@ export const createRateLimiter = ({
     legacyHeaders: false,
     handler: (req, res) => {
       logger.warn({ ip: req.ip, url: req.url }, logLabel);
-      res.status(429).json({ message });
+
+      const body: ApiErrorResponse = {
+        success: false,
+        message: 'Rate limit exceeded',
+        timestamp: new Date().toISOString(),
+        error: message,
+      };
+      res.status(429).json(body);
     },
   }) as unknown as express.RequestHandler;

@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { Resend } from 'resend';
 
 import { ContactFormDto } from '@/dtos/contact-form.dto';
+import { escapeHtml } from '@/utils/escape-html';
 
 @Injectable()
 export class EmailService {
@@ -19,6 +20,12 @@ export class EmailService {
     try {
       const recipientEmail = this.configService.getOrThrow<string>('CONTACT_EMAIL');
       const fromDomain = this.configService.getOrThrow<string>('FROM_DOMAIN');
+      const safe = {
+        name: escapeHtml(data.name),
+        email: escapeHtml(data.email),
+        subject: escapeHtml(data.subject),
+        message: escapeHtml(data.message),
+      };
 
       const { data: result, error } = await this.resend.emails.send({
         from: `Contact Form <noreply@${fromDomain}>`,
@@ -32,21 +39,21 @@ export class EmailService {
 
             <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
               <p style="margin: 10px 0;">
-                <strong>Name:</strong> ${data.name}
+                <strong>Name:</strong> ${safe.name}
               </p>
               <p style="margin: 10px 0;">
                 <strong>Email:</strong>
-                <a href="mailto:${data.email}" style="color: #007cba;">${data.email}</a>
+                <a href="mailto:${safe.email}" style="color: #007cba;">${safe.email}</a>
               </p>
               <p style="margin: 10px 0;">
-                <strong>Subject:</strong> ${data.subject}
+                <strong>Subject:</strong> ${safe.subject}
               </p>
             </div>
 
             <div style="background-color: #ffffff; padding: 20px; border-left: 4px solid #007cba; margin: 20px 0;">
               <h3 style="margin-top: 0; color: #333;">Message:</h3>
               <p style="line-height: 1.6; color: #555;">
-                ${data.message.replace(/\n/g, '<br>')}
+                ${safe.message.replace(/\n/g, '<br>')}
               </p>
             </div>
 
