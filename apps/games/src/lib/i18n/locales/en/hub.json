@@ -6,7 +6,6 @@
   "title": "Games",
   "subtitle": "Small browser games, built with the same care as everything else here.",
   "list_label": "Games",
-  "coming_soon": "Coming soon",
   "games": {
     "blackjack": {
       "title": "Blackjack",

@@ -32,6 +32,12 @@ describe('routes', () => {
     expect(document.documentElement.lang).toBe('pt-BR')
   })
 
+  it('renders the blackjack table', async () => {
+    await renderAt('/en/blackjack')
+    expect(await screen.findByRole('heading', { level: 1, name: 'Blackjack' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Deal' })).toBeDisabled()
+  })
+
   it('renders the 404 page for an unsupported language', async () => {
     await renderAt('/xx')
     expect(await screen.findByRole('heading', { name: 'Page not found' })).toBeInTheDocument()

@@ -145,6 +145,7 @@ Theme and language are stored in cookies on the parent domain (`Domain=gsebold.c
 - `public/theme-init.js` mirrors `ThemeProvider` like landing's inline script does: same key (`PREFERENCE_KEYS.theme`), same lookup order, same default (`dark`).
 - **i18n** follows landing (same detection config, en/pt, path-prefixed URLs), with its own namespaces: `common`, `hub`, `not-found`. Pages set `document.title` with `useDocumentTitle`; `index.html` holds the static title and Open Graph tags.
 - No build-time env: nothing is inlined from `VITE_*`.
+- **A game** lives in `src/games/<name>/`: `engine/` is framework-free TypeScript (rules, a pure reducer, Vitest tests), a hook wires it to React (persistence, keyboard), and `components/` render it. Randomness (shuffles) happens in the hook and enters the reducer through actions, so the engine stays deterministic and testable. Game state that persists (the blackjack balance) goes in `localStorage` under `games.<name>.*`; it is not a shared preference.
 
 ## Gateway
 

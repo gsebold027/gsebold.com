@@ -1,0 +1,55 @@
+{
+  "meta_title": "Blackjack · Jogos",
+  "title": "Blackjack",
+  "back_to_games": "Todos os jogos",
+  "rules": "6 baralhos · Blackjack paga 3:2 · Dealer para no 17 macio",
+  "balance": "Saldo",
+  "bet": "Aposta",
+  "dealer": "Dealer",
+  "you": "Você",
+  "hand_label": "{{hand}}, {{total}}",
+  "hand_label_hidden": "{{hand}}, uma carta virada",
+  "soft_total": "{{total}} macio",
+  "chip_label": "Adicionar {{value}} à aposta",
+  "actions": {
+    "clear": "Limpar",
+    "deal": "Distribuir",
+    "deal_again": "Distribuir de novo",
+    "new_bet": "Mudar aposta",
+    "hit": "Pedir",
+    "stand": "Parar",
+    "double": "Dobrar",
+    "rebuy": "Recomprar {{amount}}"
+  },
+  "status": {
+    "place_bet": "Faça uma aposta entre {{min}} e {{max}}.",
+    "your_turn": "Você tem {{player}}. O dealer mostra {{dealer}}.",
+    "reshuffled": "O sapato foi embaralhado.",
+    "broke": "Suas fichas acabaram.",
+    "blackjack": "Blackjack! Você ganha {{amount}}.",
+    "win": "Você ganha {{amount}}.",
+    "push": "Empate. Sua aposta foi devolvida.",
+    "lose": "O dealer vence.",
+    "bust": "Estourou. O dealer vence.",
+    "result": "Você: {{player}}. Dealer: {{dealer}}."
+  },
+  "card": {
+    "face_down": "Carta virada para baixo",
+    "name": "{{rank}} de {{suit}}",
+    "ranks": {
+      "A": "Ás",
+      "J": "Valete",
+      "Q": "Dama",
+      "K": "Rei"
+    },
+    "suits": {
+      "clubs": "paus",
+      "diamonds": "ouros",
+      "hearts": "copas",
+      "spades": "espadas"
+    }
+  },
+  "keyboard_hint": "Teclas: H pedir · S parar · D dobrar · Enter distribuir",
+  "dealer_hand": "Mão do dealer",
+  "your_hand": "Sua mão"
+}

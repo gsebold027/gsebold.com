@@ -1,0 +1,55 @@
+{
+  "meta_title": "Blackjack · Games",
+  "title": "Blackjack",
+  "back_to_games": "All games",
+  "rules": "6 decks · Blackjack pays 3:2 · Dealer stands on soft 17",
+  "balance": "Balance",
+  "bet": "Bet",
+  "dealer": "Dealer",
+  "you": "You",
+  "hand_label": "{{hand}}, {{total}}",
+  "hand_label_hidden": "{{hand}}, one card face down",
+  "soft_total": "soft {{total}}",
+  "chip_label": "Add {{value}} to the bet",
+  "actions": {
+    "clear": "Clear",
+    "deal": "Deal",
+    "deal_again": "Deal again",
+    "new_bet": "Change bet",
+    "hit": "Hit",
+    "stand": "Stand",
+    "double": "Double",
+    "rebuy": "Rebuy {{amount}}"
+  },
+  "status": {
+    "place_bet": "Place a bet between {{min}} and {{max}}.",
+    "your_turn": "You have {{player}}. Dealer shows {{dealer}}.",
+    "reshuffled": "The shoe was reshuffled.",
+    "broke": "You're out of chips.",
+    "blackjack": "Blackjack! You win {{amount}}.",
+    "win": "You win {{amount}}.",
+    "push": "Push. Your bet is returned.",
+    "lose": "Dealer wins.",
+    "bust": "Bust. Dealer wins.",
+    "result": "You: {{player}}. Dealer: {{dealer}}."
+  },
+  "card": {
+    "face_down": "Face-down card",
+    "name": "{{rank}} of {{suit}}",
+    "ranks": {
+      "A": "Ace",
+      "J": "Jack",
+      "Q": "Queen",
+      "K": "King"
+    },
+    "suits": {
+      "clubs": "clubs",
+      "diamonds": "diamonds",
+      "hearts": "hearts",
+      "spades": "spades"
+    }
+  },
+  "keyboard_hint": "Keys: H hit · S stand · D double · Enter deal",
+  "dealer_hand": "Dealer's hand",
+  "your_hand": "Your hand"
+}
